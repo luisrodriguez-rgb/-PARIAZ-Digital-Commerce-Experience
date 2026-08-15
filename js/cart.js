@@ -1,16 +1,19 @@
 /**
- * PARIAZ DIGITAL STORE - Shopping Cart State Manager
- * Manejo reactivo de estado con persistencia en localStorage y drawer interactivo.
+ * PARIAZ DIGITAL STORE — Shopping Cart & Wishlist State Manager (Figma UI Edition)
+ * Persistencia reactiva con localStorage, wishlist, cupones y checkout multi-paso.
  */
 
 import { formatPriceCOP, generateWhatsAppOrderUrl } from './whatsapp.js';
 
-const CART_STORAGE_KEY = 'pariaz_cart_state_v1';
-const FREE_SHIPPING_THRESHOLD = 300000; // $300.000 COP para envío gratis nacional
+const CART_STORAGE_KEY = 'pariaz_cart_state_v2';
+const WISHLIST_STORAGE_KEY = 'pariaz_wishlist_state_v2';
+const FREE_SHIPPING_THRESHOLD = 300000; // $300.000 COP para envío gratis
 
 class CartManager {
   constructor() {
     this.items = this.loadCart();
+    this.wishlist = this.loadWishlist();
+    this.appliedCoupon = null;
     this.listeners = [];
   }
 
@@ -19,7 +22,6 @@ class CartManager {
       const saved = localStorage.getItem(CART_STORAGE_KEY);
       return saved ? JSON.parse(saved) : [];
     } catch (e) {
-      console.warn("No se pudo cargar el carrito de localStorage:", e);
       return [];
     }
   }
@@ -29,17 +31,51 @@ class CartManager {
       localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(this.items));
       this.notifyListeners();
     } catch (e) {
-      console.error("Error al guardar en localStorage:", e);
+      console.error(e);
     }
+  }
+
+  loadWishlist() {
+    try {
+      const saved = localStorage.getItem(WISHLIST_STORAGE_KEY);
+      return saved ? JSON.parse(saved) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  saveWishlist() {
+    try {
+      localStorage.setItem(WISHLIST_STORAGE_KEY, JSON.stringify(this.wishlist));
+      this.notifyListeners();
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  toggleWishlist(productId) {
+    const idx = this.wishlist.indexOf(productId);
+    if (idx > -1) {
+      this.wishlist.splice(idx, 1);
+      this.showToast("Eliminado de tu lista de guardados");
+    } else {
+      this.wishlist.push(productId);
+      this.showToast("❤️ Guardado en tus favoritos");
+    }
+    this.saveWishlist();
+  }
+
+  isWishlisted(productId) {
+    return this.wishlist.includes(productId);
   }
 
   subscribe(callback) {
     this.listeners.push(callback);
-    callback(this.items);
+    callback(this);
   }
 
   notifyListeners() {
-    this.listeners.forEach(cb => cb(this.items));
+    this.listeners.forEach(cb => cb(this));
   }
 
   addItem(product, size = "L", quantity = 1) {
@@ -54,6 +90,8 @@ class CartManager {
         id: product.id,
         name: product.name,
         price: product.price,
+        originalPrice: product.originalPrice || product.price,
+        image: product.image || './assets/brand/logo.jpeg',
         selectedSize: size,
         quantity: quantity,
         category: product.category,
@@ -64,7 +102,7 @@ class CartManager {
 
     this.saveCart();
     this.openDrawer();
-    this.showToast(`Agregado: ${product.name} (${size})`);
+    this.showToast(`🔥 Añadido a tu bolsa: ${product.name} (${size})`);
   }
 
   removeItem(itemKey) {
@@ -82,11 +120,6 @@ class CartManager {
     } else {
       this.saveCart();
     }
-  }
-
-  clearCart() {
-    this.items = [];
-    this.saveCart();
   }
 
   getTotalCount() {
@@ -125,7 +158,7 @@ class CartManager {
       toast.className = 'pariaz-toast';
       document.body.appendChild(toast);
     }
-    toast.textContent = message;
+    toast.innerHTML = message;
     toast.classList.add('show');
     clearTimeout(this.toastTimeout);
     this.toastTimeout = setTimeout(() => {
@@ -139,6 +172,12 @@ class CartManager {
     countBadges.forEach(badge => {
       badge.textContent = totalCount;
       badge.style.display = totalCount > 0 ? 'inline-flex' : 'none';
+    });
+
+    const wishlistBadges = document.querySelectorAll('.wishlist-count-badge');
+    wishlistBadges.forEach(badge => {
+      badge.textContent = this.wishlist.length;
+      badge.style.display = this.wishlist.length > 0 ? 'inline-flex' : 'none';
     });
 
     const itemsContainer = document.getElementById('cart-items-list');
@@ -155,18 +194,17 @@ class CartManager {
       subtotalEl.textContent = formatPriceCOP(subtotal);
     }
 
-    // Barra de envío gratis
     if (freeShippingBar && freeShippingText) {
       if (subtotal >= FREE_SHIPPING_THRESHOLD) {
         freeShippingBar.style.width = '100%';
         freeShippingBar.style.backgroundColor = '#10b981';
-        freeShippingText.innerHTML = `🔥 <strong>¡Felicidades! Tienes Envío Gratis</strong> a todo Colombia.`;
+        freeShippingText.innerHTML = `🔥 <strong>¡Envío Gratis desbloqueado!</strong> a todo Colombia.`;
       } else {
         const remaining = FREE_SHIPPING_THRESHOLD - subtotal;
         const percent = Math.min(100, (subtotal / FREE_SHIPPING_THRESHOLD) * 100);
         freeShippingBar.style.width = `${percent}%`;
         freeShippingBar.style.backgroundColor = '#ffffff';
-        freeShippingText.innerHTML = `Agrega <strong>${formatPriceCOP(remaining)}</strong> más para obtener <strong>Envío Gratis</strong>.`;
+        freeShippingText.innerHTML = `Agrega <strong>${formatPriceCOP(remaining)}</strong> más para <strong>Envío Gratis</strong>.`;
       }
     }
 
@@ -183,8 +221,8 @@ class CartManager {
     if (itemsContainer) {
       itemsContainer.innerHTML = this.items.map(item => `
         <div class="cart-item-row" data-key="${item.itemKey}">
-          <div class="cart-item-visual" style="border-color: ${item.accentColor}22">
-            <span class="cart-item-symbol">${item.name.charAt(0)}</span>
+          <div class="cart-item-visual">
+            <img src="${item.image}" alt="${item.name}" class="cart-item-thumb">
           </div>
           <div class="cart-item-info">
             <div class="cart-item-header">
@@ -207,7 +245,6 @@ class CartManager {
         </div>
       `).join('');
 
-      // Eventos de botones dentro del carrito
       itemsContainer.querySelectorAll('.cart-item-remove-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
           this.removeItem(e.currentTarget.getAttribute('data-key'));
@@ -230,9 +267,7 @@ class CartManager {
     if (whatsappBtn) {
       const waUrl = generateWhatsAppOrderUrl(this.items);
       whatsappBtn.onclick = () => {
-        if (waUrl) {
-          window.open(waUrl, '_blank');
-        }
+        if (waUrl) window.open(waUrl, '_blank');
       };
     }
   }

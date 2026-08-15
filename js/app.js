@@ -1,47 +1,48 @@
 /**
- * PARIAZ DIGITAL STORE — Main Application Bootstrap
- * Inicializa todos los componentes, estado del carrito y eventos globales.
+ * PARIAZ DIGITAL STORE — Main Application Bootstrap (Figma App Edition)
+ * Inicialización de componentes, Bottom Nav, Stories, Wishlist y Checkout.
  */
 
 import { cart } from './cart.js';
 import { initFilters } from './filters.js';
 import { 
   initProductModalListeners, 
-  renderArtistsSection, 
+  renderStoriesBar,
   initShopTheLook, 
   renderDropArchive,
-  openCheckoutDemoModal,
-  closeCheckoutDemoModal
+  openWishlistModal,
+  closeWishlistModal,
+  openCheckoutFlowModal,
+  closeCheckoutFlowModal,
+  showCheckoutStep
 } from './ui.js';
+import { generateWhatsAppOrderUrl } from './whatsapp.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Inicializar suscripción y render del carrito
+  // 1. Inicializar carrito y reactividad
   cart.subscribe(() => {
     cart.renderCartUI();
   });
 
-  // 2. Inicializar filtros y catálogo de productos
+  // 2. Inicializar barra superior de historias (Stories Bar)
+  renderStoriesBar();
+
+  // 3. Inicializar catálogo y filtros
   initFilters();
 
-  // 3. Inicializar modal de detalle de producto
+  // 4. Inicializar modal detallado de producto
   initProductModalListeners();
 
-  // 4. Renderizar sección WORN BY (Artistas)
-  renderArtistsSection();
-
-  // 5. Inicializar sección interactiva Shop The Look
+  // 5. Inicializar Lookbook interactivo con fotos de artistas
   initShopTheLook();
 
   // 6. Renderizar Drop Archive
   renderDropArchive();
 
-  // 7. Eventos de apertura y cierre del Cart Drawer
+  // 7. Eventos de Drawer del Carrito
   const cartTriggerBtns = document.querySelectorAll('.trigger-cart-drawer');
   const cartCloseBtn = document.getElementById('cart-close-btn');
   const cartOverlay = document.getElementById('cart-overlay');
-  const checkoutOnlineBtn = document.getElementById('btn-checkout-online');
-  const checkoutModalClose = document.getElementById('checkout-modal-close-btn');
-  const checkoutModalConfirm = document.getElementById('checkout-demo-confirm-btn');
 
   cartTriggerBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -50,55 +51,115 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  if (cartCloseBtn) {
-    cartCloseBtn.addEventListener('click', () => cart.closeDrawer());
-  }
+  if (cartCloseBtn) cartCloseBtn.addEventListener('click', () => cart.closeDrawer());
+  if (cartOverlay) cartOverlay.addEventListener('click', () => cart.closeDrawer());
 
-  if (cartOverlay) {
-    cartOverlay.addEventListener('click', () => cart.closeDrawer());
-  }
+  // 8. Eventos de Wishlist Modal
+  const wishlistTriggerBtns = document.querySelectorAll('.trigger-wishlist-modal');
+  const wishlistCloseBtn = document.getElementById('wishlist-close-btn');
 
-  if (checkoutOnlineBtn) {
-    checkoutOnlineBtn.addEventListener('click', () => {
+  wishlistTriggerBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openWishlistModal();
+    });
+  });
+
+  if (wishlistCloseBtn) wishlistCloseBtn.addEventListener('click', closeWishlistModal);
+
+  // 9. Eventos de Checkout Multi-Paso
+  const checkoutTriggerBtns = document.querySelectorAll('#btn-checkout-online, .trigger-checkout-modal');
+  const checkoutCloseBtn = document.getElementById('checkout-flow-close-btn');
+  const btnToStep2 = document.getElementById('btn-goto-step-2');
+  const btnToStep3 = document.getElementById('btn-goto-step-3');
+  const btnBackStep1 = document.getElementById('btn-back-step-1');
+  const btnBackStep2 = document.getElementById('btn-back-step-2');
+  const btnFinishOnlinePay = document.getElementById('btn-finish-online-pay');
+  const btnFinishWhatsAppPay = document.getElementById('btn-finish-whatsapp-pay');
+
+  checkoutTriggerBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
       cart.closeDrawer();
-      openCheckoutDemoModal();
+      openCheckoutFlowModal();
+    });
+  });
+
+  if (checkoutCloseBtn) checkoutCloseBtn.addEventListener('click', closeCheckoutFlowModal);
+  if (btnToStep2) btnToStep2.addEventListener('click', () => showCheckoutStep(2));
+  if (btnBackStep1) btnBackStep1.addEventListener('click', () => showCheckoutStep(1));
+  if (btnToStep3) {
+    btnToStep3.addEventListener('click', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('checkout-input-name')?.value;
+      const city = document.getElementById('checkout-input-city')?.value;
+      if (!name || !city) {
+        cart.showToast("⚠️ Por favor completa tu nombre y ciudad");
+        return;
+      }
+      showCheckoutStep(3);
+    });
+  }
+  if (btnBackStep2) btnBackStep2.addEventListener('click', () => showCheckoutStep(2));
+
+  if (btnFinishOnlinePay) {
+    btnFinishOnlinePay.addEventListener('click', () => {
+      closeCheckoutFlowModal();
+      cart.clearCart();
+      cart.showToast("🎉 ¡Pedido #PRZ-8842 confirmado! Redirigiendo a pasarela Wompi/PSE...");
     });
   }
 
-  if (checkoutModalClose) {
-    checkoutModalClose.addEventListener('click', closeCheckoutDemoModal);
-  }
+  if (btnFinishWhatsAppPay) {
+    btnFinishWhatsAppPay.addEventListener('click', () => {
+      const name = document.getElementById('checkout-input-name')?.value || '';
+      const city = document.getElementById('checkout-input-city')?.value || '';
+      const address = document.getElementById('checkout-input-address')?.value || '';
+      const phone = document.getElementById('checkout-input-phone')?.value || '';
 
-  if (checkoutModalConfirm) {
-    checkoutModalConfirm.addEventListener('click', () => {
-      closeCheckoutDemoModal();
-      cart.showToast("⚡ Simulación completada. En producción conectará con Wompi/Bold.");
+      const waUrl = generateWhatsAppOrderUrl(cart.items, { name, city, address, phone });
+      closeCheckoutFlowModal();
+      if (waUrl) window.open(waUrl, '_blank');
     });
   }
 
-  // 8. Formulario VIP Drop Club
+  // 10. Floating Bottom Nav Actions
+  const bottomNavHome = document.getElementById('bnav-home');
+  const bottomNavSearch = document.getElementById('bnav-search');
+  const bottomNavCart = document.getElementById('bnav-cart');
+  const bottomNavWishlist = document.getElementById('bnav-wishlist');
+  const bottomNavAccount = document.getElementById('bnav-account');
+
+  if (bottomNavHome) bottomNavHome.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  if (bottomNavSearch) {
+    bottomNavSearch.addEventListener('click', () => {
+      const searchInput = document.querySelector('.app-search-input');
+      if (searchInput) {
+        searchInput.focus();
+        document.getElementById('shop')?.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+  if (bottomNavCart) bottomNavCart.addEventListener('click', () => cart.openDrawer());
+  if (bottomNavWishlist) bottomNavWishlist.addEventListener('click', () => openWishlistModal());
+  if (bottomNavAccount) {
+    bottomNavAccount.addEventListener('click', () => {
+      document.getElementById('vip-club-section')?.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  // 11. Formulario VIP Drop Club
   const vipForm = document.getElementById('vip-club-form');
   if (vipForm) {
     vipForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const input = vipForm.querySelector('input[type="text"], input[type="email"]');
-      const val = input ? input.value.trim() : '';
-      if (val) {
-        cart.showToast("🔥 ¡Registrado con éxito para el próximo Drop de Pariaz!");
+      const input = vipForm.querySelector('input');
+      if (input && input.value) {
+        cart.showToast("🔥 ¡Registrado al VIP Drop Club de Pariaz!");
         input.value = '';
       }
     });
   }
 
-  // 9. Header scroll shrink effect
-  const header = document.querySelector('.site-header');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
-      header?.classList.add('is-scrolled');
-    } else {
-      header?.classList.remove('is-scrolled');
-    }
-  }, { passive: true });
-
-  console.log("⚡ PARIAZ Digital Store initialized successfully.");
+  console.log("⚡ PARIAZ Figma Mobile Experience loaded.");
 });

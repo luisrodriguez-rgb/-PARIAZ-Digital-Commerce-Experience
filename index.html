@@ -2,14 +2,14 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PARIAZ — Más que una marca | Streetwear Medellín</title>
-  <meta name="description" content="Pariaz. Marca de streetwear urbano nacida en Medellín. Ropa conceptual, disciplina, perseverancia y cultura urbana.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>PARIAZ — Luxury Streetwear App Experience</title>
+  <meta name="description" content="Pariaz Digital Store. E-commerce móvil inspirado en UI Kit de Figma para la cultura urbana de Medellín.">
   
   <!-- Google Fonts Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
   
   <!-- Estilos del Sistema de Diseño -->
   <link rel="stylesheet" href="css/styles.css">
@@ -17,44 +17,41 @@
 <body>
 
   <!-- =========================================================================
-       01. BARRA DE ANUNCIOS
+       01. APP TOP HEADER (SEARCH & QUICK ACTIONS)
        ========================================================================= -->
-  <aside class="announcement-bar" aria-label="Anuncios de la tienda">
-    <div class="announcement-inner">
-      <span class="announcement-badge">DROP 004 ACTIVO</span>
-      <span>ENVÍOS A TODA COLOMBIA // COMPRA DIRECTA EN WEB O WHATSAPP</span>
-      <a href="#shop" class="announcement-link">EXPLORAR DROP &rarr;</a>
-    </div>
-  </aside>
-
-  <!-- =========================================================================
-       02. CABECERA PRINCIPAL (STICKY)
-       ========================================================================= -->
-  <header class="site-header">
-    <div class="container header-container">
+  <header class="app-top-header">
+    <div class="container app-header-inner">
       
-      <!-- Navegación Izquierda -->
-      <nav class="header-nav" aria-label="Menú principal">
-        <a href="#latest-drop" class="nav-link">DROPS</a>
-        <a href="#shop" class="nav-link">SHOP</a>
-        <a href="#worn-by" class="nav-link">WORN BY</a>
-        <a href="#story" class="nav-link">HISTORIA</a>
-      </nav>
-
-      <!-- Logo Central con Imagen Oficial -->
-      <a href="#" class="header-logo-brand" aria-label="Inicio Pariaz">
-        <img src="assets/brand/logo.jpeg" alt="Logo Pariaz" class="header-logo-img">
-        <span class="logo-text">PARIAZ</span>
-        <span class="logo-sub">MEDELLÍN</span>
+      <!-- Brand Logo -->
+      <a href="#" class="app-logo-box" aria-label="Inicio Pariaz">
+        <img src="assets/brand/logo.jpeg" alt="Logo Pariaz" class="app-logo-img">
+        <span class="app-logo-title">PARIAZ</span>
       </a>
 
-      <!-- Acciones Derecha -->
-      <div class="header-actions">
-        <a href="#shop" class="header-btn" title="Buscar en catálogo">
-          CATÁLOGO
-        </a>
-        <button class="header-btn header-btn-cart trigger-cart-drawer" aria-label="Abrir carrito de compras">
-          <span>CARRITO</span>
+      <!-- Search Bar con Filtro Integrado (Figma Style) -->
+      <form class="app-search-form" onsubmit="event.preventDefault();">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-muted);">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" class="app-search-input" placeholder="Buscar camisetas, buzos, conjuntos, gorras...">
+      </form>
+
+      <!-- Action Buttons -->
+      <div class="app-header-actions">
+        <button class="app-icon-circle-btn trigger-wishlist-modal" aria-label="Ver lista de favoritos">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+          <span class="wishlist-count-badge" style="display: none;">0</span>
+        </button>
+
+        <button class="app-icon-circle-btn trigger-cart-drawer" aria-label="Abrir bolsa de compra">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
           <span class="cart-count-badge" style="display: none;">0</span>
         </button>
       </div>
@@ -62,365 +59,463 @@
     </div>
   </header>
 
-  <main>
-    <!-- =======================================================================
-         03. HERO SECTION (EDITORIAL STREETWEAR CON FOTO REAL)
-         ======================================================================= -->
-    <section class="hero-section" id="hero">
-      <div class="hero-grid-lines"></div>
-      <div class="container hero-content-wrapper">
-        
-        <div class="hero-text-block">
-          <div class="hero-label-tag">COLECCIÓN 2025 // SABANETA • MEDELLÍN</div>
-          <h1 class="hero-headline">
-            PARIAZ<br>
-            <span class="text-outline">MÁS QUE</span> UNA MARCA
-          </h1>
-          <p class="hero-subcopy">
-            Una historia de disciplina, calle y superación personal. Ropa urbana diseñada para quienes construyen su propio camino desde abajo.
-          </p>
-          <div class="hero-cta-group">
-            <a href="#shop" class="btn-primary">COMPRAR AHORA &rarr;</a>
-            <a href="#latest-drop" class="btn-secondary">VER ÚLTIMO DROP</a>
-          </div>
-        </div>
-
-        <!-- Showcase con la camiseta real de Pariaz -->
-        <div class="hero-art-display">
-          <div class="hero-showcase-card">
-            <div class="hero-showcase-header">
-              <span>PIEZA INSIGNIA // DROP 004</span>
-              <span>MEDELLÍN, CO</span>
-            </div>
-            <div class="hero-showcase-media">
-              <span class="hero-showcase-badge">DISPONIBLE</span>
-              <img src="assets/products/camisa-manos.jpeg" alt="Camiseta Pariaz Manos y Luz" class="hero-showcase-img">
-            </div>
-            <div class="hero-showcase-footer">
-              <div>
-                <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">CAMISETA PARIAZ MANOS & LUZ</span>
-                <span style="font-weight: 800; font-size: 1.15rem; color: var(--text-primary);">$140.000 COP</span>
-              </div>
-              <a href="#shop" class="btn-primary" style="padding: 10px 18px; font-size: 0.78rem;">
-                VER EN TIENDA &rarr;
-              </a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- =======================================================================
-         04. CULTURAL MARQUEE TICKER
-         ======================================================================= -->
-    <div class="marquee-ticker-section" aria-hidden="true">
-      <div class="marquee-track">
-        <div class="marquee-content">
-          <span>SUPERACIÓN PERSONAL</span> <span class="marquee-separator">&bull;</span>
-          <span>DISCIPLINA</span> <span class="marquee-separator">&bull;</span>
-          <span>KRIS R</span> <span class="marquee-separator">&bull;</span>
-          <span>HADES 66</span> <span class="marquee-separator">&bull;</span>
-          <span>JON Z</span> <span class="marquee-separator">&bull;</span>
-          <span>COSCULLUELA</span> <span class="marquee-separator">&bull;</span>
-          <span>LUAR LA L</span> <span class="marquee-separator">&bull;</span>
-          <span>DESDE MEDELLÍN PAL MUNDO</span> <span class="marquee-separator">&bull;</span>
-          <span>EDICIONES LIMITADAS</span> <span class="marquee-separator">&bull;</span>
-          <span>AUTENTICIDAD URBANA</span> <span class="marquee-separator">&bull;</span>
-        </div>
-        <div class="marquee-content">
-          <span>SUPERACIÓN PERSONAL</span> <span class="marquee-separator">&bull;</span>
-          <span>DISCIPLINA</span> <span class="marquee-separator">&bull;</span>
-          <span>KRIS R</span> <span class="marquee-separator">&bull;</span>
-          <span>HADES 66</span> <span class="marquee-separator">&bull;</span>
-          <span>JON Z</span> <span class="marquee-separator">&bull;</span>
-          <span>COSCULLUELA</span> <span class="marquee-separator">&bull;</span>
-          <span>LUAR LA L</span> <span class="marquee-separator">&bull;</span>
-          <span>DESDE MEDELLÍN PAL MUNDO</span> <span class="marquee-separator">&bull;</span>
-          <span>EDICIONES LIMITADAS</span> <span class="marquee-separator">&bull;</span>
-          <span>AUTENTICIDAD URBANA</span> <span class="marquee-separator">&bull;</span>
-        </div>
+  <!-- =========================================================================
+       02. TOP STORIES BAR (ARTIST STORIES REEL)
+       ========================================================================= -->
+  <section class="stories-bar-section" aria-label="Historias destacadas de artistas">
+    <div class="container">
+      <div class="stories-scroll-container" id="app-stories-bar">
+        <!-- Inyectado dinámicamente desde js/ui.js (Kris R, Hades 66, Jon Z, Coscu, Luar) -->
       </div>
     </div>
+  </section>
 
+  <main>
     <!-- =======================================================================
-         05. WORN BY / PARIAZ FAMILY (ARTISTS CON FOTOGRAFÍAS REALES)
+         03. HERO APP BANNER (FIGMA ONBOARDING & SPOTLIGHT)
          ======================================================================= -->
-    <section class="section-wrapper" id="worn-by">
+    <section class="hero-app-section" id="hero">
       <div class="container">
-        <div class="section-header-block">
-          <div>
-            <span class="section-label">PRUEBA CULTURAL // SOCIAL PROOF</span>
-            <h2 class="section-title">WORN BY / SEEN ON</h2>
+        <div class="hero-app-banner">
+          
+          <div class="hero-app-text">
+            <div class="hero-pill-badge">🔥 DROP 004 // MEDELLÍN EXCLUSIVE</div>
+            <h1 class="hero-app-title">
+              PARIAZ<br>
+              MÁS QUE UNA MARCA.
+            </h1>
+            <p class="hero-app-desc">
+              Una historia de disciplina, calle y superación personal. Ropa urbana de alto gramaje para quienes construyen su propio camino.
+            </p>
+            <a href="#shop" class="hero-btn-pill-primary">
+              EXPLORAR COLECCIÓN &rarr;
+            </a>
           </div>
-          <p class="section-desc">
-            Artistas y referentes de la música urbana latina luciendo prendas exclusivas de Pariaz en tarimas, streams y producciones.
-          </p>
-        </div>
 
-        <div class="artists-grid" id="artists-grid-container">
-          <!-- Inyectado dinámicamente desde js/ui.js con fotos reales de Kris R, Hades 66, Jon Z, Coscu, Luar -->
+          <div class="hero-mockup-frame">
+            <img src="assets/products/camisa-manos.jpeg" alt="Camiseta Manos y Luz Pariaz" class="hero-mockup-img">
+          </div>
+
         </div>
       </div>
     </section>
 
     <!-- =======================================================================
-         06. LATEST DROP SPOTLIGHT
+         04. CATEGORY FILTER PILLS & LIVE SEARCH
          ======================================================================= -->
-    <section class="section-wrapper" id="latest-drop" style="background-color: #09090c;">
-      <div class="container">
-        <div class="section-header-block">
-          <div>
-            <span class="section-label">LANZAMIENTO DESTACADO</span>
-            <h2 class="section-title">LATEST DROP // EDICIÓN 004</h2>
+    <section class="container" id="shop" style="padding-top: 10px;">
+      
+      <!-- Category Icon Pills -->
+      <div class="category-pills-row" role="tablist">
+        <button class="filter-tab-pill active" data-category="all" role="tab">
+          <span>🔥</span> <span>ALL DROPS (11)</span>
+        </button>
+        <button class="filter-tab-pill" data-category="camisetas" role="tab">
+          <span>👕</span> <span>CAMISETAS (6)</span>
+        </button>
+        <button class="filter-tab-pill" data-category="conjuntos" role="tab">
+          <span>🧥</span> <span>CONJUNTOS (2)</span>
+        </button>
+        <button class="filter-tab-pill" data-category="buzos" role="tab">
+          <span>⚡</span> <span>BUZOS (1)</span>
+        </button>
+        <button class="filter-tab-pill" data-category="gorras" role="tab">
+          <span>🧢</span> <span>GORRAS (1)</span>
+        </button>
+        <button class="filter-tab-pill" data-category="limited" role="tab">
+          <span>💎</span> <span>LIMITED DROPS (1)</span>
+        </button>
+      </div>
+
+      <!-- App Products Grid (Figma Cards) -->
+      <div class="app-products-grid" id="catalog-products-grid">
+        <!-- Inyectado dinámicamente desde js/filters.js -->
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         05. SHOP THE LOOK (INTERACTIVE LOOKBOOK WITH REAL ARTISTS)
+         ======================================================================= -->
+    <section class="container" id="shop-the-look" style="margin-top: 70px;">
+      <div style="margin-bottom: 24px;">
+        <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.18em; color: var(--accent-red); text-transform: uppercase;">
+          EXPERIENCIA LOOKBOOK
+        </span>
+        <h2 style="font-family: var(--font-display); font-size: 2.6rem; line-height: 1;">
+          SHOP THE LOOK // SEEN ON ARTISTS
+        </h2>
+      </div>
+
+      <!-- Conmutador de Looks -->
+      <div class="shop-look-tabs-row">
+        <button class="look-tab-btn active" data-look="hades">HADES 66 (DESERT SUIT)</button>
+        <button class="look-tab-btn" data-look="krisr">KRIS R (CRIMSON TEE)</button>
+        <button class="look-tab-btn" data-look="jonz">JON Z (ÁNGELES HEAVEN)</button>
+      </div>
+
+      <div class="shop-look-container">
+        <!-- Media Frame con Hotspots -->
+        <div class="look-media-frame">
+          <img src="assets/looks/hades-look.jpeg" alt="Hades 66 Look Pariaz" class="shop-look-bg-img" id="shop-look-bg-img">
+          
+          <div class="look-hotspots-container" id="shop-look-hotspots-container">
+            <!-- Hotspots inyectados desde js/ui.js -->
           </div>
-          <a href="#shop" class="btn-secondary" style="padding: 10px 20px; font-size: 0.8rem;">
-            VER TODAS LAS PRENDAS &rarr;
-          </a>
         </div>
 
-        <div class="products-grid" id="latest-drop-grid">
-          <!-- Inyectado dinámicamente desde js/filters.js con fotos reales de catálogo -->
+        <!-- Desglose de Prendas -->
+        <div class="look-details-pane">
+          <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; color: var(--text-muted);">
+            OUTFIT COMPLETO DE TARIMA
+          </span>
+          <h3 style="font-size: 1.8rem; font-weight: 800; margin: 8px 0 16px;" id="shop-look-title">
+            HADES 66 — FULL DESERT SUIT
+          </h3>
+          
+          <div class="look-items-list" id="shop-look-items-list">
+            <!-- Items inyectados desde js/ui.js -->
+          </div>
+
+          <button class="btn-add-to-bag-pill" id="btn-add-full-outfit" style="width: 100%;">
+            AGREGAR OUTFIT COMPLETO &rarr;
+          </button>
         </div>
       </div>
     </section>
 
     <!-- =======================================================================
-         07. SHOP / CATÁLOGO COMPLETO CON TABS
+         06. STORYTELLING: FROM THE BOTTOM (SABANETA / MEDELLÍN)
          ======================================================================= -->
-    <section class="section-wrapper" id="shop">
-      <div class="container">
-        <div class="section-header-block">
-          <div>
-            <span class="section-label">CATÁLOGO OFICIAL</span>
-            <h2 class="section-title">SHOP PARIAZ</h2>
+    <section class="container" id="story" style="margin-top: 70px;">
+      <div class="story-manifesto-box">
+        <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.2em; color: var(--accent-red); text-transform: uppercase;">
+          EL MANIFIESTO PARIAZ
+        </span>
+        <h2 class="story-quote-main">
+          "FROM THE BOTTOM.<br>
+          BUILT WITH DISCIPLINE.<br>
+          MADE TO MOVE FORWARD."
+        </h2>
+        <p style="color: var(--text-secondary); max-width: 700px; margin: 0 auto; line-height: 1.7; font-size: 1rem;">
+          Pariaz nace de la convicción de su fundador en Antioquia: convertir la perseverancia y el trabajo honesto en un proyecto empresarial que motive a los jóvenes a creer en sus capacidades y superarse cada día.
+        </p>
+
+        <div class="story-pillars-grid">
+          <div class="pillar-item">
+            <span class="pillar-num">01</span>
+            <h4 class="pillar-title">DISCIPLINA</h4>
+            <p class="pillar-text">Constancia en cada puntada.</p>
           </div>
-          <p class="section-desc">
-            Prendas confeccionadas en Medellín con textiles pesados de alto gramaje y detalles de autor.
-          </p>
-        </div>
-
-        <!-- Pestañas de Filtrado -->
-        <div class="filter-tabs-container" role="tablist">
-          <button class="filter-tab-btn active" data-category="all" role="tab">ALL ITEMS (14)</button>
-          <button class="filter-tab-btn" data-category="camisetas" role="tab">CAMISETAS (8)</button>
-          <button class="filter-tab-btn" data-category="conjuntos" role="tab">CONJUNTOS (3)</button>
-          <button class="filter-tab-btn" data-category="buzos" role="tab">BUZOS / HOODIES (1)</button>
-          <button class="filter-tab-btn" data-category="gorras" role="tab">GORRAS (1)</button>
-          <button class="filter-tab-btn" data-category="mujer" role="tab">MUJER (1)</button>
-          <button class="filter-tab-btn" data-category="limited" role="tab">LIMITED DROPS (1)</button>
-        </div>
-
-        <!-- Grid de Productos Filtrados -->
-        <div class="products-grid" id="catalog-products-grid">
-          <!-- Inyectado dinámicamente desde js/filters.js -->
-        </div>
-      </div>
-    </section>
-
-    <!-- =======================================================================
-         08. SHOP THE LOOK (HOTSPOTS INTERACTIVOS CON FOTOS REALES)
-         ======================================================================= -->
-    <section class="section-wrapper" id="shop-the-look">
-      <div class="container">
-        <div class="section-header-block">
-          <div>
-            <span class="section-label">EXPERIENCIA INTERACTIVA // LOOKBOOK</span>
-            <h2 class="section-title">SHOP THE LOOK</h2>
+          <div class="pillar-item">
+            <span class="pillar-num">02</span>
+            <h4 class="pillar-title">PERSEVERANCIA</h4>
+            <p class="pillar-text">Resiliencia sin límites.</p>
           </div>
-          <p class="section-desc">
-            Convierte el contenido visual de artistas en productos instantáneos. Selecciona un referente y toca los puntos interactivos.
-          </p>
-        </div>
-
-        <!-- Conmutador de Artistas para Lookbook -->
-        <div class="shop-look-tabs-row">
-          <button class="look-tab-btn active" data-look="hades">HADES 66 (DESERT SUIT)</button>
-          <button class="look-tab-btn" data-look="krisr">KRIS R (CRIMSON TEE)</button>
-          <button class="look-tab-btn" data-look="jonz">JON Z (ÁNGELES HEAVEN)</button>
-        </div>
-
-        <div class="shop-look-container">
-          <!-- Marco visual con Hotspots dinámicos -->
-          <div class="look-media-frame" id="shop-look-model-frame">
-            <img src="assets/looks/hades-look.jpeg" alt="Hades 66 Look Pariaz" class="shop-look-bg-img" id="shop-look-bg-img">
-            
-            <div class="look-hotspots-container" id="shop-look-hotspots-container">
-              <!-- Inyectado dinámicamente desde js/ui.js -->
-            </div>
+          <div class="pillar-item">
+            <span class="pillar-num">03</span>
+            <h4 class="pillar-title">AUTENTICIDAD</h4>
+            <p class="pillar-text">Calle real y visión pura.</p>
           </div>
-
-          <!-- Panel de desglose de prendas -->
-          <div class="look-details-pane">
-            <span class="section-label">OUTFIT COMPLETO</span>
-            <h3 style="font-family: var(--font-display); font-size: 2.2rem; margin: 8px 0;" id="shop-look-title">
-              HADES 66 — DESERT SAND SUIT
-            </h3>
-            
-            <div class="look-items-list" id="shop-look-items-list">
-              <!-- Inyectado dinámicamente desde js/ui.js -->
-            </div>
-
-            <button class="btn-primary" id="btn-add-full-outfit" style="width: 100%;">
-              AGREGAR OUTFIT COMPLETO &rarr;
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =======================================================================
-         09. STORYTELLING: FROM THE BOTTOM (SUPERACIÓN)
-         ======================================================================= -->
-    <section class="section-wrapper" id="story">
-      <div class="container">
-        <div class="story-manifesto-box">
-          <span class="section-label" style="color: var(--accent-red);">EL MANIFIESTO</span>
-          <h2 class="story-quote-main">
-            "FROM THE BOTTOM.<br>
-            BUILT WITH DISCIPLINE.<br>
-            MADE TO MOVE FORWARD."
-          </h2>
-          <p style="color: var(--text-secondary); max-width: 740px; margin: 0 auto; line-height: 1.7; font-size: 1.05rem;">
-            Pariaz no solo busca comercializar ropa, sino transmitir un mensaje de superación, disciplina y perseverancia. La marca nace del proceso personal de su fundador en Antioquia: convertir los sueños y el trabajo honesto en un proyecto empresarial que motive a la juventud a creer en sus capacidades y salir adelante.
-          </p>
-
-          <div class="story-pillars-grid">
-            <div class="pillar-item">
-              <span class="pillar-num">01</span>
-              <h4 class="pillar-title">DISCIPLINA</h4>
-              <p class="pillar-text">Constancia diaria en cada costura y diseño.</p>
-            </div>
-            <div class="pillar-item">
-              <span class="pillar-num">02</span>
-              <h4 class="pillar-title">PERSEVERANCIA</h4>
-              <p class="pillar-text">Resiliencia ante cualquier obstáculo.</p>
-            </div>
-            <div class="pillar-item">
-              <span class="pillar-num">03</span>
-              <h4 class="pillar-title">AUTENTICIDAD</h4>
-              <p class="pillar-text">Calle real sin filtros ni apariencias.</p>
-            </div>
-            <div class="pillar-item">
-              <span class="pillar-num">04</span>
-              <h4 class="pillar-title">SUPERACIÓN</h4>
-              <p class="pillar-text">Venir desde abajo y construir legado.</p>
-            </div>
+          <div class="pillar-item">
+            <span class="pillar-num">04</span>
+            <h4 class="pillar-title">SUPERACIÓN</h4>
+            <p class="pillar-text">De Medellín para el mundo.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- =======================================================================
-         10. AS SEEN ON SOCIAL & DROP ARCHIVE
+         07. VIP DROP CLUB & ACCOUNT SECTION
          ======================================================================= -->
-    <section class="section-wrapper" style="background-color: #09090c;">
-      <div class="container">
-        <div class="section-header-block">
-          <div>
-            <span class="section-label">HISTÓRICO DE COLECCIONES</span>
-            <h2 class="section-title">DROP ARCHIVE</h2>
-          </div>
-          <p class="section-desc">
-            Lanzamientos exclusivos numerados. Cada drop representa un capítulo en la evolución de la marca.
-          </p>
-        </div>
-
-        <div class="drop-archive-grid" id="drop-archive-container">
-          <!-- Inyectado dinámicamente desde js/ui.js -->
-        </div>
-
-        <!-- VIP Club -->
-        <div class="vip-club-section" style="margin-top: 60px;">
-          <span class="section-label">ACCESO ANTICIPADO</span>
-          <h3 style="font-family: var(--font-display); font-size: 2.6rem; margin: 8px 0;">ÚNETE AL VIP DROP CLUB</h3>
-          <p style="color: var(--text-secondary); max-width: 480px; margin: 0 auto; font-size: 0.95rem;">
-            Recibe acceso privado 24 horas antes de cada lanzamiento oficial directamente a tu WhatsApp o correo.
-          </p>
-          <form class="vip-form" id="vip-club-form">
-            <input type="text" class="vip-input" placeholder="Tu número de WhatsApp o Email" required>
-            <button type="submit" class="btn-primary" style="padding: 14px 24px;">REGISTRARME</button>
-          </form>
-        </div>
+    <section class="container" id="vip-club-section" style="margin-top: 60px;">
+      <div class="vip-club-section">
+        <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; color: var(--accent-red); text-transform: uppercase;">
+          ACCESO PRIVADO
+        </span>
+        <h3 style="font-family: var(--font-display); font-size: 2.6rem; margin: 8px 0;">ÚNETE AL VIP DROP CLUB</h3>
+        <p style="color: var(--text-secondary); max-width: 480px; margin: 0 auto; font-size: 0.95rem;">
+          Recibe acceso prioritario 24 horas antes de cada lanzamiento oficial directamente a tu WhatsApp o correo.
+        </p>
+        <form class="vip-form" id="vip-club-form">
+          <input type="text" class="vip-input" placeholder="Tu número de WhatsApp o Email" required>
+          <button type="submit" class="hero-btn-pill-primary" style="padding: 14px 28px;">REGISTRARME</button>
+        </form>
       </div>
     </section>
 
   </main>
 
   <!-- =========================================================================
-       11. FOOTER MINIMALISTA EDITORIAL
+       08. FLOATING IOS BOTTOM NAVIGATION BAR (FIGMA STYLE — IMAGE 1 & 2)
        ========================================================================= -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-top-grid">
-        <div class="footer-brand-col">
-          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-            <img src="assets/brand/logo.jpeg" alt="Logo Pariaz" style="height: 36px; filter: invert(1);">
-            <span class="logo-text" style="font-size: 2rem;">PARIAZ</span>
-          </div>
-          <p>
-            Marca registrada en Sabaneta, Antioquia. Cultura urbana, streetwear de alta calidad y una narrativa de superación desde Medellín para el mundo.
-          </p>
-          <div style="margin-top: 20px; font-size: 0.8rem; color: var(--text-muted);">
-            <span>CCAS Matrícula Mercantil Sabaneta</span>
-          </div>
-        </div>
+  <nav class="floating-bottom-nav" aria-label="Navegación principal de la app">
+    <button class="bnav-item active" id="bnav-home" aria-label="Inicio">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+      <span style="font-size: 0.65rem; font-weight: 700;">Home</span>
+    </button>
 
-        <div>
-          <h4 class="footer-col-title">SHOP</h4>
-          <ul class="footer-links-list">
-            <li><a href="#shop">Camisetas</a></li>
-            <li><a href="#shop">Conjuntos</a></li>
-            <li><a href="#shop">Buzos & Hoodies</a></li>
-            <li><a href="#shop">Gorras</a></li>
-            <li><a href="#shop">Ediciones Limitadas</a></li>
-          </ul>
-        </div>
+    <button class="bnav-item" id="bnav-search" aria-label="Buscar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <span style="font-size: 0.65rem; font-weight: 700;">Buscar</span>
+    </button>
 
-        <div>
-          <h4 class="footer-col-title">MARCA</h4>
-          <ul class="footer-links-list">
-            <li><a href="#story">Nuestra Historia</a></li>
-            <li><a href="#worn-by">Worn by Artists</a></li>
-            <li><a href="#latest-drop">Último Drop</a></li>
-            <li><a href="https://instagram.com/tiendapariaz" target="_blank" rel="noopener">Instagram (@tiendapariaz)</a></li>
-          </ul>
-        </div>
+    <button class="bnav-item" id="bnav-cart" aria-label="Bolsa de compras">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+      <span class="cart-count-badge" style="display: none;">0</span>
+      <span style="font-size: 0.65rem; font-weight: 700;">Bolsa</span>
+    </button>
 
-        <div>
-          <h4 class="footer-col-title">ATENCIÓN</h4>
-          <ul class="footer-links-list">
-            <li><a href="https://wa.me/573000000000" target="_blank">Canal WhatsApp VIP</a></li>
-            <li><a href="#">Guía de Tallas</a></li>
-            <li><a href="#">Envíos Nacionales</a></li>
-            <li><a href="#">Políticas de Cambio</a></li>
-          </ul>
-        </div>
-      </div>
+    <button class="bnav-item" id="bnav-wishlist" aria-label="Favoritos">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+      <span class="wishlist-count-badge" style="display: none;">0</span>
+      <span style="font-size: 0.65rem; font-weight: 700;">Deseos</span>
+    </button>
 
-      <div class="footer-bottom-bar">
-        <span>&copy; 2025 PARIAZ STORE. Todos los derechos reservados.</span>
-        <span>INFRAESTRUCTURA DE COMERCIO DIGITAL</span>
-      </div>
-    </div>
-  </footer>
+    <button class="bnav-item" id="bnav-account" aria-label="Mi Cuenta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span style="font-size: 0.65rem; font-weight: 700;">VIP</span>
+    </button>
+  </nav>
 
   <!-- =========================================================================
-       12. CART DRAWER (AJAX-LIKE SLIDEOUT)
+       09. MODAL DETALLE DE PRODUCTO (FIGMA PRODUCT SCREEN — IMAGE 2 & 5)
+       ========================================================================= -->
+  <div class="modal-backdrop-overlay" id="modal-backdrop-overlay"></div>
+
+  <div class="product-detail-modal" id="product-detail-modal" role="dialog" aria-modal="true">
+    
+    <!-- Top Bar con Botón Atrás y Wishlist -->
+    <div class="modal-top-bar">
+      <button class="modal-back-btn" id="modal-close-btn" aria-label="Volver">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <span style="font-size: 0.8rem; font-weight: 800; letter-spacing: 0.15em; color: var(--text-muted); text-transform: uppercase;" id="modal-product-collection">
+        DROP 004
+      </span>
+      <button class="modal-wish-btn" id="modal-wishlist-toggle" aria-label="Guardar">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+      </button>
+    </div>
+
+    <div class="modal-screen-grid">
+      <!-- Visual Pane -->
+      <div class="modal-product-visual-pane" id="modal-product-visual">
+        <!-- Inyectado desde js/ui.js -->
+      </div>
+
+      <!-- Details Pane -->
+      <div class="modal-product-info-pane">
+        <div>
+          <div class="modal-rating-review-row">
+            <span class="star-icon">★</span>
+            <span id="modal-rating-num">5.0</span>
+            <span class="reviews-count" id="modal-reviews-count">(1.4k reviews)</span>
+            <span style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 2px 8px; border-radius: var(--radius-pill); font-size: 0.72rem; margin-left: 6px;">
+              ✓ Verificado
+            </span>
+          </div>
+
+          <h2 class="modal-product-name" id="modal-product-name">Nombre Producto</h2>
+
+          <div class="modal-price-block">
+            <span class="modal-price-val" id="modal-product-price">$140.000 COP</span>
+            <span class="modal-price-orig" id="modal-product-original-price">$180.000 COP</span>
+          </div>
+
+          <p class="modal-product-desc" id="modal-product-desc">
+            Descripción de la prenda con detalles y confección premium de Medellín.
+          </p>
+
+          <!-- Choose Size -->
+          <div style="margin-bottom: 20px;">
+            <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);">
+              SELECCIONA TU TALLA:
+            </span>
+            <div class="size-pill-group" id="modal-size-selector">
+              <!-- Botones de tallas -->
+            </div>
+          </div>
+
+          <!-- Matching Items (Image 4 - "Excellent Combination with...") -->
+          <div class="matching-items-section">
+            <span class="matching-items-title">COMBINACIÓN PERFECTA CON:</span>
+            <div class="matching-items-list" id="modal-matching-items-list">
+              <!-- Bundle items -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Sticky Bottom Actions Bar -->
+        <div class="modal-bottom-actions">
+          <div class="modal-btn-row">
+            <div class="modal-stepper-box">
+              <button class="modal-stepper-btn" id="modal-qty-minus">−</button>
+              <span class="modal-stepper-val" id="modal-qty-val">1</span>
+              <button class="modal-stepper-btn" id="modal-qty-plus">+</button>
+            </div>
+            <button class="btn-add-to-bag-pill" id="modal-btn-add-cart">
+              Add to Bag &bull; $140.000
+            </button>
+          </div>
+
+          <button class="btn-wa-inquiry-pill" id="modal-btn-whatsapp-inquiry">
+            <span>💬 Comprar por WhatsApp</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       10. STORY VIEWER MODAL (INSTAGRAM / TIKTOK REEL VIEWER)
+       ========================================================================= -->
+  <div class="story-viewer-modal" id="story-viewer-modal" role="dialog" aria-modal="true">
+    <div class="story-top-progress">
+      <div class="story-progress-fill" id="story-progress-bar"></div>
+    </div>
+
+    <div class="story-top-header">
+      <div class="story-header-author">
+        <img src="assets/brand/logo.jpeg" alt="Artist" class="story-author-img" id="story-artist-avatar">
+        <div>
+          <span class="story-author-name" id="story-artist-name">Kris R</span>
+          <span style="font-size: 0.68rem; color: #10b981; display: block;">✓ En Vivo</span>
+        </div>
+      </div>
+      <button class="story-close-btn" onclick="document.getElementById('modal-backdrop-overlay').click();">&times;</button>
+    </div>
+
+    <div class="story-media-layer">
+      <img src="assets/artists/krisr.jpeg" alt="Story Frame" class="story-bg-img" id="story-bg-img">
+    </div>
+
+    <div class="story-bottom-content">
+      <h3 class="story-headline" id="story-headline">KRIS R EN VIVO CON PARIAZ</h3>
+      <p class="story-subhead" id="story-subhead">Camiseta Crimson Security & Trust disponible en la tienda.</p>
+      <button class="story-product-btn" id="story-product-btn">VER PRENDA EN TIENDA &rarr;</button>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       11. WISHLIST MODAL (FAVORITOS)
+       ========================================================================= -->
+  <div class="wishlist-modal" id="wishlist-modal" role="dialog" aria-modal="true">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <h3 style="font-size: 1.5rem; font-weight: 800;">TUS GUARDADOS</h3>
+      <button id="wishlist-close-btn" style="font-size: 1.8rem; line-height: 1;">&times;</button>
+    </div>
+
+    <div class="wishlist-items-container" id="wishlist-items-container">
+      <!-- Inyectado desde js/ui.js -->
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       12. MULTI-STEP CHECKOUT MODAL (FIGMA FLOW — IMAGE 1 & 5)
+       ========================================================================= -->
+  <div class="checkout-flow-modal" id="checkout-flow-modal" role="dialog" aria-modal="true">
+    
+    <div class="checkout-stepper-header">
+      <h3 class="checkout-step-title" id="checkout-modal-main-title">FINALIZAR COMPRA</h3>
+      <button id="checkout-flow-close-btn" style="font-size: 1.8rem; line-height: 1;">&times;</button>
+    </div>
+
+    <!-- Step 1: Resumen de Carrito -->
+    <div id="checkout-step-1">
+      <div class="checkout-summary-box">
+        <div class="checkout-summary-row">
+          <span>Subtotal de Prendas:</span>
+          <span id="checkout-summary-subtotal">$0 COP</span>
+        </div>
+        <div class="checkout-summary-row">
+          <span>Envío Nacional Colombia:</span>
+          <span style="color: #10b981; font-weight: 700;">GRATIS</span>
+        </div>
+        <div class="checkout-summary-row total-row">
+          <span>Total a Pagar:</span>
+          <span id="checkout-summary-total">$0 COP</span>
+        </div>
+      </div>
+
+      <div class="checkout-actions-row">
+        <button class="hero-btn-pill-primary" id="btn-goto-step-2" style="width: 100%; justify-content: center;">
+          CONTINUAR CON DIRECCIÓN &rarr;
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 2: Dirección de Envío -->
+    <div id="checkout-step-2" style="display: none;">
+      <form id="checkout-address-form" onsubmit="event.preventDefault();">
+        <div class="checkout-form-group">
+          <label class="checkout-form-label">Nombre Completo</label>
+          <input type="text" class="checkout-form-input" id="checkout-input-name" placeholder="Ej: Santiago Restrepo" required>
+        </div>
+
+        <div class="checkout-form-group">
+          <label class="checkout-form-label">Ciudad / Municipio (Colombia)</label>
+          <input type="text" class="checkout-form-input" id="checkout-input-city" placeholder="Ej: Medellín / Bogotá / Cali" required>
+        </div>
+
+        <div class="checkout-form-group">
+          <label class="checkout-form-label">Dirección de Entrega</label>
+          <input type="text" class="checkout-form-input" id="checkout-input-address" placeholder="Ej: Calle 10 # 43E-12 Apto 402">
+        </div>
+
+        <div class="checkout-form-group">
+          <label class="checkout-form-label">Teléfono / WhatsApp</label>
+          <input type="tel" class="checkout-form-input" id="checkout-input-phone" placeholder="Ej: 310 123 4567">
+        </div>
+
+        <div class="checkout-actions-row" style="margin-top: 24px;">
+          <button type="button" class="filter-tab-pill" id="btn-back-step-1">&larr; Volver</button>
+          <button type="button" class="hero-btn-pill-primary" id="btn-goto-step-3" style="flex-grow: 1; justify-content: center;">
+            MÉTODO DE PAGO &rarr;
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Step 3: Método de Pago -->
+    <div id="checkout-step-3" style="display: none;">
+      <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 20px;">
+        Selecciona cómo deseas completar tu pedido:
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
+        
+        <!-- Opción A: WhatsApp Express -->
+        <button class="btn-wa-inquiry-pill" id="btn-finish-whatsapp-pay" style="padding: 16px;">
+          <span>🟢 Finalizar por WhatsApp (Recomendado)</span>
+        </button>
+
+        <!-- Opción B: Online Payment Gateway (PSE / Tarjeta / Addi) -->
+        <button class="hero-btn-pill-primary" id="btn-finish-online-pay" style="padding: 16px; justify-content: center; background: #fff; color: #000;">
+          <span>💳 Pago en Línea (Wompi / PSE / Tarjetas)</span>
+        </button>
+
+      </div>
+
+      <button type="button" class="filter-tab-pill" id="btn-back-step-2">&larr; Cambiar Dirección</button>
+    </div>
+
+  </div>
+
+  <!-- =========================================================================
+       13. CART DRAWER (SLIDEOUT)
        ========================================================================= -->
   <div class="cart-overlay" id="cart-overlay"></div>
   
-  <aside class="cart-drawer" id="cart-drawer" aria-label="Carrito de compras">
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Bolsa de compras">
     <div class="cart-drawer-header">
-      <h3 class="cart-drawer-title">TU CARRITO</h3>
-      <button class="cart-close-btn" id="cart-close-btn" aria-label="Cerrar carrito">&times;</button>
+      <h3 class="cart-drawer-title">MI BOLSA</h3>
+      <button id="cart-close-btn" style="font-size: 1.8rem; line-height: 1;">&times;</button>
     </div>
 
-    <!-- Barra de meta de envío gratis -->
     <div class="free-shipping-box">
-      <p class="free-shipping-text" id="free-shipping-text">
-        Agrega prendas para calcular envío gratis nacional.
-      </p>
+      <p class="free-shipping-text" id="free-shipping-text">Calculando envío gratis...</p>
       <div class="free-shipping-bar-bg">
         <div class="free-shipping-progress" id="free-shipping-progress"></div>
       </div>
@@ -428,117 +523,37 @@
 
     <div class="cart-drawer-body">
       <div class="cart-empty-state" id="cart-empty-state">
-        <span style="font-size: 3rem; opacity: 0.3;">🛒</span>
-        <p style="font-size: 0.95rem; font-weight: 600;">Tu carrito está vacío</p>
-        <p style="font-size: 0.82rem;">Explora el catálogo y agrega tus prendas favoritas del Drop.</p>
-        <a href="#shop" class="btn-primary" style="margin-top: 10px; font-size: 0.8rem;" onclick="document.getElementById('cart-close-btn').click();">
-          EXPLORAR CATÁLOGO &rarr;
-        </a>
+        <span style="font-size: 3rem; opacity: 0.3;">🛍️</span>
+        <p style="font-weight: 700;">Tu bolsa está vacía</p>
+        <p style="font-size: 0.85rem;">Explora los drops de Pariaz y agrega tus prendas.</p>
       </div>
 
       <div class="cart-items-list" id="cart-items-list">
-        <!-- Inyectado dinámicamente desde js/cart.js -->
+        <!-- Inyectado desde js/cart.js -->
       </div>
     </div>
 
     <div class="cart-drawer-footer" id="cart-drawer-footer" style="display: none;">
       <div class="cart-subtotal-row">
-        <span class="cart-subtotal-label">Subtotal estimado:</span>
+        <span style="font-size: 0.85rem; color: var(--text-secondary); text-transform: uppercase;">Subtotal:</span>
         <span class="cart-subtotal-val" id="cart-subtotal-val">$0 COP</span>
       </div>
 
-      <div class="cart-checkout-actions">
-        <!-- Botón 1: WhatsApp Checkout -->
-        <button class="btn-whatsapp-order" id="btn-checkout-whatsapp">
-          <span>COMPRAR POR WHATSAPP &rarr;</span>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <button class="btn-add-to-bag-pill trigger-checkout-modal" style="width: 100%; text-align: center;">
+          CHECKOUT SEGURO &rarr;
         </button>
-
-        <!-- Botón 2: Checkout Online (Simulado) -->
-        <button class="btn-online-checkout" id="btn-checkout-online">
-          <span>PAGO EN LÍNEA (PSE / TARJETA)</span>
+        <button class="btn-wa-inquiry-pill" id="btn-checkout-whatsapp">
+          <span>PEDIR POR WHATSAPP</span>
         </button>
       </div>
     </div>
   </aside>
 
-  <!-- =========================================================================
-       13. MODAL DETALLE DE PRODUCTO
-       ========================================================================= -->
-  <div class="modal-backdrop-overlay" id="modal-backdrop-overlay"></div>
-
-  <div class="product-detail-modal" id="product-detail-modal" role="dialog" aria-modal="true">
-    <button class="modal-close-btn" id="modal-close-btn" aria-label="Cerrar modal">&times;</button>
-    
-    <div class="modal-inner-grid">
-      <div class="modal-product-visual" id="modal-product-visual">
-        <!-- Foto real inyectada dinámicamente -->
-      </div>
-
-      <div class="modal-product-details-pane">
-        <div>
-          <span class="modal-collection-tag" id="modal-product-collection">COLECCIÓN</span>
-          <h2 class="modal-product-name" id="modal-product-name">Nombre Producto</h2>
-          <span class="product-badge" id="modal-product-badge" style="margin-bottom: 12px; display: inline-block;">BADGE</span>
-          <div class="modal-product-price" id="modal-product-price">$0 COP</div>
-          <p class="modal-product-desc" id="modal-product-desc">Descripción técnica de la prenda.</p>
-
-          <div class="modal-size-block">
-            <span class="sizes-label">SELECCIONA TU TALLA:</span>
-            <div class="size-select-group" id="modal-size-selector">
-              <!-- Botones de tallas inyectados dinámicamente -->
-            </div>
-          </div>
-
-          <ul style="list-style: none; margin-bottom: 24px; font-size: 0.8rem; color: var(--text-muted);" id="modal-product-specs">
-            <!-- Especificaciones -->
-          </ul>
-        </div>
-
-        <div>
-          <div class="modal-qty-cart-row">
-            <div class="qty-stepper" style="padding: 4px;">
-              <button class="qty-btn" id="modal-qty-minus">−</button>
-              <span class="qty-val" id="modal-qty-val">1</span>
-              <button class="qty-btn" id="modal-qty-plus">+</button>
-            </div>
-            <button class="btn-primary btn-modal-add" id="modal-btn-add-cart">
-              AÑADIR AL CARRITO
-            </button>
-          </div>
-
-          <button class="btn-whatsapp-order btn-modal-wa" id="modal-btn-whatsapp-inquiry">
-            PREGUNTAR DISPONIBILIDAD POR WHATSAPP &rarr;
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- =========================================================================
-       14. MODAL DEMO CHECKOUT EXPLICATIVO
-       ========================================================================= -->
-  <div class="checkout-demo-modal" id="checkout-demo-modal" role="dialog" aria-modal="true">
-    <span style="font-size: 3rem; margin-bottom: 12px; display: block;">💳</span>
-    <h3 style="font-family: var(--font-display); font-size: 2.2rem; color: var(--text-primary); margin-bottom: 12px;">
-      CHECKOUT ONLINE (DEMO)
-    </h3>
-    <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6; margin-bottom: 24px;">
-      Esta ventana simula el flujo de compra automatizado. En la implementación final de producción para Pariaz, aquí se conectará la pasarela de pagos oficial (<strong>Wompi, Bold, Addi o MercadoPago</strong>) para recibir pagos por PSE, tarjetas y transferencias en tiempo real sin requerir atención humana 24/7.
-    </p>
-    <div style="display: flex; gap: 12px; justify-content: center;">
-      <button class="btn-secondary" id="checkout-modal-close-btn" style="padding: 12px 24px;">
-        VOLVER
-      </button>
-      <button class="btn-primary" id="checkout-demo-confirm-btn" style="padding: 12px 24px;">
-        ENTENDIDO
-      </button>
-    </div>
-  </div>
-
-  <!-- Toast Notificaciones -->
+  <!-- Toast -->
   <div class="pariaz-toast" id="pariaz-toast"></div>
 
-  <!-- Scripts con Arquitectura de Módulos ES6 -->
+  <!-- Script Modules -->
   <script type="module" src="js/app.js"></script>
 </body>
 </html>

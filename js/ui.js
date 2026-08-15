@@ -1,9 +1,9 @@
 /**
- * PARIAZ DIGITAL STORE - UI Components & Interaction Controller
- * Modales de producto, Shop the Look con fotos reales de artistas y microinteracciones.
+ * PARIAZ DIGITAL STORE — UI & Modals Controller (Figma Mobile-App Edition)
+ * Stories interactivas, Modal de producto detallado, Checkout multi-paso y Wishlist.
  */
 
-import { formatPriceCOP, generateProductInquiryUrl } from './whatsapp.js';
+import { formatPriceCOP, generateProductInquiryUrl, generateWhatsAppOrderUrl } from './whatsapp.js';
 import { cart } from './cart.js';
 import { artists } from '../data/artists.js';
 import { dropArchive, products } from '../data/products.js';
@@ -11,9 +11,91 @@ import { dropArchive, products } from '../data/products.js';
 let activeProduct = null;
 let selectedSize = 'L';
 let selectedQty = 1;
+let currentStoryIndex = 0;
+let storyTimer = null;
 
 /**
- * Abre el Modal de Producto con selector de tallas y botones de acción dual
+ * Renderiza la barra superior de Historias (Stories Bar)
+ */
+export function renderStoriesBar() {
+  const container = document.getElementById('app-stories-bar');
+  if (!container) return;
+
+  container.innerHTML = artists.map((artist, index) => `
+    <button class="story-avatar-pill" data-index="${index}" aria-label="Ver historia de ${artist.name}">
+      <div class="story-avatar-ring">
+        <img src="${artist.avatar}" alt="${artist.name}" class="story-avatar-img">
+      </div>
+      <span class="story-avatar-name">${artist.name}</span>
+    </button>
+  `).join('');
+
+  container.querySelectorAll('.story-avatar-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.getAttribute('data-index'), 10);
+      openStoryViewer(idx);
+    });
+  });
+}
+
+/**
+ * Visor de Historias (Story Viewer Modal)
+ */
+export function openStoryViewer(index) {
+  currentStoryIndex = index;
+  const artist = artists[currentStoryIndex];
+  if (!artist) return;
+
+  const modal = document.getElementById('story-viewer-modal');
+  const overlay = document.getElementById('modal-backdrop-overlay');
+  if (!modal || !overlay) return;
+
+  document.getElementById('story-artist-name').textContent = artist.name;
+  document.getElementById('story-artist-avatar').src = artist.avatar;
+  document.getElementById('story-bg-img').src = artist.image;
+  document.getElementById('story-headline').textContent = artist.storySlide.headline;
+  document.getElementById('story-subhead').textContent = artist.storySlide.subhead;
+
+  const linkBtn = document.getElementById('story-product-btn');
+  if (linkBtn) {
+    const prod = products.find(p => p.id === artist.storySlide.productLink);
+    linkBtn.textContent = prod ? `VER ${prod.name.toUpperCase()} ($${formatPriceCOP(prod.price)}) →` : 'EXPLORAR EN TIENDA →';
+    linkBtn.onclick = () => {
+      closeStoryViewer();
+      if (prod) openProductModal(prod);
+    };
+  }
+
+  // Barra de progreso animada
+  const progressBar = document.getElementById('story-progress-bar');
+  if (progressBar) {
+    progressBar.style.width = '0%';
+    setTimeout(() => { progressBar.style.width = '100%'; }, 50);
+  }
+
+  modal.classList.add('is-open');
+  overlay.classList.add('is-active');
+
+  clearTimeout(storyTimer);
+  storyTimer = setTimeout(() => {
+    if (currentStoryIndex < artists.length - 1) {
+      openStoryViewer(currentStoryIndex + 1);
+    } else {
+      closeStoryViewer();
+    }
+  }, 6000);
+}
+
+export function closeStoryViewer() {
+  clearTimeout(storyTimer);
+  const modal = document.getElementById('story-viewer-modal');
+  const overlay = document.getElementById('modal-backdrop-overlay');
+  if (modal) modal.classList.remove('is-open');
+  if (overlay) overlay.classList.remove('is-active');
+}
+
+/**
+ * Abre el Modal de Producto detallado (Figma Design - Image 2 & 5)
  */
 export function openProductModal(product) {
   activeProduct = product;
@@ -24,76 +106,102 @@ export function openProductModal(product) {
   const overlay = document.getElementById('modal-backdrop-overlay');
   if (!modal || !overlay) return;
 
-  // Llenar datos
   document.getElementById('modal-product-name').textContent = product.name;
   document.getElementById('modal-product-collection').textContent = product.collection;
   document.getElementById('modal-product-price').textContent = formatPriceCOP(product.price);
   document.getElementById('modal-product-desc').textContent = product.description;
   document.getElementById('modal-qty-val').textContent = selectedQty;
 
-  const badgeEl = document.getElementById('modal-product-badge');
-  if (badgeEl) {
-    if (product.badge) {
-      badgeEl.textContent = product.badge;
-      badgeEl.style.display = 'inline-block';
+  const origPriceEl = document.getElementById('modal-product-original-price');
+  if (origPriceEl) {
+    if (product.originalPrice && product.originalPrice > product.price) {
+      origPriceEl.textContent = formatPriceCOP(product.originalPrice);
+      origPriceEl.style.display = 'inline-block';
     } else {
-      badgeEl.style.display = 'none';
+      origPriceEl.style.display = 'none';
     }
   }
 
-  // Detalles / Especificaciones
-  const detailsList = document.getElementById('modal-product-specs');
-  if (detailsList) {
-    detailsList.innerHTML = product.details.map(d => `<li>• ${d}</li>`).join('');
-  }
+  const ratingNumEl = document.getElementById('modal-rating-num');
+  const reviewsCountEl = document.getElementById('modal-reviews-count');
+  if (ratingNumEl) ratingNumEl.textContent = product.rating || '5.0';
+  if (reviewsCountEl) reviewsCountEl.textContent = `(${product.reviewsCount || '1.4k'} reviews)`;
 
-  // Visual del modal (con foto real o arte gráfico)
+  // Visual
   const visualEl = document.getElementById('modal-product-visual');
   if (visualEl) {
-    if (product.image) {
-      visualEl.style.background = '#0a0a0d';
-      visualEl.innerHTML = `
-        <div class="modal-real-photo-box">
-          <img src="${product.image}" alt="${product.name}" class="modal-real-img">
-          <span class="modal-tag-pill" style="position: absolute; bottom: 16px; left: 16px; background: rgba(0,0,0,0.8);">${product.tag}</span>
-        </div>
-      `;
-    } else {
-      visualEl.style.background = `radial-gradient(circle at 50% 40%, ${product.accentColor}25 0%, #0d0d10 80%)`;
-      visualEl.innerHTML = `
-        <div class="modal-art-box">
-          <span class="modal-brand-stamp">PARIAZ MEDELLÍN</span>
-          <div class="modal-hero-monogram" style="border-color: ${product.accentColor}55">
-            <span>${product.name.includes('P') ? 'P' : product.name.charAt(0)}</span>
-          </div>
-          <span class="modal-tag-pill">${product.tag}</span>
-        </div>
-      `;
-    }
+    visualEl.innerHTML = `
+      <div class="modal-photo-hero-wrap">
+        <img src="${product.image || './assets/brand/logo.jpeg'}" alt="${product.name}" class="modal-hero-img">
+        <div class="modal-badge-pill">${product.tag || 'STREETWEAR'}</div>
+      </div>
+    `;
   }
 
-  // Generar selector de tallas
+  // Selector de Tallas
   const sizesContainer = document.getElementById('modal-size-selector');
   if (sizesContainer) {
     sizesContainer.innerHTML = product.sizes.map(size => `
-      <button class="size-select-btn ${size === selectedSize ? 'active' : ''}" data-size="${size}">
+      <button class="size-pill-btn ${size === selectedSize ? 'active' : ''}" data-size="${size}">
         ${size}
       </button>
     `).join('');
 
-    sizesContainer.querySelectorAll('.size-select-btn').forEach(btn => {
+    sizesContainer.querySelectorAll('.size-pill-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        sizesContainer.querySelectorAll('.size-select-btn').forEach(b => b.classList.remove('active'));
+        sizesContainer.querySelectorAll('.size-pill-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         selectedSize = btn.getAttribute('data-size');
-        updateModalWhatsAppButton();
+        updateModalBottomBar();
       });
     });
   }
 
-  updateModalWhatsAppButton();
+  // Combinaciones sugeridas ("Excellent Combination with..." / Cross-sell - Image 4)
+  const bundleContainer = document.getElementById('modal-matching-items-list');
+  if (bundleContainer) {
+    if (product.matchingItems && product.matchingItems.length > 0) {
+      bundleContainer.innerHTML = product.matchingItems.map(item => `
+        <div class="matching-item-card" data-id="${item.id}">
+          <img src="${item.image}" alt="${item.name}" class="matching-item-thumb">
+          <div class="matching-item-info">
+            <span class="matching-item-name">${item.name}</span>
+            <span class="matching-item-price">${formatPriceCOP(item.price)}</span>
+          </div>
+          <button class="btn-add-matching-item" data-id="${item.id}">+ Añadir</button>
+        </div>
+      `).join('');
 
-  // Mostrar modal
+      bundleContainer.querySelectorAll('.btn-add-matching-item').forEach(b => {
+        b.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const mId = b.getAttribute('data-id');
+          const mProd = products.find(p => p.id === mId);
+          if (mProd) cart.addItem(mProd, mProd.sizes[0], 1);
+        });
+      });
+    } else {
+      bundleContainer.innerHTML = '';
+    }
+  }
+
+  // Wishlist Heart Modal Button
+  const modalWishBtn = document.getElementById('modal-wishlist-toggle');
+  if (modalWishBtn) {
+    const isWish = cart.isWishlisted(product.id);
+    modalWishBtn.innerHTML = `
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="${isWish ? '#e11d48' : 'none'}" stroke="${isWish ? '#e11d48' : '#ffffff'}" stroke-width="2">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+      </svg>
+    `;
+    modalWishBtn.onclick = () => {
+      cart.toggleWishlist(product.id);
+      openProductModal(product);
+    };
+  }
+
+  updateModalBottomBar();
+
   modal.classList.add('is-open');
   overlay.classList.add('is-active');
   document.body.style.overflow = 'hidden';
@@ -109,8 +217,21 @@ export function closeProductModal() {
   }
 }
 
-function updateModalWhatsAppButton() {
+function updateModalBottomBar() {
+  const addCartBtn = document.getElementById('modal-btn-add-cart');
   const waBtn = document.getElementById('modal-btn-whatsapp-inquiry');
+
+  if (addCartBtn && activeProduct) {
+    addCartBtn.innerHTML = `
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span>Add to Bag &bull; ${formatPriceCOP(activeProduct.price * selectedQty)}</span>
+    `;
+    addCartBtn.onclick = () => {
+      cart.addItem(activeProduct, selectedSize, selectedQty);
+      closeProductModal();
+    };
+  }
+
   if (waBtn && activeProduct) {
     const url = generateProductInquiryUrl(activeProduct, selectedSize);
     waBtn.onclick = () => window.open(url, '_blank');
@@ -125,12 +246,13 @@ export function initProductModalListeners() {
   const overlay = document.getElementById('modal-backdrop-overlay');
   const btnMinus = document.getElementById('modal-qty-minus');
   const btnPlus = document.getElementById('modal-qty-plus');
-  const btnAddCart = document.getElementById('modal-btn-add-cart');
 
   if (closeBtn) closeBtn.addEventListener('click', closeProductModal);
   if (overlay) overlay.addEventListener('click', () => {
     closeProductModal();
-    closeCheckoutDemoModal();
+    closeStoryViewer();
+    closeWishlistModal();
+    closeCheckoutFlowModal();
   });
 
   if (btnMinus) {
@@ -138,6 +260,7 @@ export function initProductModalListeners() {
       if (selectedQty > 1) {
         selectedQty--;
         document.getElementById('modal-qty-val').textContent = selectedQty;
+        updateModalBottomBar();
       }
     });
   }
@@ -146,61 +269,124 @@ export function initProductModalListeners() {
     btnPlus.addEventListener('click', () => {
       selectedQty++;
       document.getElementById('modal-qty-val').textContent = selectedQty;
-    });
-  }
-
-  if (btnAddCart) {
-    btnAddCart.addEventListener('click', () => {
-      if (activeProduct) {
-        cart.addItem(activeProduct, selectedSize, selectedQty);
-        closeProductModal();
-      }
+      updateModalBottomBar();
     });
   }
 }
 
 /**
- * Renderiza la sección WORN BY / SEEN ON con fotografías reales de artistas
+ * Modal de Wishlist / Guardados (Figma Design - Image 5)
  */
-export function renderArtistsSection() {
-  const container = document.getElementById('artists-grid-container');
-  if (!container) return;
+export function openWishlistModal() {
+  const modal = document.getElementById('wishlist-modal');
+  const overlay = document.getElementById('modal-backdrop-overlay');
+  const listContainer = document.getElementById('wishlist-items-container');
+  if (!modal || !overlay || !listContainer) return;
 
-  container.innerHTML = artists.map(artist => `
-    <div class="artist-card has-real-artist-photo" style="--artist-color: ${artist.accent}">
-      <div class="artist-card-inner">
-        <div class="artist-badge-tag">${artist.badge}</div>
-        
-        <div class="artist-real-media-box">
-          <img src="${artist.image}" alt="${artist.name}" class="artist-photo-img" loading="lazy">
-          <div class="artist-photo-overlay"></div>
-        </div>
+  const wishedProducts = products.filter(p => cart.isWishlisted(p.id));
 
-        <div class="artist-info">
-          <span class="artist-role">${artist.role}</span>
-          <h3 class="artist-name">${artist.name}</h3>
-          <p class="artist-quote">"${artist.quote}"</p>
-          <div class="artist-piece-link">
-            <span class="piece-label">Prenda Usada:</span>
-            <span class="piece-name">${artist.featuredPiece}</span>
-          </div>
-        </div>
+  if (wishedProducts.length === 0) {
+    listContainer.innerHTML = `
+      <div class="wishlist-empty-state">
+        <span style="font-size: 3rem; display: block; margin-bottom: 12px;">💔</span>
+        <h3>Tu lista de guardados está vacía</h3>
+        <p>Toca el corazón en cualquier prenda para guardarla y revisarla después.</p>
       </div>
-    </div>
-  `).join('');
+    `;
+  } else {
+    listContainer.innerHTML = wishedProducts.map(p => `
+      <div class="wishlist-item-row">
+        <img src="${p.image || './assets/brand/logo.jpeg'}" alt="${p.name}" class="wishlist-thumb">
+        <div class="wishlist-item-info">
+          <h4>${p.name}</h4>
+          <span class="wishlist-item-price">${formatPriceCOP(p.price)}</span>
+        </div>
+        <button class="btn-wishlist-move-cart" data-id="${p.id}">Añadir al Carro</button>
+        <button class="btn-wishlist-remove" data-id="${p.id}">&times;</button>
+      </div>
+    `).join('');
+
+    listContainer.querySelectorAll('.btn-wishlist-move-cart').forEach(b => {
+      b.addEventListener('click', () => {
+        const id = b.getAttribute('data-id');
+        const p = products.find(prod => prod.id === id);
+        if (p) {
+          cart.addItem(p, p.sizes[0], 1);
+          closeWishlistModal();
+        }
+      });
+    });
+
+    listContainer.querySelectorAll('.btn-wishlist-remove').forEach(b => {
+      b.addEventListener('click', () => {
+        const id = b.getAttribute('data-id');
+        cart.toggleWishlist(id);
+        openWishlistModal();
+      });
+    });
+  }
+
+  modal.classList.add('is-open');
+  overlay.classList.add('is-active');
+  document.body.style.overflow = 'hidden';
+}
+
+export function closeWishlistModal() {
+  const modal = document.getElementById('wishlist-modal');
+  const overlay = document.getElementById('modal-backdrop-overlay');
+  if (modal) modal.classList.remove('is-open');
+  if (overlay) overlay.classList.remove('is-active');
+  document.body.style.overflow = '';
 }
 
 /**
- * Inicializa los Hotspots interactivos de "Shop The Look" con conmutador de artistas
+ * Modal de Checkout Multi-Paso (Figma Image 1 & 5)
+ */
+export function openCheckoutFlowModal() {
+  const modal = document.getElementById('checkout-flow-modal');
+  const overlay = document.getElementById('modal-backdrop-overlay');
+  if (!modal || !overlay) return;
+
+  showCheckoutStep(1);
+
+  modal.classList.add('is-open');
+  overlay.classList.add('is-active');
+  document.body.style.overflow = 'hidden';
+}
+
+export function closeCheckoutFlowModal() {
+  const modal = document.getElementById('checkout-flow-modal');
+  const overlay = document.getElementById('modal-backdrop-overlay');
+  if (modal) modal.classList.remove('is-open');
+  if (overlay) overlay.classList.remove('is-active');
+  document.body.style.overflow = '';
+}
+
+export function showCheckoutStep(step) {
+  const step1 = document.getElementById('checkout-step-1');
+  const step2 = document.getElementById('checkout-step-2');
+  const step3 = document.getElementById('checkout-step-3');
+
+  if (step1) step1.style.display = step === 1 ? 'block' : 'none';
+  if (step2) step2.style.display = step === 2 ? 'block' : 'none';
+  if (step3) step3.style.display = step === 3 ? 'block' : 'none';
+
+  const summarySubtotal = document.getElementById('checkout-summary-subtotal');
+  const summaryTotal = document.getElementById('checkout-summary-total');
+  if (summarySubtotal) summarySubtotal.textContent = formatPriceCOP(cart.getSubtotal());
+  if (summaryTotal) summaryTotal.textContent = formatPriceCOP(cart.getSubtotal());
+}
+
+/**
+ * Inicializa Shop The Look interactivo con fotos reales de artistas
  */
 export function initShopTheLook() {
-  const modelFrame = document.getElementById('shop-look-model-frame');
-  const btnFullOutfit = document.getElementById('btn-add-full-outfit');
   const lookTabs = document.querySelectorAll('.look-tab-btn');
+  const btnFullOutfit = document.getElementById('btn-add-full-outfit');
 
   const looksData = {
     'hades': {
-      title: 'HADES 66 — DESERT SAND SUIT',
+      title: 'HADES 66 — FULL DESERT SUIT',
       image: './assets/looks/hades-look.jpeg',
       items: [
         { num: '01', name: 'Camiseta Corona de Espinas Sand', price: '$160.000 COP', id: 'conjunto-hades', size: 'L' },
@@ -216,8 +402,8 @@ export function initShopTheLook() {
       title: 'KRIS R — CRIMSON SECURITY OUTFIT',
       image: './assets/looks/krisr-look.jpeg',
       items: [
-        { num: '01', name: 'Camiseta Pariaz Crimson — Security & Trust', price: '$170.000 COP', id: 'pariaz-krisr', size: 'XL' },
-        { num: '02', name: 'Gorra Pariaz Corona / P 3D', price: '$95.000 COP', id: 'gorra-p', size: 'Talla Única' }
+        { num: '01', name: 'Camiseta Crimson Security & Trust', price: '$170.000 COP', id: 'pariaz-krisr', size: 'XL' },
+        { num: '02', name: 'Gorra Pariaz Corona 3D', price: '$95.000 COP', id: 'gorra-p', size: 'Talla Única' }
       ],
       totalCOP: '$265.000 COP',
       hotspots: [
@@ -228,12 +414,12 @@ export function initShopTheLook() {
       title: 'JON Z — ÁNGELES HEAVEN OUTFIT',
       image: './assets/artists/jonz.jpeg',
       items: [
-        { num: '01', name: 'Camiseta Pariaz Ángeles Heaven Gate', price: '$180.000 COP', id: 'pariaz-jonz', size: 'L' },
-        { num: '02', name: 'Gorra Pariaz León Street', price: '$95.000 COP', id: 'gorra-leon', size: 'Talla Única' }
+        { num: '01', name: 'Camiseta Ángeles Heaven Gate', price: '$180.000 COP', id: 'pariaz-jonz', size: 'L' },
+        { num: '02', name: 'Gorra Pariaz León Street', price: '$95.000 COP', id: 'gorra-p', size: 'Talla Única' }
       ],
       totalCOP: '$275.000 COP',
       hotspots: [
-        { top: '46%', left: '48%', label: 'Camiseta Pariaz Ángeles ($180k)', id: 'pariaz-jonz' }
+        { top: '46%', left: '48%', label: 'Camiseta Ángeles Heaven ($180k)', id: 'pariaz-jonz' }
       ]
     }
   };
@@ -307,12 +493,11 @@ export function initShopTheLook() {
     });
   }
 
-  // Render inicial
   renderCurrentLook('hades');
 }
 
 /**
- * Renderiza el histórico de Drops (Drop Archive)
+ * Renderiza el histórico de Drops
  */
 export function renderDropArchive() {
   const container = document.getElementById('drop-archive-container');
@@ -328,25 +513,4 @@ export function renderDropArchive() {
       </div>
     </div>
   `).join('');
-}
-
-/**
- * Modal informativo de Checkout Demo
- */
-export function openCheckoutDemoModal() {
-  const modal = document.getElementById('checkout-demo-modal');
-  const overlay = document.getElementById('modal-backdrop-overlay');
-  if (modal && overlay) {
-    modal.classList.add('is-open');
-    overlay.classList.add('is-active');
-    document.body.style.overflow = 'hidden';
-  }
-}
-
-export function closeCheckoutDemoModal() {
-  const modal = document.getElementById('checkout-demo-modal');
-  const overlay = document.getElementById('modal-backdrop-overlay');
-  if (modal) modal.classList.remove('is-open');
-  if (overlay) overlay.classList.remove('is-active');
-  document.body.style.overflow = '';
 }

@@ -1,6 +1,6 @@
 /**
- * PARIAZ DIGITAL STORE - Category & Collection Filter Engine
- * Filtrado dinámico por pestañas con renderizado de fotos reales e interactividad 3D.
+ * PARIAZ DIGITAL STORE — Category & Collection Filter Engine (Figma UI Edition)
+ * Búsqueda en vivo, filtrado por categorías, wishlist y renderizado de tarjetas de app.
  */
 
 import { products } from '../data/products.js';
@@ -8,15 +8,26 @@ import { formatPriceCOP } from './whatsapp.js';
 import { openProductModal } from './ui.js';
 import { cart } from './cart.js';
 
-let currentFilter = 'all';
+let currentCategory = 'all';
+let searchQuery = '';
 
 export function initFilters() {
-  const tabButtons = document.querySelectorAll('.filter-tab-btn');
+  // 1. Pestañas de categoría (Pill buttons con iconos)
+  const tabButtons = document.querySelectorAll('.filter-tab-pill');
   tabButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       tabButtons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      currentFilter = btn.getAttribute('data-category');
+      currentCategory = btn.getAttribute('data-category');
+      renderCatalogGrid();
+    });
+  });
+
+  // 2. Buscador en vivo
+  const searchInputs = document.querySelectorAll('.app-search-input');
+  searchInputs.forEach(input => {
+    input.addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim().toLowerCase();
       renderCatalogGrid();
     });
   });
@@ -26,20 +37,32 @@ export function initFilters() {
 }
 
 /**
- * Renderiza el grid principal del catálogo filtrado
+ * Renderiza el grid principal del catálogo filtrado y buscado
  */
 export function renderCatalogGrid() {
   const container = document.getElementById('catalog-products-grid');
   if (!container) return;
 
-  const filtered = currentFilter === 'all' 
-    ? products 
-    : products.filter(p => p.category === currentFilter);
+  let filtered = products;
+
+  if (currentCategory !== 'all') {
+    filtered = filtered.filter(p => p.category === currentCategory);
+  }
+
+  if (searchQuery) {
+    filtered = filtered.filter(p => 
+      p.name.toLowerCase().includes(searchQuery) ||
+      p.collection.toLowerCase().includes(searchQuery) ||
+      p.categoryLabel.toLowerCase().includes(searchQuery)
+    );
+  }
 
   if (filtered.length === 0) {
     container.innerHTML = `
       <div class="no-products-message">
-        <p>No hay prendas disponibles en esta categoría actualmente.</p>
+        <span style="font-size: 2.5rem; display: block; margin-bottom: 12px;">🔍</span>
+        <h3>No encontramos prendas con "${searchQuery}"</h3>
+        <p>Prueba buscando con palabras como "camiseta", "hoodie", "conjunto" o "gorra".</p>
       </div>
     `;
     return;
@@ -50,93 +73,82 @@ export function renderCatalogGrid() {
 }
 
 /**
- * Renderiza la sección LATEST DROP (prendas destacadas con fotos reales)
+ * Renderiza la sección LATEST DROP (prendas destacadas)
  */
 export function renderLatestDropGrid() {
   const container = document.getElementById('latest-drop-grid');
   if (!container) return;
 
-  const latestItems = products.filter(p => p.isLatestDrop).slice(0, 6);
+  const latestItems = products.filter(p => p.isLatestDrop).slice(0, 4);
   container.innerHTML = latestItems.map(product => createProductCardHtml(product, true)).join('');
   attachProductCardEvents(container);
 }
 
 /**
- * Plantilla HTML para una tarjeta de producto con fotos reales y microinteracciones
+ * Plantilla HTML de Tarjeta de Producto basada fielmente en el UI Kit de Figma (Image 2 & 5)
  */
 function createProductCardHtml(product, isFeatured = false) {
-  const badgeHtml = product.badge 
-    ? `<span class="product-badge ${product.badge.includes('REAL') || product.badge.includes('KRIS') || product.badge.includes('JON') || product.badge.includes('HADES') ? 'badge-real-photo' : (product.badge === 'LIMITED' || product.badge === 'NO VUELVE' ? 'badge-limited' : '')}">${product.badge}</span>` 
+  const isWish = cart.isWishlisted(product.id);
+  const discountHtml = product.originalPrice && product.originalPrice > product.price
+    ? `<span class="product-price-original">${formatPriceCOP(product.originalPrice)}</span>`
     : '';
 
-  const sizePills = product.sizes.map(s => `<span class="size-dot">${s}</span>`).join('');
-
-  // Si tiene imagen real
-  let mediaContent = '';
-  if (product.image) {
-    mediaContent = `
-      <div class="product-real-photo-wrap">
-        <img src="${product.image}" alt="${product.name}" class="product-real-img" loading="lazy">
-        <div class="photo-ambient-glow" style="--glow-color: ${product.accentColor}44"></div>
-      </div>
-    `;
-  } else {
-    mediaContent = `
-      <div class="product-visual-art" style="background: radial-gradient(circle at 50% 40%, ${product.accentColor}18 0%, #0d0d10 80%)">
-        <div class="streetwear-graphic-silhouette">
-          <span class="silhouette-brand">PARIAZ</span>
-          <div class="silhouette-core" style="border-color: ${product.accentColor}44">
-            <span class="silhouette-letter">${product.name.includes('P') ? 'P' : product.name.charAt(0)}</span>
-          </div>
-          <span class="silhouette-tag">${product.tag}</span>
-        </div>
-      </div>
-    `;
-  }
+  const badgeHtml = product.badge
+    ? `<span class="app-card-badge">${product.badge}</span>`
+    : '';
 
   return `
-    <article class="product-card ${isFeatured ? 'product-card-featured' : ''} ${product.image ? 'has-real-photo' : ''}" data-id="${product.id}">
-      <div class="product-card-media" style="--accent-glow: ${product.accentColor}33">
+    <article class="app-product-card ${isFeatured ? 'is-featured' : ''}" data-id="${product.id}">
+      
+      <!-- Contenedor Visual con Botón de Wishlist -->
+      <div class="app-card-media-wrap">
         ${badgeHtml}
-        ${mediaContent}
+        
+        <button class="app-wishlist-heart-btn ${isWish ? 'is-active' : ''}" data-id="${product.id}" aria-label="Guardar en favoritos">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="${isWish ? '#e11d48' : 'none'}" stroke="${isWish ? '#e11d48' : '#ffffff'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+        </button>
 
-        <div class="product-card-hover-overlay">
-          <div class="hover-sizes-preview">
-            <span class="sizes-label">TALLAS DISPONIBLES:</span>
-            <div class="sizes-row">${sizePills}</div>
-          </div>
-          <button class="btn-quick-view" data-id="${product.id}">
-            VER DETALLES & TALLAS
-          </button>
-        </div>
+        <img src="${product.image || './assets/brand/logo.jpeg'}" alt="${product.name}" class="app-product-thumb" loading="lazy">
       </div>
 
-      <div class="product-card-body">
-        <div class="product-card-header">
-          <span class="product-collection-tag">${product.collection}</span>
-          <span class="product-status-dot" title="Stock listo para despacho">Disponible</span>
-        </div>
-        <h3 class="product-card-title">${product.name}</h3>
-        <div class="product-card-footer">
-          <div class="product-price-block">
-            <span class="price-currency">COP</span>
-            <span class="price-amount">${formatPriceCOP(product.price)}</span>
+      <!-- Cuerpo de la Tarjeta con Rating, Título y Precios -->
+      <div class="app-card-body">
+        
+        <div class="app-card-meta-row">
+          <span class="app-card-collection">${product.collection}</span>
+          <div class="app-card-rating">
+            <span class="star-icon">★</span>
+            <span class="rating-num">${product.rating || '5.0'}</span>
+            <span class="reviews-count">(${product.reviewsCount || '1.2k'})</span>
           </div>
-          <button class="btn-card-add-direct" data-id="${product.id}" title="Añadir talla estándar L">
-            + AGREGAR
+        </div>
+
+        <h3 class="app-card-title">${product.name}</h3>
+
+        <div class="app-card-footer">
+          <div class="app-card-pricing">
+            <span class="product-price-current">${formatPriceCOP(product.price)}</span>
+            ${discountHtml}
+          </div>
+
+          <button class="app-card-quick-add-btn" data-id="${product.id}" title="Añadir talla L al carrito">
+            <span>+</span>
           </button>
         </div>
+
       </div>
     </article>
   `;
 }
 
 function attachProductCardEvents(container) {
-  // Click en la tarjeta o botón de ver detalles -> abre modal de producto
-  container.querySelectorAll('.btn-quick-view, .product-card-media, .product-card-title').forEach(el => {
+  // Click en la tarjeta o título abre el modal detallado
+  container.querySelectorAll('.app-card-media-wrap, .app-card-title').forEach(el => {
     el.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const card = el.closest('.product-card');
+      if (e.target.closest('.app-wishlist-heart-btn')) return;
+      const card = el.closest('.app-product-card');
       if (card) {
         const prodId = card.getAttribute('data-id');
         const prod = products.find(p => p.id === prodId);
@@ -145,8 +157,19 @@ function attachProductCardEvents(container) {
     });
   });
 
+  // Toggle de Wishlist
+  container.querySelectorAll('.app-wishlist-heart-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const prodId = btn.getAttribute('data-id');
+      cart.toggleWishlist(prodId);
+      renderCatalogGrid();
+      renderLatestDropGrid();
+    });
+  });
+
   // Botón directo de agregar
-  container.querySelectorAll('.btn-card-add-direct').forEach(btn => {
+  container.querySelectorAll('.app-card-quick-add-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       const prodId = btn.getAttribute('data-id');
@@ -155,24 +178,6 @@ function attachProductCardEvents(container) {
         const defaultSize = prod.sizes.includes('L') ? 'L' : prod.sizes[0];
         cart.addItem(prod, defaultSize, 1);
       }
-    });
-  });
-
-  // Efecto de inclinación 3D en tarjetas (3D Card Tilt)
-  container.querySelectorAll('.product-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -5;
-      const rotateY = ((x - centerX) / centerX) * 5;
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
     });
   });
 }
