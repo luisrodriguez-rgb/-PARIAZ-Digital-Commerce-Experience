@@ -6,6 +6,10 @@
   <title>PARIAZ — Luxury Streetwear Experience</title>
   <meta name="description" content="Pariaz Digital Store. Ropa urbana de alto gramaje confeccionada en Medellín, Colombia.">
   
+  <!-- Favicon Oficial -->
+  <link rel="icon" type="image/jpeg" href="assets/brand/logo.jpeg">
+  <link rel="apple-touch-icon" href="assets/brand/logo.jpeg">
+  
   <!-- Google Fonts Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -85,13 +89,15 @@
 
   <main>
     <!-- =======================================================================
-         04. HERO SECTION — PARIAZ NO SE EXPLICA. SE VISTE.
+         04. HERO SECTION — PARIAZ NO SE EXPLICA. SE VISTE. (CON TIENDA REAL)
          ======================================================================= -->
     <section class="hero-app-section" id="hero">
       <div class="container">
-        <div class="hero-app-banner">
+        <div class="hero-store-stage">
+          <img src="assets/brand/tienda.jpg" alt="Tienda Física Pariaz Medellín" class="hero-store-bg">
+          <div class="hero-store-gradient-overlay"></div>
           
-          <div class="hero-app-text">
+          <div class="hero-store-content">
             <div class="hero-pill-badge">DROP 004 // MEDELLÍN</div>
             <h1 class="hero-app-title">
               PARIAZ<br>
@@ -114,11 +120,6 @@
               </a>
             </div>
           </div>
-
-          <div class="hero-mockup-frame">
-            <img src="assets/products/camisa.jpeg" alt="Camiseta Manos y Luz Pariaz" class="hero-mockup-img">
-          </div>
-
         </div>
       </div>
     </section>
@@ -530,7 +531,7 @@
        14. WISHLIST MODAL
        ========================================================================= -->
   <div class="wishlist-modal" id="wishlist-modal" role="dialog" aria-modal="true">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
       <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800;">TUS GUARDADOS</h3>
       <button id="wishlist-close-btn" style="font-size: 1.6rem; line-height: 1;">&times;</button>
     </div>

@@ -9,12 +9,12 @@
    01. DESIGN TOKENS & RESET
    -------------------------------------------------------------------------- */
 :root {
-  --bg-app: #08080a;
-  --bg-surface: #0f0f13;
-  --bg-card: #14141a;
-  --bg-card-hover: #1b1b24;
-  --bg-input: #15151c;
-  --bg-overlay: rgba(0, 0, 0, 0.92);
+  --bg-app: #070709;
+  --bg-surface: #0e0e12;
+  --bg-card: #131318;
+  --bg-card-hover: #1a1a22;
+  --bg-input: #14141a;
+  --bg-overlay: rgba(0, 0, 0, 0.94);
 
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
@@ -22,9 +22,10 @@
   
   --border-subtle: rgba(255, 255, 255, 0.08);
   --border-medium: rgba(255, 255, 255, 0.16);
-  --border-strong: rgba(255, 255, 255, 0.28);
+  --border-strong: rgba(255, 255, 255, 0.3);
 
   --accent-red: #e11d48;
+  --accent-red-glow: rgba(225, 29, 72, 0.35);
   --accent-gold: #f59e0b;
   --accent-blue: #38bdf8;
   --accent-whatsapp: #25d366;
@@ -39,8 +40,9 @@
   --radius-lg: 28px;
   --radius-pill: 100px;
 
-  --shadow-card: 0 12px 32px rgba(0, 0, 0, 0.45);
-  --shadow-floating: 0 20px 48px rgba(0, 0, 0, 0.7);
+  --shadow-card: 0 16px 40px rgba(0, 0, 0, 0.6);
+  --shadow-floating: 0 24px 50px rgba(0, 0, 0, 0.8);
+  --shadow-glow: 0 0 25px rgba(225, 29, 72, 0.3);
 
   --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -123,15 +125,16 @@ button {
   font-weight: 800;
   padding: 2px 8px;
   border-radius: var(--radius-xs);
+  box-shadow: 0 0 10px var(--accent-red-glow);
 }
 
 .app-top-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: rgba(8, 8, 10, 0.94);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background-color: rgba(7, 7, 9, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border-subtle);
   padding: 14px 0;
 }
@@ -147,17 +150,23 @@ button {
   display: flex;
   align-items: center;
   gap: 12px;
+  transition: transform var(--transition-fast);
+}
+
+.app-logo-box:hover {
+  transform: scale(1.03);
 }
 
 .app-logo-img {
-  height: 36px;
+  height: 38px;
   width: auto;
+  border-radius: 6px;
   filter: invert(1);
 }
 
 .app-logo-title {
   font-family: var(--font-heading);
-  font-size: 1.7rem;
+  font-size: 1.75rem;
   font-weight: 900;
   letter-spacing: 0.08em;
   line-height: 1;
@@ -212,6 +221,7 @@ button {
 .app-icon-circle-btn:hover {
   border-color: var(--border-strong);
   background-color: var(--bg-card);
+  transform: scale(1.06);
 }
 
 .cart-count-badge, .wishlist-count-badge {
@@ -229,6 +239,13 @@ button {
   align-items: center;
   justify-content: center;
   padding: 0 2px;
+  animation: badgePop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes badgePop {
+  0% { transform: scale(0); }
+  80% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
 
 /* --------------------------------------------------------------------------
@@ -264,18 +281,19 @@ button {
 }
 
 .story-avatar-pill:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.05);
 }
 
 .story-avatar-ring {
-  width: 64px;
-  height: 64px;
+  width: 66px;
+  height: 66px;
   border-radius: 50%;
   padding: 2.5px;
   background: linear-gradient(135deg, #e11d48, #d97706, #38bdf8);
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 14px rgba(225, 29, 72, 0.2);
 }
 
 .story-avatar-img {
@@ -293,65 +311,107 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   04. HERO SECTION — PARIAZ NO SE EXPLICA. SE VISTE.
+   04. HERO SECTION — ATMOSPHERIC STORE BANNER + PUNCHY TYPOGRAPHY
    -------------------------------------------------------------------------- */
 .hero-app-section {
-  padding: 32px 0 44px;
+  padding: 28px 0 40px;
 }
 
-.hero-app-banner {
-  background: linear-gradient(135deg, #121218 0%, #0c0c10 100%);
-  border: 1px solid var(--border-medium);
-  border-radius: var(--radius-lg);
-  padding: 48px;
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 40px;
-  align-items: center;
+.hero-store-stage {
   position: relative;
+  border-radius: var(--radius-lg);
   overflow: hidden;
+  border: 1px solid var(--border-medium);
+  min-height: 520px;
+  display: flex;
+  align-items: center;
   box-shadow: var(--shadow-card);
+}
+
+.hero-store-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.65) contrast(1.15);
+  transform: scale(1.02);
+  transition: transform 10s ease-out;
+}
+
+.hero-store-stage:hover .hero-store-bg {
+  transform: scale(1.06);
+}
+
+.hero-store-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(7, 7, 9, 0.95) 0%,
+    rgba(7, 7, 9, 0.82) 45%,
+    rgba(7, 7, 9, 0.4) 100%
+  );
+  z-index: 2;
+}
+
+.hero-store-content {
+  position: relative;
+  z-index: 5;
+  padding: 56px 48px;
+  max-width: 680px;
 }
 
 .hero-pill-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: rgba(225, 29, 72, 0.12);
-  border: 1px solid rgba(225, 29, 72, 0.3);
+  background-color: rgba(225, 29, 72, 0.2);
+  border: 1px solid rgba(225, 29, 72, 0.5);
   color: #ff4d6d;
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  padding: 6px 14px;
+  padding: 6px 16px;
   border-radius: var(--radius-pill);
-  margin-bottom: 16px;
+  margin-bottom: 18px;
+  backdrop-filter: blur(10px);
+  animation: pulseGlow 2.5s infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(225, 29, 72, 0.2); }
+  50% { box-shadow: 0 0 25px rgba(225, 29, 72, 0.5); }
 }
 
 .hero-app-title {
   font-family: var(--font-heading);
-  font-size: clamp(2.6rem, 5vw, 4.4rem);
+  font-size: clamp(2.8rem, 5.5vw, 4.6rem);
   font-weight: 900;
-  line-height: 1.02;
+  line-height: 0.98;
   letter-spacing: -0.03em;
   text-transform: uppercase;
   margin-bottom: 16px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
 }
 
 .hero-app-desc {
-  font-size: 1.05rem;
-  color: var(--text-secondary);
-  max-width: 480px;
+  font-size: 1.08rem;
+  color: #cbd5e1;
   line-height: 1.6;
   margin-bottom: 24px;
+  max-width: 520px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
 }
 
 .hero-countdown-box {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  background: rgba(14, 14, 18, 0.75);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-medium);
   border-radius: var(--radius-sm);
-  padding: 12px 18px;
+  padding: 12px 20px;
   display: inline-flex;
   flex-direction: column;
   gap: 4px;
@@ -359,9 +419,9 @@ button {
 }
 
 .hero-countdown-label {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   color: var(--text-muted);
   text-transform: uppercase;
 }
@@ -380,33 +440,19 @@ button {
   gap: 10px;
   background-color: var(--text-primary);
   color: #000;
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 800;
   letter-spacing: 0.04em;
-  padding: 16px 38px;
+  padding: 16px 40px;
   border-radius: var(--radius-pill);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.18);
 }
 
 .hero-btn-pill-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
-}
-
-.hero-mockup-frame {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
-  border-radius: var(--radius-md);
-  padding: 16px;
-}
-
-.hero-mockup-img {
-  max-height: 400px;
-  width: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.8));
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3);
+  background-color: #fff;
 }
 
 /* --------------------------------------------------------------------------
@@ -417,12 +463,13 @@ button {
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-lg);
   padding: 36px 40px;
+  box-shadow: var(--shadow-card);
 }
 
 .funnel-steps-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
+  gap: 14px;
   margin-top: 24px;
 }
 
@@ -436,20 +483,27 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.funnel-step-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-strong);
 }
 
 .funnel-step-num {
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background-color: var(--accent-red);
   color: #fff;
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   font-weight: 900;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 10px;
+  box-shadow: 0 0 12px var(--accent-red-glow);
 }
 
 .funnel-step-title {
@@ -467,10 +521,10 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   06. CULTURAL TICKER
+   06. CULTURAL TICKER (MARQUEE)
    -------------------------------------------------------------------------- */
 .marquee-ticker-wrap {
-  background-color: #0d0d12;
+  background-color: #0a0a0e;
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
   overflow: hidden;
@@ -530,16 +584,18 @@ button {
 .filter-tab-pill:hover {
   border-color: var(--border-strong);
   color: var(--text-primary);
+  transform: translateY(-1px);
 }
 
 .filter-tab-pill.active {
   background-color: var(--text-primary);
   color: #000;
   border-color: var(--text-primary);
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.15);
 }
 
 /* --------------------------------------------------------------------------
-   08. PRODUCT CARDS (CERO REVIEWS FALSOS)
+   08. PRODUCT CARDS
    -------------------------------------------------------------------------- */
 .app-products-grid {
   display: grid;
@@ -559,7 +615,7 @@ button {
 }
 
 .app-product-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
   border-color: var(--border-strong);
   box-shadow: var(--shadow-floating);
 }
@@ -586,7 +642,7 @@ button {
 }
 
 .app-product-card:hover .app-product-thumb {
-  transform: scale(1.06);
+  transform: scale(1.08);
 }
 
 .app-card-badge {
@@ -601,6 +657,7 @@ button {
   padding: 4px 8px;
   border-radius: var(--radius-xs);
   z-index: 10;
+  box-shadow: 0 0 10px var(--accent-red-glow);
 }
 
 .app-wishlist-heart-btn {
@@ -621,7 +678,7 @@ button {
 }
 
 .app-wishlist-heart-btn:hover {
-  transform: scale(1.15);
+  transform: scale(1.18);
 }
 
 .app-card-body {
@@ -691,15 +748,16 @@ button {
   justify-content: center;
   font-size: 1.2rem;
   font-weight: 800;
-  transition: transform var(--transition-fast);
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
 }
 
 .app-card-quick-add-btn:hover {
-  transform: scale(1.12);
+  transform: scale(1.15);
+  background-color: #fff;
 }
 
 /* --------------------------------------------------------------------------
-   09. PARIAZ EN LA CALLE (SEEN ON ARTISTS)
+   09. PARIAZ EN LA CALLE
    -------------------------------------------------------------------------- */
 .shop-look-tabs-row {
   display: flex;
@@ -724,6 +782,7 @@ button {
 .look-tab-btn:hover {
   color: var(--text-primary);
   border-color: var(--border-strong);
+  transform: translateY(-1px);
 }
 
 .look-tab-btn.active {
@@ -740,6 +799,7 @@ button {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   overflow: hidden;
+  box-shadow: var(--shadow-card);
 }
 
 .look-media-frame {
@@ -761,6 +821,11 @@ button {
   object-fit: contain;
   object-position: center;
   filter: drop-shadow(0 15px 30px rgba(0,0,0,0.8));
+  transition: transform var(--transition-smooth);
+}
+
+.shop-look-bg-img:hover {
+  transform: scale(1.04);
 }
 
 .look-hotspots-container {
@@ -789,7 +854,7 @@ button {
 }
 
 .look-hotspot-dot:hover {
-  transform: scale(1.2);
+  transform: scale(1.25);
 }
 
 .hotspot-tooltip {
@@ -912,30 +977,35 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   11. PRODUCT DETAIL MODAL & GUÍA DE TALLAS
+   11. MODALES (CORREGIDO: DISPLAY NONE CUANDO ESTÁN CERRADOS)
    -------------------------------------------------------------------------- */
 .modal-backdrop-overlay {
   position: fixed;
   inset: 0;
   background-color: var(--bg-overlay);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   z-index: 2000;
+  display: none;
   opacity: 0;
-  visibility: hidden;
-  transition: all var(--transition-smooth);
+  transition: opacity var(--transition-smooth);
 }
 
 .modal-backdrop-overlay.is-active {
+  display: block;
   opacity: 1;
-  visibility: visible;
 }
 
-.product-detail-modal, .size-guide-modal {
+.product-detail-modal,
+.size-guide-modal,
+.checkout-flow-modal,
+.wishlist-modal,
+.story-viewer-modal {
+  display: none;
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -46%) scale(0.96);
+  transform: translate(-50%, -50%) scale(0.96);
   width: 92%;
   max-width: 860px;
   max-height: 90vh;
@@ -945,14 +1015,31 @@ button {
   z-index: 2001;
   overflow-y: auto;
   opacity: 0;
-  visibility: hidden;
+  box-shadow: var(--shadow-floating);
   transition: all var(--transition-smooth);
 }
 
-.product-detail-modal.is-open, .size-guide-modal.is-open {
-  transform: translate(-50%, -50%) scale(1);
+.product-detail-modal.is-open,
+.size-guide-modal.is-open,
+.checkout-flow-modal.is-open,
+.wishlist-modal.is-open,
+.story-viewer-modal.is-open {
+  display: block;
   opacity: 1;
-  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.checkout-flow-modal,
+.wishlist-modal {
+  max-width: 540px;
+  padding: 30px;
+}
+
+.story-viewer-modal {
+  max-width: 400px;
+  height: 80vh;
+  background-color: #000;
+  padding: 0;
 }
 
 .modal-top-bar {
@@ -972,6 +1059,11 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform var(--transition-fast);
+}
+
+.modal-back-btn:hover, .modal-wish-btn:hover {
+  transform: scale(1.1);
 }
 
 .modal-screen-grid {
@@ -1045,6 +1137,11 @@ button {
   border: 1px solid var(--border-medium);
   color: var(--text-primary);
   border-radius: var(--radius-pill);
+  transition: all var(--transition-fast);
+}
+
+.size-pill-btn:hover {
+  border-color: var(--border-strong);
 }
 
 .size-pill-btn.active {
@@ -1098,6 +1195,12 @@ button {
   gap: 8px;
   border-radius: var(--radius-pill);
   padding: 14px 20px;
+  transition: all var(--transition-fast);
+}
+
+.btn-add-to-bag-pill:hover {
+  background-color: #fff;
+  transform: translateY(-2px);
 }
 
 .btn-wa-inquiry-pill {
@@ -1112,6 +1215,12 @@ button {
   gap: 8px;
   border-radius: var(--radius-pill);
   padding: 13px;
+  transition: all var(--transition-fast);
+}
+
+.btn-wa-inquiry-pill:hover {
+  background-color: var(--accent-whatsapp-hover);
+  transform: translateY(-2px);
 }
 
 /* Guía de Tallas Tabla */
@@ -1134,33 +1243,72 @@ button {
   color: var(--text-primary);
 }
 
+/* Checkout Modal Steps */
+.checkout-stepper-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 14px;
+}
+
+.checkout-form-group {
+  margin-bottom: 14px;
+}
+
+.checkout-form-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.checkout-form-input {
+  width: 100%;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  padding: 12px 16px;
+  font-size: 0.88rem;
+  border-radius: var(--radius-sm);
+}
+
+.checkout-summary-box {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.checkout-summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  color: var(--text-secondary);
+}
+
+.checkout-summary-row.total-row {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 10px;
+  margin-top: 10px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.checkout-actions-row {
+  display: flex;
+  gap: 10px;
+}
+
 /* --------------------------------------------------------------------------
    12. STORY VIEWER MODAL
    -------------------------------------------------------------------------- */
-.story-viewer-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.95);
-  width: 90%;
-  max-width: 400px;
-  height: 80vh;
-  background-color: #000;
-  border: 1px solid var(--border-medium);
-  border-radius: var(--radius-lg);
-  z-index: 2500;
-  overflow: hidden;
-  opacity: 0;
-  visibility: hidden;
-  transition: all var(--transition-smooth);
-}
-
-.story-viewer-modal.is-open {
-  transform: translate(-50%, -50%) scale(1);
-  opacity: 1;
-  visibility: visible;
-}
-
 .story-top-progress {
   position: absolute;
   top: 12px;
@@ -1275,14 +1423,14 @@ button {
   background-color: var(--bg-overlay);
   backdrop-filter: blur(8px);
   z-index: 1500;
+  display: none;
   opacity: 0;
-  visibility: hidden;
-  transition: all var(--transition-smooth);
+  transition: opacity var(--transition-smooth);
 }
 
 .cart-overlay.is-active {
+  display: block;
   opacity: 1;
-  visibility: visible;
 }
 
 .cart-drawer {
@@ -1530,15 +1678,15 @@ button {
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(16, 16, 22, 0.92);
+  background: rgba(14, 14, 18, 0.94);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-pill);
-  padding: 8px 18px;
+  padding: 8px 20px;
   display: flex;
   align-items: center;
-  gap: 26px;
+  gap: 28px;
   box-shadow: var(--shadow-floating);
   z-index: 1000;
 }
@@ -1590,13 +1738,12 @@ button {
    15. RESPONSIVE
    -------------------------------------------------------------------------- */
 @media (max-width: 992px) {
-  .hero-app-banner {
-    grid-template-columns: 1fr;
-    text-align: center;
-    padding: 32px 24px;
+  .hero-store-stage {
+    min-height: 440px;
   }
-  .hero-mockup-frame {
-    margin: 0 auto;
+  .hero-store-content {
+    padding: 40px 28px;
+    max-width: 100%;
   }
   .funnel-steps-grid {
     grid-template-columns: repeat(2, 1fr);
