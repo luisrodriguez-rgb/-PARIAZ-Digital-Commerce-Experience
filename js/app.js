@@ -1304,11 +1304,28 @@
     });
     document.getElementById('size-guide-close-btn')?.addEventListener('click', closeSizeGuide);
 
+    function scrollToCatalog() {
+      const el = document.getElementById('shop');
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.pageYOffset - 70;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }
+
+    // Direct Catalog Jump
+    document.querySelectorAll('.trigger-jump-catalog').forEach(b => {
+      b.onclick = (e) => {
+        e.preventDefault();
+        scrollToCatalog();
+      };
+    });
+
     // Bottom Navigation
     document.getElementById('bnav-home')?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    document.getElementById('bnav-catalog')?.addEventListener('click', scrollToCatalog);
     document.getElementById('bnav-search')?.addEventListener('click', () => {
       const inp = document.querySelector('.app-search-input');
-      if (inp) { inp.focus(); document.getElementById('shop')?.scrollIntoView({ behavior: 'smooth' }); }
+      if (inp) { inp.focus(); scrollToCatalog(); }
     });
     document.getElementById('bnav-cart')?.addEventListener('click', openCart);
     document.getElementById('bnav-wishlist')?.addEventListener('click', openWishlist);
