@@ -1,0 +1,16 @@
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Dependencies & Build
+node_modules/
+dist/
+.vercel/
+
+# Templates & Local Archives
+L-ESSENCE/
+
+# IDE & Gemini
+.gemini/
+.vscode/
+.idea/

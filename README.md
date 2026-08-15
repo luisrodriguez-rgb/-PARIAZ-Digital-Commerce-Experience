@@ -1,4 +1,4 @@
-# 💎 PARIAZ — Digital Commerce Experience (Demo)
+# 💎 PARIAZ — Digital Commerce Experience
 
 Demostración interactiva de infraestructura de comercio digital y e-commerce para **PARIAZ STORE** (Medellín / Sabaneta, Colombia).
 
@@ -9,9 +9,9 @@ Demostración interactiva de infraestructura de comercio digital y e-commerce pa
 * **Marca:** Streetwear Conceptual / Cultura Urbana / Medellín.
 * **Problema que Resuelve:** Convierte el tráfico masivo de Instagram, TikTok y artistas urbanos en un sistema de ventas propio sin saturar la atención manual por WhatsApp.
 * **Estrategia Híbrida:** 
-  1. Catálogo interactivo con selector de tallas y carrito.
+  1. Catálogo interactivo con selector de tallas y carrito reactivo.
   2. Generador de pedido ordenado para **WhatsApp Click-to-Chat**.
-  3. Simulación de **Pasarela de Pagos en Línea (Wompi/Bold/PSE)**.
+  3. Simulación de **Pasarela de Pagos en Línea (Wompi / Bold / PSE / Addi)**.
 
 ---
 
@@ -25,11 +25,10 @@ Demostración interactiva de infraestructura de comercio digital y e-commerce pa
 
 ---
 
-## 📁 Estructura del Proyecto
+## 📁 Estructura del Repositorio
 
 ```text
-pariaz-demo/
-├── index.html         # Maqueta y estructura de la experiencia
+├── index.html         # Maqueta y estructura principal de la experiencia
 ├── css/
 │   └── styles.css     # Sistema de diseño, tokens, dark mode y responsive
 ├── js/
@@ -39,8 +38,10 @@ pariaz-demo/
 │   ├── ui.js          # Modales de producto, Shop the Look, Artistas y Checkout
 │   └── whatsapp.js    # Compilador de pedidos y URLs de WhatsApp
 ├── data/
-│   ├── products.js    # Catálogo con 17 SKUs reales y precios en COP
-│   └── artists.js     # Worn By / Prueba social (Blessd, Kris R, Westcol, Anuel, etc.)
+│   ├── products.js    # Catálogo con 14 SKUs reales y precios en COP
+│   └── artists.js     # Worn By / Prueba social (Kris R, Hades 66, Jon Z, Coscu, Luar)
+├── assets/            # Fotografías reales de marca, catálogo y artistas
+├── docs/              # Documentación de estrategia, roadmap y análisis comercial
 └── vercel.json        # Configuración de despliegue en Vercel
 ```
 
@@ -51,7 +52,6 @@ pariaz-demo/
 Para probar la demo localmente:
 
 ```bash
-cd pariaz-demo
 # Usando Python:
 python3 -m http.server 3000
 
