@@ -1,6 +1,6 @@
 /* ==========================================================================
-   PARIAZ DIGITAL STORE — Design System (Clean Luxury Streetwear Edition)
-   Tipografía: Outfit + Plus Jakarta Sans | Cero Emojis | Alta Interactividad
+   PARIAZ DIGITAL STORE — Design System (Luxury Streetwear Commercial Edition)
+   Outfit + Plus Jakarta Sans | Cero Emojis | Cero Métricas Falsas | Alto Impacto
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -14,7 +14,7 @@
   --bg-card: #14141a;
   --bg-card-hover: #1b1b24;
   --bg-input: #15151c;
-  --bg-overlay: rgba(0, 0, 0, 0.9);
+  --bg-overlay: rgba(0, 0, 0, 0.92);
 
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
@@ -232,7 +232,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   03. TOP STORIES BAR (INSTAGRAM/TIKTOK VIBE)
+   03. TOP STORIES BAR (ARTIST STORIES REEL)
    -------------------------------------------------------------------------- */
 .stories-bar-section {
   padding: 14px 0 10px;
@@ -293,7 +293,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   04. HERO APP BANNER & COUNTDOWN
+   04. HERO SECTION — PARIAZ NO SE EXPLICA. SE VISTE.
    -------------------------------------------------------------------------- */
 .hero-app-section {
   padding: 32px 0 44px;
@@ -303,9 +303,9 @@ button {
   background: linear-gradient(135deg, #121218 0%, #0c0c10 100%);
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-lg);
-  padding: 44px;
+  padding: 48px;
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 1.2fr 0.8fr;
   gap: 40px;
   align-items: center;
   position: relative;
@@ -322,7 +322,7 @@ button {
   color: #ff4d6d;
   font-size: 0.75rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   padding: 6px 14px;
   border-radius: var(--radius-pill);
@@ -331,15 +331,16 @@ button {
 
 .hero-app-title {
   font-family: var(--font-heading);
-  font-size: clamp(2.4rem, 4.8vw, 4rem);
+  font-size: clamp(2.6rem, 5vw, 4.4rem);
   font-weight: 900;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  margin-bottom: 14px;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
 }
 
 .hero-app-desc {
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: var(--text-secondary);
   max-width: 480px;
   line-height: 1.6;
@@ -354,20 +355,20 @@ button {
   display: inline-flex;
   flex-direction: column;
   gap: 4px;
-  margin-bottom: 24px;
+  margin-bottom: 26px;
 }
 
 .hero-countdown-label {
   font-size: 0.7rem;
   font-weight: 800;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   color: var(--text-muted);
   text-transform: uppercase;
 }
 
 .hero-countdown-val {
   font-family: var(--font-heading);
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   font-weight: 900;
   color: var(--accent-red);
   letter-spacing: 0.08em;
@@ -379,10 +380,10 @@ button {
   gap: 10px;
   background-color: var(--text-primary);
   color: #000;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 800;
   letter-spacing: 0.04em;
-  padding: 16px 36px;
+  padding: 16px 38px;
   border-radius: var(--radius-pill);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
@@ -402,14 +403,71 @@ button {
 }
 
 .hero-mockup-img {
-  max-height: 380px;
+  max-height: 400px;
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.8));
 }
 
 /* --------------------------------------------------------------------------
-   05. CULTURAL TICKER (INFINITE MARQUEE)
+   05. DE INSTAGRAM A COMPRA (FUNNEL SHOWCASE)
+   -------------------------------------------------------------------------- */
+.funnel-showcase-box {
+  background: linear-gradient(135deg, #101016 0%, #0d0d12 100%);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  padding: 36px 40px;
+}
+
+.funnel-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.funnel-step-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 18px 14px;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.funnel-step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--accent-red);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.funnel-step-title {
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.funnel-step-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+/* --------------------------------------------------------------------------
+   06. CULTURAL TICKER
    -------------------------------------------------------------------------- */
 .marquee-ticker-wrap {
   background-color: #0d0d12;
@@ -438,7 +496,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   06. CATEGORY FILTER PILLS
+   07. CATEGORY FILTER PILLS
    -------------------------------------------------------------------------- */
 .category-pills-row {
   display: flex;
@@ -481,7 +539,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   07. PRODUCT CARDS
+   08. PRODUCT CARDS (CERO REVIEWS FALSOS)
    -------------------------------------------------------------------------- */
 .app-products-grid {
   display: grid;
@@ -583,29 +641,9 @@ button {
 
 .app-card-collection {
   font-size: 0.72rem;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-.app-card-rating {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
-.star-icon {
-  color: var(--accent-gold);
-}
-
-.rating-num {
-  color: var(--text-primary);
-}
-
-.reviews-count {
   color: var(--text-muted);
 }
 
@@ -633,20 +671,13 @@ button {
 
 .app-card-pricing {
   display: flex;
-  align-items: baseline;
-  gap: 8px;
+  flex-direction: column;
 }
 
 .product-price-current {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 800;
   color: var(--text-primary);
-}
-
-.product-price-original {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  text-decoration: line-through;
 }
 
 .app-card-quick-add-btn {
@@ -668,7 +699,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   08. SHOP THE LOOK
+   09. PARIAZ EN LA CALLE (SEEN ON ARTISTS)
    -------------------------------------------------------------------------- */
 .shop-look-tabs-row {
   display: flex;
@@ -820,7 +851,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   09. BRAND MANIFESTO
+   10. STORY MANIFESTO
    -------------------------------------------------------------------------- */
 .story-manifesto-box {
   background-color: var(--bg-surface);
@@ -881,7 +912,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   10. PRODUCT DETAIL MODAL & GUÍA DE TALLAS
+   11. PRODUCT DETAIL MODAL & GUÍA DE TALLAS
    -------------------------------------------------------------------------- */
 .modal-backdrop-overlay {
   position: fixed;
@@ -971,15 +1002,6 @@ button {
   justify-content: space-between;
 }
 
-.modal-rating-review-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-
 .modal-product-name {
   font-family: var(--font-heading);
   font-size: 1.65rem;
@@ -996,15 +1018,9 @@ button {
 }
 
 .modal-price-val {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 800;
   color: var(--text-primary);
-}
-
-.modal-price-orig {
-  font-size: 1rem;
-  color: var(--text-muted);
-  text-decoration: line-through;
 }
 
 .modal-product-desc {
@@ -1035,74 +1051,6 @@ button {
   background-color: var(--text-primary);
   color: #000;
   border-color: var(--text-primary);
-}
-
-.matching-items-section {
-  margin: 18px 0 20px;
-  border-top: 1px solid var(--border-subtle);
-  padding-top: 14px;
-}
-
-.matching-items-title {
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 10px;
-}
-
-.matching-items-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-  gap: 10px;
-}
-
-.matching-item-card {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  padding: 8px 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.matching-item-thumb {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-  background-color: #09090c;
-  border-radius: var(--radius-xs);
-}
-
-.matching-item-info {
-  flex-grow: 1;
-}
-
-.matching-item-name {
-  font-size: 0.72rem;
-  font-weight: 700;
-  display: block;
-}
-
-.matching-item-price {
-  font-size: 0.7rem;
-  color: var(--text-secondary);
-}
-
-.btn-add-matching-item {
-  font-size: 0.7rem;
-  font-weight: 800;
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-medium);
-  padding: 4px 8px;
-  border-radius: var(--radius-pill);
-}
-
-.btn-add-matching-item:hover {
-  background-color: var(--text-primary);
-  color: #000;
 }
 
 .modal-bottom-actions {
@@ -1187,7 +1135,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   11. STORY VIEWER MODAL
+   12. STORY VIEWER MODAL
    -------------------------------------------------------------------------- */
 .story-viewer-modal {
   position: fixed;
@@ -1319,97 +1267,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   12. CHECKOUT MODAL & WISHLIST MODAL
-   -------------------------------------------------------------------------- */
-.checkout-flow-modal, .wishlist-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -46%) scale(0.96);
-  width: 92%;
-  max-width: 540px;
-  max-height: 88vh;
-  background-color: #101015;
-  border: 1px solid var(--border-medium);
-  border-radius: var(--radius-lg);
-  z-index: 2001;
-  overflow-y: auto;
-  opacity: 0;
-  visibility: hidden;
-  transition: all var(--transition-smooth);
-  padding: 30px;
-}
-
-.checkout-flow-modal.is-open, .wishlist-modal.is-open {
-  transform: translate(-50%, -50%) scale(1);
-  opacity: 1;
-  visibility: visible;
-}
-
-.checkout-stepper-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  border-bottom: 1px solid var(--border-subtle);
-  padding-bottom: 14px;
-}
-
-.checkout-form-group {
-  margin-bottom: 14px;
-}
-
-.checkout-form-label {
-  display: block;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 6px;
-}
-
-.checkout-form-input {
-  width: 100%;
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-medium);
-  padding: 12px 16px;
-  font-size: 0.88rem;
-  border-radius: var(--radius-sm);
-}
-
-.checkout-summary-box {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  padding: 16px;
-  margin-bottom: 20px;
-}
-
-.checkout-summary-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.85rem;
-  margin-bottom: 6px;
-  color: var(--text-secondary);
-}
-
-.checkout-summary-row.total-row {
-  border-top: 1px solid var(--border-subtle);
-  padding-top: 10px;
-  margin-top: 10px;
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: var(--text-primary);
-}
-
-.checkout-actions-row {
-  display: flex;
-  gap: 10px;
-}
-
-/* --------------------------------------------------------------------------
-   13. CART DRAWER
+   13. CART DRAWER (TU BOLSA)
    -------------------------------------------------------------------------- */
 .cart-overlay {
   position: fixed;
@@ -1578,31 +1436,6 @@ button {
   font-size: 0.88rem;
 }
 
-.cart-coupon-box {
-  display: flex;
-  gap: 8px;
-  margin: 14px 0;
-}
-
-.cart-coupon-input {
-  flex-grow: 1;
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-medium);
-  padding: 8px 12px;
-  border-radius: var(--radius-sm);
-  font-size: 0.8rem;
-  text-transform: uppercase;
-}
-
-.btn-apply-coupon {
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-strong);
-  padding: 8px 14px;
-  border-radius: var(--radius-sm);
-  font-size: 0.75rem;
-  font-weight: 800;
-}
-
 .cart-drawer-footer {
   padding: 20px;
   border-top: 1px solid var(--border-subtle);
@@ -1622,7 +1455,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   14. FOOTER
+   14. FOOTER & FLOATING NAV
    -------------------------------------------------------------------------- */
 .app-site-footer {
   background-color: #050507;
@@ -1692,9 +1525,6 @@ button {
   gap: 12px;
 }
 
-/* --------------------------------------------------------------------------
-   15. FLOATING IOS BOTTOM NAVIGATION BAR
-   -------------------------------------------------------------------------- */
 .floating-bottom-nav {
   position: fixed;
   bottom: 20px;
@@ -1733,7 +1563,6 @@ button {
   height: 22px;
 }
 
-/* Toast */
 .pariaz-toast {
   position: fixed;
   top: 20px;
@@ -1758,7 +1587,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   16. RESPONSIVE
+   15. RESPONSIVE
    -------------------------------------------------------------------------- */
 @media (max-width: 992px) {
   .hero-app-banner {
@@ -1768,6 +1597,9 @@ button {
   }
   .hero-mockup-frame {
     margin: 0 auto;
+  }
+  .funnel-steps-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
   .shop-look-container {
     grid-template-columns: 1fr;
@@ -1790,6 +1622,9 @@ button {
 @media (max-width: 640px) {
   .app-search-form {
     display: none;
+  }
+  .funnel-steps-grid {
+    grid-template-columns: 1fr;
   }
   .story-pillars-grid {
     grid-template-columns: 1fr;

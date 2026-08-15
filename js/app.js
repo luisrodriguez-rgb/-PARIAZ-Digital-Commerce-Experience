@@ -1,49 +1,42 @@
 /**
  * PARIAZ DIGITAL STORE — Core Application Engine
  * Compatible con file:// y http:// (Cero dependencias externas, 100% robusto).
- * 23 Prendas Reales, 8 Artistas Urbanos y 5 Looks de Tarima.
+ * Enfoque Comercial: Sin métricas falsas, flujo Instagram->WhatsApp, Upselling y Drops.
  */
 
 (function () {
   'use strict';
 
   // =========================================================================
-  // 01. BASE DE DATOS DE PRODUCTOS Y ARTISTAS (FOTOS REALES ORDENADAS)
+  // 01. BASE DE DATOS DE PRODUCTOS Y ARTISTAS (PRECIOS REALES)
   // =========================================================================
   const PRODUCTS = [
     // --- CAMISETAS ---
     {
       id: "camisa-1",
-      name: "Camiseta Pariaz Manos & Luz (Drop 004)",
+      name: "Camiseta Pariaz Manos & Luz",
       price: 140000,
-      originalPrice: 180000,
-      rating: "5.0",
-      reviewsCount: "1.4k",
       category: "camisetas",
       categoryLabel: "Camisetas",
-      collection: "Drop 004 Signature",
+      collection: "Drop 004 — Manos & Luz",
       sizes: ["S", "M", "L", "XL", "XXL"],
-      badge: "PIEZA INSIGNIA",
+      badge: "DROP 004",
       image: "assets/products/camisa.jpeg",
       description: "Silueta insignia de Pariaz en algodón peinado de 240g con fit streetwear holgado. Estampado serigráfico en tramado semitono de manos elevando la 'P' cósmica.",
       details: ["100% Algodón Premium 240 GSM", "Corte Boxy Streetwear", "Estampado tramado de alta durabilidad", "Hecho en Medellín"],
       matching: [
-        { id: "gorra-blessd", name: "Gorra Pariaz Corona 3D", price: 95000, image: "assets/products/blessd_gorra.png" },
-        { id: "conjunto-hades", name: "Pantalón Jogger Sand", price: 240000, image: "assets/products/Hades.jpeg" }
+        { id: "gorra-blessd", name: "Gorra Pariaz Corona 3D", price: 95000, image: "assets/products/blessd_gorra.png" }
       ]
     },
     {
       id: "camisa-4-almighty",
       name: "Camiseta Pariaz x Almighty Edition",
       price: 170000,
-      originalPrice: 220000,
-      rating: "5.0",
-      reviewsCount: "920",
       category: "camisetas",
       categoryLabel: "Camisetas",
       collection: "Worn by Almighty",
       sizes: ["S", "M", "L", "XL", "XXL"],
-      badge: "WORN BY ALMIGHTY",
+      badge: "VISTO EN ALMIGHTY",
       image: "assets/products/camisa_4_almaygthhy.png",
       description: "Edición especial lucida por Almighty. Confección en algodón pesado con diseño de autor en el pecho y espalda.",
       details: ["Algodón 240g perchado", "Serigrafía discharge táctil", "Cuello grueso 3cm", "Edición limitada"],
@@ -53,16 +46,13 @@
     },
     {
       id: "camisa-5-jonz",
-      name: "Camiseta Pariaz Ángeles Heaven Gate",
+      name: "Camiseta Ángeles Heaven Gate",
       price: 180000,
-      originalPrice: 230000,
-      rating: "5.0",
-      reviewsCount: "654",
       category: "camisetas",
       categoryLabel: "Camisetas",
       collection: "Worn by Jon Z",
       sizes: ["S", "M", "L", "XL"],
-      badge: "WORN BY JON Z",
+      badge: "VISTO EN JON Z",
       image: "assets/products/camisa_5_jonz.png",
       description: "Pieza de autor lucida por Jon Z en vivo. Composición barroca con ángeles heraldos, leones guardianes y la emblemática 'P' celestial.",
       details: ["Serigrafía discharge al agua", "Algodón pre-lavado vintage", "Edición numerada", "Costuras reforzadas"],
@@ -74,14 +64,11 @@
       id: "pariaz-krisr",
       name: "Camiseta Crimson Security & Trust",
       price: 170000,
-      originalPrice: 210000,
-      rating: "4.9",
-      reviewsCount: "890",
       category: "camisetas",
       categoryLabel: "Camisetas",
       collection: "Worn by Kris R",
       sizes: ["S", "M", "L", "XL", "XXL"],
-      badge: "WORN BY KRIS R",
+      badge: "VISTO EN KRIS R",
       image: "assets/products/krisr.jpeg",
       description: "Pieza exclusiva vista en Kris R. Base en negro profundo con la 'P' gótica en serigrafía degradada roja carmesí y firma 'Security and trust'.",
       details: ["Serigrafía táctil degradada", "Cuello acanalado de 3cm", "Gramaje pesado 240 GSM", "Etiqueta tejida en dobladillo"],
@@ -93,9 +80,6 @@
       id: "camisa-6",
       name: "Camiseta Pariaz Double Print (Front & Back)",
       price: 160000,
-      originalPrice: 200000,
-      rating: "4.9",
-      reviewsCount: "540",
       category: "camisetas",
       categoryLabel: "Camisetas",
       collection: "Drop 004",
@@ -112,9 +96,6 @@
       id: "camisa-7",
       name: "Camiseta Pariaz Gothic Lettering Black",
       price: 150000,
-      originalPrice: 190000,
-      rating: "4.8",
-      reviewsCount: "410",
       category: "camisetas",
       categoryLabel: "Camisetas",
       collection: "Drop 003",
@@ -131,9 +112,6 @@
       id: "camisa-8",
       name: "Camiseta Pariaz Raw Boxy Edition",
       price: 160000,
-      originalPrice: 200000,
-      rating: "5.0",
-      reviewsCount: "380",
       category: "camisetas",
       categoryLabel: "Camisetas",
       collection: "Editorial Look",
@@ -150,9 +128,6 @@
       id: "camisa-9",
       name: "Camiseta Pariaz Street Royalty",
       price: 160000,
-      originalPrice: 200000,
-      rating: "4.9",
-      reviewsCount: "290",
       category: "camisetas",
       categoryLabel: "Camisetas",
       collection: "Drop 004",
@@ -169,9 +144,6 @@
       id: "camisa-10",
       name: "Camiseta Pariaz Core Monogram",
       price: 150000,
-      originalPrice: 185000,
-      rating: "4.8",
-      reviewsCount: "320",
       category: "camisetas",
       categoryLabel: "Camisetas",
       collection: "Core Collection",
@@ -188,9 +160,6 @@
       id: "camisa-2",
       name: "Camiseta Pariaz Monograma White Vintage",
       price: 140000,
-      originalPrice: 175000,
-      rating: "4.9",
-      reviewsCount: "670",
       category: "camisetas",
       categoryLabel: "Camisetas",
       collection: "White Vault",
@@ -207,9 +176,6 @@
       id: "camisa-3",
       name: "Camiseta Pariaz Street Classic Black",
       price: 140000,
-      originalPrice: 175000,
-      rating: "4.8",
-      reviewsCount: "510",
       category: "camisetas",
       categoryLabel: "Camisetas",
       collection: "Classics",
@@ -226,9 +192,6 @@
       id: "camisa-4",
       name: "Camiseta Pariaz Graphic Dark Night",
       price: 150000,
-      originalPrice: 190000,
-      rating: "4.9",
-      reviewsCount: "440",
       category: "camisetas",
       categoryLabel: "Camisetas",
       collection: "Dark Nights",
@@ -245,14 +208,11 @@
       id: "camisa-tury",
       name: "Camiseta Pariaz x Tury Signature",
       price: 160000,
-      originalPrice: 200000,
-      rating: "4.9",
-      reviewsCount: "390",
       category: "camisetas",
       categoryLabel: "Camisetas",
       collection: "Worn by Tury",
       sizes: ["S", "M", "L", "XL"],
-      badge: "WORN BY TURY",
+      badge: "VISTO EN TURY",
       image: "assets/products/camisa_5_tury.png",
       description: "Pieza exclusiva vista en Tury. Serigrafía discharge de autor con estética de alta costura callejera.",
       details: ["Algodón 240 GSM", "Estampado discharge al agua", "Corte Boxy holgado"],
@@ -266,14 +226,11 @@
       id: "conjunto-hades",
       name: "Conjunto Corona Desert Sand Suit",
       price: 400000,
-      originalPrice: 500000,
-      rating: "5.0",
-      reviewsCount: "340",
       category: "conjuntos",
       categoryLabel: "Conjuntos",
       collection: "Worn by Hades 66",
       sizes: ["S", "M", "L", "XL"],
-      badge: "WORN BY HADES 66",
+      badge: "VISTO EN HADES 66",
       image: "assets/products/Hades.jpeg",
       description: "Set completo de 2 piezas (Camiseta Oversize + Pantalón Jogger) lucido por Hades 66. Diseño de corona de espinas en tono arena desierto.",
       details: ["Set de 2 piezas completas", "Algodón perchado y gabardina", "Bolsillos funcionales y cordones", "Fit Streetwear auténtico"],
@@ -285,14 +242,11 @@
       id: "conjunto-morado",
       name: "Conjunto Pariaz Morado x Almighty Track",
       price: 480000,
-      originalPrice: 580000,
-      rating: "5.0",
-      reviewsCount: "260",
       category: "conjuntos",
       categoryLabel: "Conjuntos",
       collection: "Worn by Almighty",
       sizes: ["S", "M", "L", "XL"],
-      badge: "ALMIGHTY SUIT",
+      badge: "VISTO EN ALMIGHTY",
       image: "assets/products/conjunto_morado.png",
       description: "Conjunto de 2 piezas en púrpura profundo con detalles reflectivos y herrajes premium. Visto en Almighty.",
       details: ["Chaqueta + Pantalón", "Tela técnica repelente", "Bordados y aplicaciones de autor"],
@@ -304,9 +258,6 @@
       id: "conjunto-negro",
       name: "Conjunto Pariaz Black Shadow Tracksuit",
       price: 420000,
-      originalPrice: 520000,
-      rating: "4.9",
-      reviewsCount: "310",
       category: "conjuntos",
       categoryLabel: "Conjuntos",
       collection: "Shadow Series",
@@ -323,14 +274,11 @@
       id: "conjunto-azul",
       name: "Conjunto Pariaz Azul Royal Track",
       price: 500000,
-      originalPrice: 620000,
-      rating: "5.0",
-      reviewsCount: "210",
       category: "conjuntos",
       categoryLabel: "Conjuntos",
       collection: "Full Suits",
       sizes: ["S", "M", "L", "XL"],
-      badge: "WORN BY LUAR",
+      badge: "VISTO EN LUAR",
       image: "assets/products/conjunto_azul.jpeg",
       description: "Conjunto impermeable de dos piezas lucido por Luar La L en sesiones de estudio.",
       details: ["Chaqueta + Pantalón Cargo", "Herrajes grabados en láser", "Resistente al agua"],
@@ -342,9 +290,6 @@
       id: "conjunto-rojo",
       name: "Conjunto Pariaz Crimson Blood Suit",
       price: 450000,
-      originalPrice: 550000,
-      rating: "4.9",
-      reviewsCount: "180",
       category: "conjuntos",
       categoryLabel: "Conjuntos",
       collection: "Crimson Line",
@@ -363,9 +308,6 @@
       id: "buzo-cafe",
       name: "Buzo Hoodie Pariaz Brown Heavyweight 380G",
       price: 240000,
-      originalPrice: 300000,
-      rating: "5.0",
-      reviewsCount: "420",
       category: "buzos",
       categoryLabel: "Buzos & Hoodies",
       collection: "Earth Tones",
@@ -382,14 +324,11 @@
       id: "buzo-pariaz",
       name: "Buzo Hoodie Pariaz Black Night Heavyweight",
       price: 220000,
-      originalPrice: 280000,
-      rating: "4.9",
-      reviewsCount: "780",
       category: "buzos",
       categoryLabel: "Buzos & Hoodies",
       collection: "Worn by Coscu",
       sizes: ["S", "M", "L", "XL", "XXL"],
-      badge: "WORN BY COSCU",
+      badge: "VISTO EN COSCU",
       image: "assets/products/coscu.jpeg",
       description: "Hoodie de algodón perchado térmico 380 GSM con bordado tonal de la 'P'.",
       details: ["Algodón 380g perchado", "Capucha doble", "Bordado de alta densidad"],
@@ -401,16 +340,13 @@
     // --- GORRAS & HEADWEAR ---
     {
       id: "gorra-blessd",
-      name: "Gorra Pariaz Corona 3D Trucker (Seen on Blessd)",
+      name: "Gorra Pariaz Corona 3D Trucker",
       price: 95000,
-      originalPrice: 130000,
-      rating: "5.0",
-      reviewsCount: "1.2k",
       category: "gorras",
       categoryLabel: "Gorras & Headwear",
       collection: "Seen on Blessd",
-      sizes: ["Talla Única"],
-      badge: "SEEN ON BLESSD",
+      sizes: ["Talla Única (Ajustable)"],
+      badge: "VISTO EN BLESSD",
       image: "assets/products/blessd_gorra.png",
       description: "La icónica gorra trucker con la corona 3D de Pariaz bordada en alto relieve. Vista en tarima con Blessd.",
       details: ["Bordado 3D puff de alta densidad", "Malla trasera transpirable", "Broche snapback regulable", "Edición original"],
@@ -420,16 +356,13 @@
     },
     {
       id: "gorra-krisr",
-      name: "Gorra Pariaz Snapback (Seen on Kris R)",
+      name: "Gorra Pariaz Snapback",
       price: 95000,
-      originalPrice: 120000,
-      rating: "4.9",
-      reviewsCount: "870",
       category: "gorras",
       categoryLabel: "Gorras & Headwear",
       collection: "Seen on Kris R",
-      sizes: ["Talla Única"],
-      badge: "SEEN ON KRIS R",
+      sizes: ["Talla Única (Ajustable)"],
+      badge: "VISTO EN KRIS R",
       image: "assets/products/gorra_krisr.jpeg",
       description: "Gorra plana estructurada de 6 paneles lucida por Kris R. Bordado lateral y frontal.",
       details: ["Bordado 3D frontal", "Visera plana rígida", "Tafilete antitranspirante"],
@@ -441,14 +374,11 @@
       id: "gorra-p",
       name: "Gorra Pariaz León Official 3D",
       price: 95000,
-      originalPrice: 120000,
-      rating: "4.8",
-      reviewsCount: "950",
       category: "gorras",
       categoryLabel: "Gorras & Headwear",
       collection: "Headwear 01",
-      sizes: ["Talla Única"],
-      badge: "OFFICIAL LOGO",
+      sizes: ["Talla Única (Ajustable)"],
+      badge: "LOGO OFICIAL",
       image: "assets/brand/logo.jpeg",
       description: "Gorra con el isotipo oficial de león de Pariaz bordado en relieve.",
       details: ["Bordado 3D", "Malla trasera", "Broche ajustable"],
@@ -459,7 +389,7 @@
   ];
 
   const ARTISTS = [
-    { name: "Blessd", avatar: "assets/products/blessd_gorra.png", image: "assets/products/blessd_gorra.png", headline: "BLESSD EN VIVO CON LA GORRA PARIAZ", subhead: "Gorra Pariaz Corona 3D Trucker en tarima.", prodId: "gorra-blessd" },
+    { name: "Blessd", avatar: "assets/products/blessd_gorra.png", image: "assets/products/blessd_gorra.png", headline: "BLESSD EN VIVO CON LA GORRA PARIAZ", subhead: "Gorra Pariaz Corona 3D Trucker en concierto.", prodId: "gorra-blessd" },
     { name: "Almighty", avatar: "assets/products/camisa_4_almaygthhy.png", image: "assets/products/camisa_4_almaygthhy.png", headline: "ALMIGHTY x PARIAZ DROP", subhead: "Camiseta Pariaz x Almighty Edition.", prodId: "camisa-4-almighty" },
     { name: "Kris R", avatar: "assets/products/krisr.jpeg", image: "assets/products/krisr.jpeg", headline: "KRIS R EN VIVO CON PARIAZ", subhead: "Camiseta Crimson Security & Trust y Gorra Snapback.", prodId: "pariaz-krisr" },
     { name: "Hades 66", avatar: "assets/products/Hades.jpeg", image: "assets/products/Hades.jpeg", headline: "HADES 66 — FULL DESERT SUIT", subhead: "Conjunto Corona Desert Sand Suit de 2 piezas.", prodId: "conjunto-hades" },
@@ -484,7 +414,7 @@
       ]
     },
     'blessd': {
-      title: 'BLESSD — TARIMA CON GORRA CORONA 3D',
+      title: 'BLESSD — GORRA CORONA 3D EN TARIMA',
       image: 'assets/products/blessd_gorra.png',
       items: [
         { num: '01', name: 'Gorra Pariaz Corona 3D Trucker', price: '$95.000 COP', id: 'gorra-blessd', size: 'Talla Única' },
@@ -573,17 +503,17 @@
 
   function loadState() {
     try {
-      const c = localStorage.getItem('prz_cart_v5');
+      const c = localStorage.getItem('prz_cart_v6');
       if (c) cartItems = JSON.parse(c);
-      const w = localStorage.getItem('prz_wish_v5');
+      const w = localStorage.getItem('prz_wish_v6');
       if (w) wishlist = JSON.parse(w);
     } catch (e) {}
   }
 
   function saveState() {
     try {
-      localStorage.setItem('prz_cart_v5', JSON.stringify(cartItems));
-      localStorage.setItem('prz_wish_v5', JSON.stringify(wishlist));
+      localStorage.setItem('prz_cart_v6', JSON.stringify(cartItems));
+      localStorage.setItem('prz_wish_v6', JSON.stringify(wishlist));
     } catch (e) {}
     renderCart();
   }
@@ -608,17 +538,17 @@
     }
     saveState();
     openCart();
-    showToast(`Añadido a la bolsa: ${product.name} (${size})`);
+    showToast(`Añadido a la bolsa: ${product.name} (Talla ${size})`);
   }
 
   function toggleWishlist(id) {
     const idx = wishlist.indexOf(id);
     if (idx > -1) {
       wishlist.splice(idx, 1);
-      showToast('Eliminado de tus guardados');
+      showToast('Eliminado de guardados');
     } else {
       wishlist.push(id);
-      showToast('Guardado en tus favoritos');
+      showToast('Guardado en favoritos');
     }
     saveState();
     renderCatalog();
@@ -656,23 +586,23 @@
     const phone = '573009299777';
     if (cartItems.length === 0) return `https://wa.me/${phone}?text=Hola%20Pariaz,%20quiero%20informaci%C3%B3n%20sobre%20las%20prendas`;
 
-    let msg = `*NUEVO PEDIDO — TIENDA PARIAZ*\n\n`;
+    let msg = `*NUEVO PEDIDO — TIENDA OFICIAL PARIAZ*\n\n`;
     cartItems.forEach(i => {
-      msg += `• 1x ${i.name} (Talla ${i.size}) — ${formatCOP(i.price * i.qty)}\n`;
+      msg += `• 1x *${i.name}* (Talla ${i.size}) — ${formatCOP(i.price * i.qty)}\n`;
     });
 
     const sub = getSubtotal();
-    msg += `\n*TOTAL:* ${formatCOP(sub)}\n`;
+    msg += `\n*TOTAL A PAGAR:* ${formatCOP(sub)}\n`;
 
     if (delivery && delivery.name) {
-      msg += `\n*DATOS DE ENVÍO:*\n`;
+      msg += `\n*DATOS DE ENTREGA:*\n`;
       msg += `• Cliente: ${delivery.name}\n`;
       msg += `• Ciudad: ${delivery.city || 'No especificada'}\n`;
       msg += `• Dirección: ${delivery.address || 'Pendiente'}\n`;
       msg += `• Teléfono: ${delivery.phone || ''}\n`;
     }
 
-    msg += `\n_Pedido generado desde la tienda oficial de Pariaz_`;
+    msg += `\n_Pedido generado desde la tienda digital de Pariaz_`;
     return `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
   }
 
@@ -703,7 +633,6 @@
 
     container.innerHTML = list.map(p => {
       const isW = wishlist.includes(p.id);
-      const origHtml = p.originalPrice && p.originalPrice > p.price ? `<span class="product-price-original">${formatCOP(p.originalPrice)}</span>` : '';
       return `
         <article class="app-product-card" data-id="${p.id}">
           <div class="app-card-media-wrap">
@@ -718,19 +647,15 @@
           <div class="app-card-body">
             <div class="app-card-meta-row">
               <span class="app-card-collection">${p.collection}</span>
-              <div class="app-card-rating">
-                <span class="star-icon">★</span>
-                <span class="rating-num">${p.rating}</span>
-                <span class="reviews-count">(${p.reviewsCount})</span>
-              </div>
+              <span style="font-size: 0.68rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Medellín</span>
             </div>
             <h3 class="app-card-title">${p.name}</h3>
             <div class="app-card-footer">
               <div class="app-card-pricing">
                 <span class="product-price-current">${formatCOP(p.price)}</span>
-                ${origHtml}
+                <span style="font-size: 0.72rem; color: var(--text-muted); display: block;">Envíos a Colombia</span>
               </div>
-              <button class="app-card-quick-add-btn" data-id="${p.id}" title="Añadir">+</button>
+              <button class="app-card-quick-add-btn" data-id="${p.id}" title="Añadir a la bolsa">+</button>
             </div>
           </div>
         </article>
@@ -797,7 +722,7 @@
     const btn = document.getElementById('story-product-btn');
     if (btn) {
       const prod = PRODUCTS.find(p => p.id === a.prodId);
-      btn.textContent = prod ? `VER ${prod.name.toUpperCase()} (${formatCOP(prod.price)})` : 'VER PRENDA';
+      btn.textContent = prod ? `COMPRAR ESTE LOOK (${formatCOP(prod.price)}) →` : 'COMPRAR ESTE LOOK →';
       btn.onclick = () => {
         closeStory();
         if (prod) openProductModal(prod);
@@ -843,19 +768,6 @@
     document.getElementById('modal-product-desc').textContent = p.description;
     document.getElementById('modal-qty-val').textContent = selectedQty;
 
-    const orig = document.getElementById('modal-product-original-price');
-    if (orig) {
-      if (p.originalPrice && p.originalPrice > p.price) {
-        orig.textContent = formatCOP(p.originalPrice);
-        orig.style.display = 'inline-block';
-      } else {
-        orig.style.display = 'none';
-      }
-    }
-
-    document.getElementById('modal-rating-num').textContent = p.rating;
-    document.getElementById('modal-reviews-count').textContent = `(${p.reviewsCount} reviews)`;
-
     const vis = document.getElementById('modal-product-visual');
     if (vis) vis.innerHTML = `<img src="${p.image}" alt="${p.name}" class="modal-hero-img">`;
 
@@ -875,26 +787,34 @@
       });
     }
 
-    // Matching items
+    // Upselling: Completa el Look
     const mCont = document.getElementById('modal-matching-items-list');
     if (mCont) {
       if (p.matching && p.matching.length > 0) {
-        mCont.innerHTML = p.matching.map(m => `
-          <div class="matching-item-card">
-            <img src="${m.image}" alt="${m.name}" class="matching-item-thumb">
-            <div class="matching-item-info">
-              <span class="matching-item-name">${m.name}</span>
-              <span class="matching-item-price">${formatCOP(m.price)}</span>
+        const matchItem = p.matching[0];
+        const comboTotal = p.price + matchItem.price;
+        mCont.innerHTML = `
+          <div class="matching-item-card" style="display: flex; align-items: center; justify-content: space-between; padding: 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-medium); border-radius: var(--radius-sm); margin-top: 10px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <img src="${matchItem.image}" alt="${matchItem.name}" style="width: 48px; height: 48px; object-fit: contain; background: #000; border-radius: var(--radius-xs);">
+              <div>
+                <span style="font-size: 0.7rem; font-weight: 800; color: var(--accent-red); text-transform: uppercase;">COMBINACIÓN SUGERIDA</span>
+                <h4 style="font-size: 0.88rem; font-weight: 800;">${matchItem.name}</h4>
+                <span style="font-size: 0.82rem; color: var(--text-secondary);">${formatCOP(matchItem.price)}</span>
+              </div>
             </div>
-            <button class="btn-add-matching-item" data-id="${m.id}">+ Añadir</button>
+            <button class="btn-add-combo-pill" id="btn-add-combo" style="padding: 8px 16px; background: #fff; color: #000; font-size: 0.78rem; font-weight: 800; border-radius: 100px;">
+              Llevar Look Completo (${formatCOP(comboTotal)})
+            </button>
           </div>
-        `).join('');
-        mCont.querySelectorAll('.btn-add-matching-item').forEach(b => {
-          b.onclick = () => {
-            const matchProd = PRODUCTS.find(x => x.id === b.getAttribute('data-id'));
-            if (matchProd) addToCart(matchProd, matchProd.sizes[0], 1);
-          };
-        });
+        `;
+        document.getElementById('btn-add-combo').onclick = () => {
+          addToCart(p, selectedSize, 1);
+          const matchProd = PRODUCTS.find(x => x.id === matchItem.id);
+          if (matchProd) addToCart(matchProd, matchProd.sizes[0], 1);
+          closeProductModal();
+          showToast(`Look completo añadido a tu bolsa (${formatCOP(comboTotal)})`);
+        };
       } else {
         mCont.innerHTML = '';
       }
@@ -942,7 +862,7 @@
     }
 
     if (waBtn && activeProduct) {
-      const text = `Hola Pariaz, me interesa la prenda: ${activeProduct.name} en Talla ${selectedSize} (${formatCOP(activeProduct.price)}). ¿Tienen disponibilidad?`;
+      const text = `Hola Pariaz, quiero comprar la prenda:\n\n• *${activeProduct.name}*\n• Talla: ${selectedSize}\n• Precio: ${formatCOP(activeProduct.price)}\n\n¿Tienen disponibilidad para envío inmediato?`;
       waBtn.onclick = () => {
         window.open(`https://wa.me/573009299777?text=${encodeURIComponent(text)}`, '_blank');
       };
@@ -971,13 +891,13 @@
 
     const btn = document.getElementById('btn-add-full-outfit');
     if (btn) {
-      btn.textContent = `AGREGAR OUTFIT COMPLETO (${data.totalCOP})`;
+      btn.textContent = `COMPRAR ESTE LOOK COMPLETO (${data.totalCOP}) →`;
       btn.onclick = () => {
         data.items.forEach(item => {
           const prod = PRODUCTS.find(p => p.id === item.id);
           if (prod) addToCart(prod, item.size, 1);
         });
-        showToast(`Outfit de ${data.title} añadido a la bolsa`);
+        showToast(`Look de ${data.title} añadido a tu bolsa`);
       };
     }
 
@@ -1035,7 +955,7 @@
         const pct = Math.min(100, (sub / 300000) * 100);
         bar.style.width = `${pct}%`;
         bar.style.backgroundColor = '#ffffff';
-        barText.innerHTML = `Agrega <strong>${formatCOP(diff)}</strong> para <strong>Envío Gratis</strong>.`;
+        barText.innerHTML = `Te faltan <strong>${formatCOP(diff)}</strong> para <strong>Envío Gratis</strong>.`;
       }
     }
 
@@ -1360,19 +1280,6 @@
       showToast('¡Pedido confirmado! Redirigiendo a pasarela...');
     });
 
-    // Cupón de Descuento
-    document.getElementById('btn-apply-coupon')?.addEventListener('click', () => {
-      const input = document.getElementById('cart-coupon-input');
-      const val = input ? input.value.trim().toUpperCase() : '';
-      if (val === 'PARIAZVIP') {
-        appliedCoupon = 'PARIAZVIP';
-        showToast('Cupón PARIAZVIP aplicado: 10% de Descuento');
-        renderCart();
-      } else {
-        showToast('Cupón no válido. Prueba PARIAZVIP');
-      }
-    });
-
     // Modal Guía de Tallas
     function openSizeGuide() {
       const modal = document.getElementById('size-guide-modal');
@@ -1406,7 +1313,7 @@
     document.getElementById('bnav-cart')?.addEventListener('click', openCart);
     document.getElementById('bnav-wishlist')?.addEventListener('click', openWishlist);
 
-    console.log("PARIAZ Store Engine Active: 23 Products, 8 Artists.");
+    console.log("PARIAZ Commercial Experience Ready.");
   });
 
 })();
