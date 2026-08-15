@@ -70,14 +70,24 @@
   <section class="stories-bar-section" aria-label="Historias destacadas de artistas">
     <div class="container">
       <div class="stories-scroll-container" id="app-stories-bar">
-        <!-- Inyectado dinámicamente desde js/ui.js -->
+        <!-- Generado dinámicamente o pre-renderizado -->
       </div>
     </div>
   </section>
 
+  <!-- =========================================================================
+       03. CULTURAL TICKER (INFINITE MARQUEE)
+       ========================================================================= -->
+  <div class="marquee-ticker-wrap" aria-hidden="true">
+    <div class="marquee-content">
+      <span>SUPERACIÓN</span> &bull; <span>DISCIPLINA</span> &bull; <span>ALGODÓN 240G MEDELLÍN</span> &bull; <span>DROP 004 EXCLUSIVE</span> &bull; <span>ENVÍOS NACIONALES</span> &bull; <span>STREETWEAR DE AUTOR</span> &bull;
+      <span>SUPERACIÓN</span> &bull; <span>DISCIPLINA</span> &bull; <span>ALGODÓN 240G MEDELLÍN</span> &bull; <span>DROP 004 EXCLUSIVE</span> &bull; <span>ENVÍOS NACIONALES</span> &bull; <span>STREETWEAR DE AUTOR</span> &bull;
+    </div>
+  </div>
+
   <main>
     <!-- =======================================================================
-         03. HERO SPOTLIGHT BANNER
+         04. HERO SPOTLIGHT BANNER & COUNTDOWN
          ======================================================================= -->
     <section class="hero-app-section" id="hero">
       <div class="container">
@@ -91,9 +101,18 @@
             <p class="hero-app-desc">
               Una historia de disciplina, calle y superación personal. Confección de alto gramaje diseñada y producida en Medellín para quienes construyen su propio camino.
             </p>
-            <a href="#shop" class="hero-btn-pill-primary">
-              EXPLORAR COLECCIÓN &rarr;
-            </a>
+
+            <!-- Temporizador de Escasez -->
+            <div class="hero-countdown-box">
+              <span class="hero-countdown-label">CIERRE DE DROP 004 EN:</span>
+              <span class="hero-countdown-val" id="drop-countdown-val">02D : 14H : 38M : 12S</span>
+            </div>
+
+            <div>
+              <a href="#shop" class="hero-btn-pill-primary">
+                EXPLORAR COLECCIÓN &rarr;
+              </a>
+            </div>
           </div>
 
           <div class="hero-mockup-frame">
@@ -105,17 +124,23 @@
     </section>
 
     <!-- =======================================================================
-         04. CATEGORY FILTER PILLS & LIVE SEARCH
+         05. CATEGORY FILTER PILLS & LIVE SEARCH
          ======================================================================= -->
     <section class="container" id="shop">
       
-      <div style="margin-bottom: 20px;">
-        <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; color: var(--accent-red); text-transform: uppercase;">
-          CATÁLOGO OFICIAL
-        </span>
-        <h2 style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 900; line-height: 1.1; margin-top: 4px;">
-          PRENDAS & SILUETAS
-        </h2>
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; color: var(--accent-red); text-transform: uppercase;">
+            CATÁLOGO OFICIAL
+          </span>
+          <h2 style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 900; line-height: 1.1; margin-top: 4px;">
+            PRENDAS & SILUETAS
+          </h2>
+        </div>
+
+        <button class="trigger-size-guide" style="font-size: 0.8rem; font-weight: 800; color: var(--text-secondary); text-decoration: underline; cursor: pointer;">
+          Ver Guía de Tallas (cm)
+        </button>
       </div>
 
       <!-- Category Pills -->
@@ -130,12 +155,12 @@
 
       <!-- App Products Grid -->
       <div class="app-products-grid" id="catalog-products-grid">
-        <!-- Inyectado dinámicamente desde js/filters.js -->
+        <!-- Renderizado por js/app.js -->
       </div>
     </section>
 
     <!-- =======================================================================
-         05. SHOP THE LOOK (INTERACTIVE LOOKBOOK WITH REAL ARTISTS)
+         06. SHOP THE LOOK (INTERACTIVE LOOKBOOK WITH REAL ARTISTS)
          ======================================================================= -->
     <section class="container" id="shop-the-look" style="margin-top: 60px;">
       <div style="margin-bottom: 20px;">
@@ -160,7 +185,7 @@
           <img src="assets/looks/hades-look.jpeg" alt="Hades 66 Look Pariaz" class="shop-look-bg-img" id="shop-look-bg-img">
           
           <div class="look-hotspots-container" id="shop-look-hotspots-container">
-            <!-- Hotspots inyectados desde js/ui.js -->
+            <!-- Hotspots inyectados desde js/app.js -->
           </div>
         </div>
 
@@ -174,7 +199,7 @@
           </h3>
           
           <div class="look-items-list" id="shop-look-items-list">
-            <!-- Items inyectados desde js/ui.js -->
+            <!-- Items inyectados desde js/app.js -->
           </div>
 
           <button class="btn-add-to-bag-pill" id="btn-add-full-outfit" style="width: 100%;">
@@ -185,7 +210,7 @@
     </section>
 
     <!-- =======================================================================
-         06. STORYTELLING: FROM THE BOTTOM (SABANETA / MEDELLÍN)
+         07. STORYTELLING: FROM THE BOTTOM (SABANETA / MEDELLÍN)
          ======================================================================= -->
     <section class="container" id="story" style="margin-top: 60px;">
       <div class="story-manifesto-box">
@@ -229,7 +254,7 @@
   </main>
 
   <!-- =========================================================================
-       07. FULL LUXURY STREETWEAR FOOTER
+       08. FULL LUXURY STREETWEAR FOOTER
        ========================================================================= -->
   <footer class="app-site-footer">
     <div class="container">
@@ -268,7 +293,7 @@
             <li><a href="https://wa.me/573009299777" target="_blank">WhatsApp Directo: +57 300 929 9777</a></li>
             <li><a href="#shop">Envíos Nacionales (Envía / Coordinadora)</a></li>
             <li><a href="#shop">Garantía de Satisfacción 100%</a></li>
-            <li><a href="#shop">Guía de Tallas Streetwear</a></li>
+            <li><a href="#" class="trigger-size-guide">Guía de Tallas Streetwear</a></li>
             <li><a href="#shop">Políticas de Devolución</a></li>
           </ul>
         </div>
@@ -294,7 +319,7 @@
   </footer>
 
   <!-- =========================================================================
-       08. FLOATING IOS BOTTOM NAVIGATION BAR
+       09. FLOATING IOS BOTTOM NAVIGATION BAR
        ========================================================================= -->
   <nav class="floating-bottom-nav" aria-label="Navegación principal de la app">
     <button class="bnav-item active" id="bnav-home" aria-label="Inicio">
@@ -321,12 +346,11 @@
   </nav>
 
   <!-- =========================================================================
-       09. MODAL DETALLE DE PRODUCTO
+       10. MODAL DETALLE DE PRODUCTO
        ========================================================================= -->
   <div class="modal-backdrop-overlay" id="modal-backdrop-overlay"></div>
 
   <div class="product-detail-modal" id="product-detail-modal" role="dialog" aria-modal="true">
-    
     <div class="modal-top-bar">
       <button class="modal-back-btn" id="modal-close-btn" aria-label="Volver">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
@@ -340,12 +364,8 @@
     </div>
 
     <div class="modal-screen-grid">
-      <!-- Visual Pane -->
-      <div class="modal-product-visual-pane" id="modal-product-visual">
-        <!-- Inyectado desde js/ui.js -->
-      </div>
+      <div class="modal-product-visual-pane" id="modal-product-visual"></div>
 
-      <!-- Details Pane -->
       <div class="modal-product-info-pane">
         <div>
           <div class="modal-rating-review-row">
@@ -365,26 +385,19 @@
             Descripción de la prenda con detalles y confección premium de Medellín.
           </p>
 
-          <!-- Choose Size -->
-          <div style="margin-bottom: 18px;">
+          <div style="margin-bottom: 16px;">
             <span style="font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted);">
               SELECCIONA TU TALLA:
             </span>
-            <div class="size-pill-group" id="modal-size-selector">
-              <!-- Botones de tallas -->
-            </div>
+            <div class="size-pill-group" id="modal-size-selector"></div>
           </div>
 
-          <!-- Matching Items -->
           <div class="matching-items-section">
             <span class="matching-items-title">COMBINACIÓN SUGERIDA:</span>
-            <div class="matching-items-list" id="modal-matching-items-list">
-              <!-- Bundle items -->
-            </div>
+            <div class="matching-items-list" id="modal-matching-items-list"></div>
           </div>
         </div>
 
-        <!-- Sticky Bottom Actions Bar -->
         <div class="modal-bottom-actions">
           <div class="modal-btn-row">
             <div class="modal-stepper-box">
@@ -401,13 +414,44 @@
             <span>Comprar por WhatsApp</span>
           </button>
         </div>
-
       </div>
     </div>
   </div>
 
   <!-- =========================================================================
-       10. STORY VIEWER MODAL
+       11. MODAL GUÍA DE TALLAS
+       ========================================================================= -->
+  <div class="size-guide-modal" id="size-guide-modal" role="dialog" aria-modal="true">
+    <div class="modal-top-bar">
+      <h3 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 800;">GUÍA DE TALLAS // BOXY FIT 240G</h3>
+      <button id="size-guide-close-btn" style="font-size: 1.6rem; line-height: 1;">&times;</button>
+    </div>
+    <div style="padding: 24px;">
+      <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 16px;">
+        Nuestras camisetas tienen un corte streetwear holgado con caída pesada. Si buscas un fit regular, pide una talla menos.
+      </p>
+      <table class="size-table">
+        <thead>
+          <tr>
+            <th>Talla</th>
+            <th>Ancho Pecho (cm)</th>
+            <th>Largo Total (cm)</th>
+            <th>Manga (cm)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>S</strong></td><td>54 cm</td><td>72 cm</td><td>23 cm</td></tr>
+          <tr><td><strong>M</strong></td><td>57 cm</td><td>75 cm</td><td>24 cm</td></tr>
+          <tr><td><strong>L</strong></td><td>60 cm</td><td>78 cm</td><td>25 cm</td></tr>
+          <tr><td><strong>XL</strong></td><td>63 cm</td><td>81 cm</td><td>26 cm</td></tr>
+          <tr><td><strong>XXL</strong></td><td>66 cm</td><td>84 cm</td><td>27 cm</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       12. STORY VIEWER MODAL
        ========================================================================= -->
   <div class="story-viewer-modal" id="story-viewer-modal" role="dialog" aria-modal="true">
     <div class="story-top-progress">
@@ -437,24 +481,20 @@
   </div>
 
   <!-- =========================================================================
-       11. WISHLIST MODAL (FAVORITOS)
+       13. WISHLIST MODAL
        ========================================================================= -->
   <div class="wishlist-modal" id="wishlist-modal" role="dialog" aria-modal="true">
     <div style="display: flex; justify-content: space-between; align-items: center;">
       <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800;">TUS GUARDADOS</h3>
       <button id="wishlist-close-btn" style="font-size: 1.6rem; line-height: 1;">&times;</button>
     </div>
-
-    <div class="wishlist-items-container" id="wishlist-items-container">
-      <!-- Inyectado desde js/ui.js -->
-    </div>
+    <div class="wishlist-items-container" id="wishlist-items-container"></div>
   </div>
 
   <!-- =========================================================================
-       12. MULTI-STEP CHECKOUT MODAL
+       14. MULTI-STEP CHECKOUT MODAL
        ========================================================================= -->
   <div class="checkout-flow-modal" id="checkout-flow-modal" role="dialog" aria-modal="true">
-    
     <div class="checkout-stepper-header">
       <h3 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 800;">FINALIZAR COMPRA</h3>
       <button id="checkout-flow-close-btn" style="font-size: 1.6rem; line-height: 1;">&times;</button>
@@ -534,11 +574,10 @@
 
       <button type="button" class="filter-tab-pill" id="btn-back-step-2">&larr; Cambiar Dirección</button>
     </div>
-
   </div>
 
   <!-- =========================================================================
-       13. CART DRAWER
+       15. CART DRAWER (CON CUPÓN Y SUBTOTAL)
        ========================================================================= -->
   <div class="cart-overlay" id="cart-overlay"></div>
   
@@ -561,8 +600,12 @@
         <p style="font-size: 0.85rem; color: var(--text-muted);">Explora el catálogo oficial de Pariaz y agrega tus prendas.</p>
       </div>
 
-      <div class="cart-items-list" id="cart-items-list">
-        <!-- Inyectado desde js/cart.js -->
+      <div class="cart-items-list" id="cart-items-list"></div>
+
+      <!-- Cupón de Descuento -->
+      <div class="cart-coupon-box">
+        <input type="text" id="cart-coupon-input" class="cart-coupon-input" placeholder="CUPÓN (EJ: PARIAZVIP)">
+        <button id="btn-apply-coupon" class="btn-apply-coupon">APLICAR</button>
       </div>
     </div>
 
@@ -586,7 +629,7 @@
   <!-- Toast -->
   <div class="pariaz-toast" id="pariaz-toast"></div>
 
-  <!-- Script Modules -->
-  <script type="module" src="js/app.js"></script>
+  <!-- Core Script (Sin module cors restrictions) -->
+  <script src="js/app.js"></script>
 </body>
 </html>

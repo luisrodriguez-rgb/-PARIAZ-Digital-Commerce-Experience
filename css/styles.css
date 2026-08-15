@@ -65,7 +65,7 @@ body {
   overflow-x: hidden;
   line-height: 1.5;
   background-color: var(--bg-app);
-  padding-bottom: 96px; /* Espacio para la barra flotante */
+  padding-bottom: 96px;
 }
 
 img, svg {
@@ -113,6 +113,7 @@ button {
   justify-content: center;
   align-items: center;
   gap: 14px;
+  flex-wrap: wrap;
 }
 
 .top-notice-badge {
@@ -292,17 +293,17 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   04. HERO APP BANNER & SPOTLIGHT
+   04. HERO APP BANNER & COUNTDOWN
    -------------------------------------------------------------------------- */
 .hero-app-section {
-  padding: 36px 0 48px;
+  padding: 32px 0 44px;
 }
 
 .hero-app-banner {
   background: linear-gradient(135deg, #121218 0%, #0c0c10 100%);
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-lg);
-  padding: 48px;
+  padding: 44px;
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   gap: 40px;
@@ -325,24 +326,51 @@ button {
   text-transform: uppercase;
   padding: 6px 14px;
   border-radius: var(--radius-pill);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .hero-app-title {
   font-family: var(--font-heading);
-  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  font-size: clamp(2.4rem, 4.8vw, 4rem);
   font-weight: 900;
   line-height: 1.05;
   letter-spacing: -0.02em;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .hero-app-desc {
-  font-size: 1.02rem;
+  font-size: 1rem;
   color: var(--text-secondary);
   max-width: 480px;
   line-height: 1.6;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
+}
+
+.hero-countdown-box {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 12px 18px;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 24px;
+}
+
+.hero-countdown-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.hero-countdown-val {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--accent-red);
+  letter-spacing: 0.08em;
 }
 
 .hero-btn-pill-primary {
@@ -381,7 +409,36 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   05. CATEGORY FILTER PILLS
+   05. CULTURAL TICKER (INFINITE MARQUEE)
+   -------------------------------------------------------------------------- */
+.marquee-ticker-wrap {
+  background-color: #0d0d12;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 12px 0;
+  display: flex;
+}
+
+.marquee-content {
+  display: inline-flex;
+  gap: 36px;
+  animation: ticker-scroll 24s linear infinite;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* --------------------------------------------------------------------------
+   06. CATEGORY FILTER PILLS
    -------------------------------------------------------------------------- */
 .category-pills-row {
   display: flex;
@@ -389,7 +446,7 @@ button {
   overflow-x: auto;
   scrollbar-width: none;
   padding-bottom: 12px;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
 .category-pills-row::-webkit-scrollbar {
@@ -424,7 +481,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   06. PRODUCT CARDS (FIGMA MOBILE APP CARDS)
+   07. PRODUCT CARDS
    -------------------------------------------------------------------------- */
 .app-products-grid {
   display: grid;
@@ -611,7 +668,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   07. SHOP THE LOOK (FIXED CONSTRAINED CONTAINER)
+   08. SHOP THE LOOK
    -------------------------------------------------------------------------- */
 .shop-look-tabs-row {
   display: flex;
@@ -763,7 +820,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   08. BRAND MANIFESTO (PROPERLY ALIGNED BOX & GRID)
+   09. BRAND MANIFESTO
    -------------------------------------------------------------------------- */
 .story-manifesto-box {
   background-color: var(--bg-surface);
@@ -824,7 +881,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   09. PRODUCT DETAIL MODAL (FIGMA SCREEN)
+   10. PRODUCT DETAIL MODAL & GUÍA DE TALLAS
    -------------------------------------------------------------------------- */
 .modal-backdrop-overlay {
   position: fixed;
@@ -843,7 +900,7 @@ button {
   visibility: visible;
 }
 
-.product-detail-modal {
+.product-detail-modal, .size-guide-modal {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -861,7 +918,7 @@ button {
   transition: all var(--transition-smooth);
 }
 
-.product-detail-modal.is-open {
+.product-detail-modal.is-open, .size-guide-modal.is-open {
   transform: translate(-50%, -50%) scale(1);
   opacity: 1;
   visibility: visible;
@@ -898,14 +955,6 @@ button {
   align-items: center;
   justify-content: center;
   border-right: 1px solid var(--border-subtle);
-}
-
-.modal-photo-hero-wrap {
-  width: 100%;
-  min-height: 340px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .modal-hero-img {
@@ -962,7 +1011,7 @@ button {
   font-size: 0.9rem;
   color: var(--text-secondary);
   line-height: 1.55;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .size-pill-group {
@@ -989,13 +1038,13 @@ button {
 }
 
 .matching-items-section {
-  margin: 20px 0 24px;
+  margin: 18px 0 20px;
   border-top: 1px solid var(--border-subtle);
-  padding-top: 16px;
+  padding-top: 14px;
 }
 
 .matching-items-title {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1117,8 +1166,28 @@ button {
   padding: 13px;
 }
 
+/* Guía de Tallas Tabla */
+.size-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 0.85rem;
+}
+
+.size-table th, .size-table td {
+  padding: 10px 14px;
+  border: 1px solid var(--border-subtle);
+  text-align: center;
+}
+
+.size-table th {
+  background-color: var(--bg-card);
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
 /* --------------------------------------------------------------------------
-   10. STORY VIEWER MODAL
+   11. STORY VIEWER MODAL
    -------------------------------------------------------------------------- */
 .story-viewer-modal {
   position: fixed;
@@ -1250,7 +1319,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   11. CHECKOUT MODAL & WISHLIST MODAL
+   12. CHECKOUT MODAL & WISHLIST MODAL
    -------------------------------------------------------------------------- */
 .checkout-flow-modal, .wishlist-modal {
   position: fixed;
@@ -1340,7 +1409,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   12. CART DRAWER
+   13. CART DRAWER
    -------------------------------------------------------------------------- */
 .cart-overlay {
   position: fixed;
@@ -1509,6 +1578,31 @@ button {
   font-size: 0.88rem;
 }
 
+.cart-coupon-box {
+  display: flex;
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.cart-coupon-input {
+  flex-grow: 1;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.btn-apply-coupon {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
 .cart-drawer-footer {
   padding: 20px;
   border-top: 1px solid var(--border-subtle);
@@ -1528,7 +1622,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   13. PREMIUM LUXURY STREETWEAR FOOTER
+   14. FOOTER
    -------------------------------------------------------------------------- */
 .app-site-footer {
   background-color: #050507;
@@ -1599,7 +1693,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   14. FLOATING IOS BOTTOM NAVIGATION BAR
+   15. FLOATING IOS BOTTOM NAVIGATION BAR
    -------------------------------------------------------------------------- */
 .floating-bottom-nav {
   position: fixed;
@@ -1664,7 +1758,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   15. RESPONSIVE
+   16. RESPONSIVE
    -------------------------------------------------------------------------- */
 @media (max-width: 992px) {
   .hero-app-banner {
