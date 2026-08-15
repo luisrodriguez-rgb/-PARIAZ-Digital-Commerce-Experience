@@ -273,7 +273,7 @@ button {
    03. TOP STORIES BAR (ARTIST STORIES REEL)
    -------------------------------------------------------------------------- */
 .stories-bar-section {
-  padding: 12px 0 8px;
+  padding: 14px 0 10px;
   border-bottom: 1px solid var(--border-subtle);
   background-color: #09090c;
 }
@@ -281,10 +281,19 @@ button {
 .stories-scroll-container {
   display: flex;
   align-items: center;
-  gap: 18px;
+  justify-content: center;
+  gap: 22px;
   overflow-x: auto;
   scrollbar-width: none;
   padding: 2px 0;
+}
+
+@media (max-width: 768px) {
+  .stories-scroll-container {
+    justify-content: flex-start;
+    gap: 16px;
+    padding: 2px 8px;
+  }
 }
 
 .stories-scroll-container::-webkit-scrollbar {
@@ -343,7 +352,7 @@ button {
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--border-medium);
-  min-height: 480px;
+  min-height: 500px;
   display: flex;
   align-items: center;
   box-shadow: var(--shadow-card);
@@ -355,8 +364,8 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 30%;
-  filter: brightness(0.68) contrast(1.15);
+  object-position: 78% center;
+  filter: brightness(0.72) contrast(1.15);
   transform: scale(1.02);
   transition: transform 8s ease-out;
 }
@@ -370,9 +379,9 @@ button {
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(7, 7, 9, 0.95) 0%,
+    rgba(7, 7, 9, 0.96) 0%,
     rgba(7, 7, 9, 0.82) 48%,
-    rgba(7, 7, 9, 0.35) 100%
+    rgba(7, 7, 9, 0.2) 100%
   );
   z-index: 2;
 }
