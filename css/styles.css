@@ -189,6 +189,12 @@ button {
   transition: all var(--transition-fast);
 }
 
+@media (max-width: 768px) {
+  .app-header-nav-btn {
+    display: none !important;
+  }
+}
+
 .app-header-nav-btn:hover {
   background-color: var(--text-primary);
   color: #000;
@@ -1652,50 +1658,54 @@ button {
   }
 
   .hero-app-section {
-    padding: 10px 0 20px;
+    padding: 8px 0 16px;
   }
 
   .hero-store-stage {
-    min-height: 420px;
+    min-height: 390px;
     display: flex;
     align-items: flex-end;
   }
 
   .hero-store-bg {
     object-position: center 20%;
-    filter: brightness(0.6) contrast(1.2);
+    filter: brightness(0.62) contrast(1.18);
   }
 
   .hero-store-gradient-overlay {
     background: linear-gradient(
       180deg,
-      rgba(7, 7, 9, 0.15) 0%,
-      rgba(7, 7, 9, 0.65) 45%,
-      rgba(7, 7, 9, 0.96) 90%
+      rgba(7, 7, 9, 0.1) 0%,
+      rgba(7, 7, 9, 0.6) 40%,
+      rgba(7, 7, 9, 0.96) 88%
     );
   }
 
   .hero-store-content {
-    padding: 20px 16px 18px;
+    padding: 16px 14px 14px;
     width: 100%;
   }
 
   .hero-pill-badge {
-    font-size: 0.65rem;
-    padding: 3px 10px;
-    margin-bottom: 8px;
-  }
-
-  .hero-app-title {
-    font-size: 2.1rem;
-    line-height: 1.02;
+    font-size: 0.62rem;
+    padding: 2px 9px;
     margin-bottom: 6px;
   }
 
+  .hero-app-title {
+    font-size: 1.85rem;
+    line-height: 1.02;
+    margin-bottom: 4px;
+  }
+
   .hero-app-desc {
-    font-size: 0.82rem;
-    line-height: 1.4;
-    margin-bottom: 10px;
+    font-size: 0.8rem;
+    line-height: 1.35;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .hero-countdown-box {
@@ -1704,19 +1714,23 @@ button {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 7px 12px;
-    margin-bottom: 12px;
+    padding: 6px 10px;
+    margin-bottom: 10px;
+  }
+
+  .hero-countdown-label {
+    font-size: 0.62rem;
   }
 
   .hero-countdown-val {
-    font-size: 1.05rem;
+    font-size: 0.98rem;
   }
 
   .hero-btn-pill-primary {
     width: 100%;
     justify-content: center;
-    padding: 12px;
-    font-size: 0.86rem;
+    padding: 11px 14px;
+    font-size: 0.82rem;
   }
 
   .funnel-showcase-box {
