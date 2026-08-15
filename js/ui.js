@@ -1,12 +1,12 @@
 /**
- * PARIAZ DIGITAL STORE — UI & Modals Controller (Figma Mobile-App Edition)
- * Stories interactivas, Modal de producto detallado, Checkout multi-paso y Wishlist.
+ * PARIAZ DIGITAL STORE — UI & Modals Controller (Clean Luxury Streetwear)
+ * Sin emojis, con interactividad completa en lookbook, stories y checkout.
  */
 
-import { formatPriceCOP, generateProductInquiryUrl, generateWhatsAppOrderUrl } from './whatsapp.js';
+import { formatPriceCOP, generateProductInquiryUrl } from './whatsapp.js';
 import { cart } from './cart.js';
 import { artists } from '../data/artists.js';
-import { dropArchive, products } from '../data/products.js';
+import { products } from '../data/products.js';
 
 let activeProduct = null;
 let selectedSize = 'L';
@@ -15,7 +15,7 @@ let currentStoryIndex = 0;
 let storyTimer = null;
 
 /**
- * Renderiza la barra superior de Historias (Stories Bar)
+ * Renderiza la barra superior de Historias
  */
 export function renderStoriesBar() {
   const container = document.getElementById('app-stories-bar');
@@ -59,14 +59,13 @@ export function openStoryViewer(index) {
   const linkBtn = document.getElementById('story-product-btn');
   if (linkBtn) {
     const prod = products.find(p => p.id === artist.storySlide.productLink);
-    linkBtn.textContent = prod ? `VER ${prod.name.toUpperCase()} ($${formatPriceCOP(prod.price)}) →` : 'EXPLORAR EN TIENDA →';
+    linkBtn.textContent = prod ? `VER ${prod.name.toUpperCase()} ($${formatPriceCOP(prod.price)})` : 'EXPLORAR EN TIENDA';
     linkBtn.onclick = () => {
       closeStoryViewer();
       if (prod) openProductModal(prod);
     };
   }
 
-  // Barra de progreso animada
   const progressBar = document.getElementById('story-progress-bar');
   if (progressBar) {
     progressBar.style.width = '0%';
@@ -95,7 +94,7 @@ export function closeStoryViewer() {
 }
 
 /**
- * Abre el Modal de Producto detallado (Figma Design - Image 2 & 5)
+ * Abre el Modal de Producto detallado
  */
 export function openProductModal(product) {
   activeProduct = product;
@@ -133,7 +132,6 @@ export function openProductModal(product) {
     visualEl.innerHTML = `
       <div class="modal-photo-hero-wrap">
         <img src="${product.image || './assets/brand/logo.jpeg'}" alt="${product.name}" class="modal-hero-img">
-        <div class="modal-badge-pill">${product.tag || 'STREETWEAR'}</div>
       </div>
     `;
   }
@@ -157,7 +155,7 @@ export function openProductModal(product) {
     });
   }
 
-  // Combinaciones sugeridas ("Excellent Combination with..." / Cross-sell - Image 4)
+  // Combinaciones sugeridas
   const bundleContainer = document.getElementById('modal-matching-items-list');
   if (bundleContainer) {
     if (product.matchingItems && product.matchingItems.length > 0) {
@@ -190,7 +188,7 @@ export function openProductModal(product) {
   if (modalWishBtn) {
     const isWish = cart.isWishlisted(product.id);
     modalWishBtn.innerHTML = `
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="${isWish ? '#e11d48' : 'none'}" stroke="${isWish ? '#e11d48' : '#ffffff'}" stroke-width="2">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="${isWish ? '#e11d48' : 'none'}" stroke="${isWish ? '#e11d48' : '#ffffff'}" stroke-width="2">
         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
       </svg>
     `;
@@ -223,8 +221,7 @@ function updateModalBottomBar() {
 
   if (addCartBtn && activeProduct) {
     addCartBtn.innerHTML = `
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-      <span>Add to Bag &bull; ${formatPriceCOP(activeProduct.price * selectedQty)}</span>
+      <span>Añadir a la bolsa &bull; ${formatPriceCOP(activeProduct.price * selectedQty)}</span>
     `;
     addCartBtn.onclick = () => {
       cart.addItem(activeProduct, selectedSize, selectedQty);
@@ -275,7 +272,7 @@ export function initProductModalListeners() {
 }
 
 /**
- * Modal de Wishlist / Guardados (Figma Design - Image 5)
+ * Modal de Wishlist
  */
 export function openWishlistModal() {
   const modal = document.getElementById('wishlist-modal');
@@ -287,22 +284,25 @@ export function openWishlistModal() {
 
   if (wishedProducts.length === 0) {
     listContainer.innerHTML = `
-      <div class="wishlist-empty-state">
-        <span style="font-size: 3rem; display: block; margin-bottom: 12px;">💔</span>
-        <h3>Tu lista de guardados está vacía</h3>
-        <p>Toca el corazón en cualquier prenda para guardarla y revisarla después.</p>
+      <div style="text-align: center; padding: 40px 20px;">
+        <h4 style="font-size: 1.1rem; margin-bottom: 8px;">Tu lista de guardados está vacía</h4>
+        <p style="color: var(--text-muted); font-size: 0.85rem;">Toca el corazón en cualquier prenda para guardarla.</p>
       </div>
     `;
   } else {
     listContainer.innerHTML = wishedProducts.map(p => `
-      <div class="wishlist-item-row">
-        <img src="${p.image || './assets/brand/logo.jpeg'}" alt="${p.name}" class="wishlist-thumb">
-        <div class="wishlist-item-info">
-          <h4>${p.name}</h4>
-          <span class="wishlist-item-price">${formatPriceCOP(p.price)}</span>
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px; background: var(--bg-card); border-radius: var(--radius-sm); margin-bottom: 10px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <img src="${p.image || './assets/brand/logo.jpeg'}" alt="${p.name}" style="width: 44px; height: 44px; object-fit: contain;">
+          <div>
+            <h4 style="font-size: 0.88rem; font-weight: 700;">${p.name}</h4>
+            <span style="font-size: 0.8rem; color: var(--text-secondary);">${formatPriceCOP(p.price)}</span>
+          </div>
         </div>
-        <button class="btn-wishlist-move-cart" data-id="${p.id}">Añadir al Carro</button>
-        <button class="btn-wishlist-remove" data-id="${p.id}">&times;</button>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-wishlist-move-cart" data-id="${p.id}" style="padding: 6px 12px; background: #fff; color: #000; font-size: 0.75rem; font-weight: 800; border-radius: 100px;">Añadir</button>
+          <button class="btn-wishlist-remove" data-id="${p.id}" style="color: var(--text-muted); font-size: 1.2rem; padding: 0 4px;">&times;</button>
+        </div>
       </div>
     `).join('');
 
@@ -340,7 +340,7 @@ export function closeWishlistModal() {
 }
 
 /**
- * Modal de Checkout Multi-Paso (Figma Image 1 & 5)
+ * Modal de Checkout Multi-Paso
  */
 export function openCheckoutFlowModal() {
   const modal = document.getElementById('checkout-flow-modal');
@@ -378,7 +378,7 @@ export function showCheckoutStep(step) {
 }
 
 /**
- * Inicializa Shop The Look interactivo con fotos reales de artistas
+ * Inicializa Shop The Look interactivo
  */
 export function initShopTheLook() {
   const lookTabs = document.querySelectorAll('.look-tab-btn');
@@ -394,8 +394,8 @@ export function initShopTheLook() {
       ],
       totalCOP: '$400.000 COP',
       hotspots: [
-        { top: '35%', left: '46%', label: 'Camiseta Corona de Espinas ($160k)', id: 'conjunto-hades' },
-        { top: '68%', left: '42%', label: 'Pantalón Jogger Pariaz ($240k)', id: 'conjunto-hades' }
+        { top: '35%', left: '46%', label: 'Camiseta Corona de Espinas ($160.000 COP)', id: 'conjunto-hades' },
+        { top: '68%', left: '42%', label: 'Pantalón Jogger Pariaz ($240.000 COP)', id: 'conjunto-hades' }
       ]
     },
     'krisr': {
@@ -407,7 +407,7 @@ export function initShopTheLook() {
       ],
       totalCOP: '$265.000 COP',
       hotspots: [
-        { top: '48%', left: '48%', label: 'Camiseta Pariaz Crimson ($170k)', id: 'pariaz-krisr' }
+        { top: '48%', left: '48%', label: 'Camiseta Pariaz Crimson ($170.000 COP)', id: 'pariaz-krisr' }
       ]
     },
     'jonz': {
@@ -415,11 +415,11 @@ export function initShopTheLook() {
       image: './assets/artists/jonz.jpeg',
       items: [
         { num: '01', name: 'Camiseta Ángeles Heaven Gate', price: '$180.000 COP', id: 'pariaz-jonz', size: 'L' },
-        { num: '02', name: 'Gorra Pariaz León Street', price: '$95.000 COP', id: 'gorra-p', size: 'Talla Única' }
+        { num: '02', name: 'Gorra Pariaz Corona 3D', price: '$95.000 COP', id: 'gorra-p', size: 'Talla Única' }
       ],
       totalCOP: '$275.000 COP',
       hotspots: [
-        { top: '46%', left: '48%', label: 'Camiseta Ángeles Heaven ($180k)', id: 'pariaz-jonz' }
+        { top: '46%', left: '48%', label: 'Camiseta Ángeles Heaven ($180.000 COP)', id: 'pariaz-jonz' }
       ]
     }
   };
@@ -442,7 +442,7 @@ export function initShopTheLook() {
       itemsList.innerHTML = data.items.map(item => `
         <div class="look-item-entry">
           <div>
-            <span style="font-size: 0.7rem; color: var(--text-muted); display: block;">ITEM ${item.num}</span>
+            <span style="font-size: 0.7rem; color: var(--text-muted); display: block; letter-spacing: 0.06em;">ITEM ${item.num}</span>
             <span class="look-item-title">${item.name}</span>
           </div>
           <span class="look-item-price">${item.price}</span>
@@ -451,7 +451,7 @@ export function initShopTheLook() {
     }
 
     if (btnFullOutfit) {
-      btnFullOutfit.innerHTML = `AGREGAR OUTFIT COMPLETO (${data.totalCOP}) &rarr;`;
+      btnFullOutfit.innerHTML = `AGREGAR OUTFIT COMPLETO (${data.totalCOP})`;
     }
 
     if (hotspotsContainer) {
@@ -489,28 +489,9 @@ export function initShopTheLook() {
         const prod = products.find(p => p.id === item.id);
         if (prod) cart.addItem(prod, item.size, 1);
       });
-      cart.showToast(`🔥 Outfit de ${data.title} añadido al carrito`);
+      cart.showToast(`Outfit de ${data.title} añadido a la bolsa`);
     });
   }
 
   renderCurrentLook('hades');
-}
-
-/**
- * Renderiza el histórico de Drops
- */
-export function renderDropArchive() {
-  const container = document.getElementById('drop-archive-container');
-  if (!container) return;
-
-  container.innerHTML = dropArchive.map(drop => `
-    <div class="drop-archive-card ${drop.status === 'ACTIVE DROP' ? 'drop-active' : ''}">
-      <div class="drop-code-badge">${drop.code}</div>
-      <h4 class="drop-name">${drop.name}</h4>
-      <div class="drop-meta">
-        <span class="drop-year">${drop.year}</span>
-        <span class="drop-status-pill">${drop.status}</span>
-      </div>
-    </div>
-  `).join('');
 }

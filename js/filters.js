@@ -1,6 +1,6 @@
 /**
- * PARIAZ DIGITAL STORE — Category & Collection Filter Engine (Figma UI Edition)
- * Búsqueda en vivo, filtrado por categorías, wishlist y renderizado de tarjetas de app.
+ * PARIAZ DIGITAL STORE — Category & Search Filter Engine (Clean Streetwear)
+ * Filtrado en vivo, catálogo modular y tarjetas limpias sin emojis.
  */
 
 import { products } from '../data/products.js';
@@ -12,7 +12,7 @@ let currentCategory = 'all';
 let searchQuery = '';
 
 export function initFilters() {
-  // 1. Pestañas de categoría (Pill buttons con iconos)
+  // 1. Pestañas de categoría (Pill buttons)
   const tabButtons = document.querySelectorAll('.filter-tab-pill');
   tabButtons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -33,11 +33,10 @@ export function initFilters() {
   });
 
   renderCatalogGrid();
-  renderLatestDropGrid();
 }
 
 /**
- * Renderiza el grid principal del catálogo filtrado y buscado
+ * Renderiza el grid principal del catálogo
  */
 export function renderCatalogGrid() {
   const container = document.getElementById('catalog-products-grid');
@@ -59,10 +58,9 @@ export function renderCatalogGrid() {
 
   if (filtered.length === 0) {
     container.innerHTML = `
-      <div class="no-products-message">
-        <span style="font-size: 2.5rem; display: block; margin-bottom: 12px;">🔍</span>
-        <h3>No encontramos prendas con "${searchQuery}"</h3>
-        <p>Prueba buscando con palabras como "camiseta", "hoodie", "conjunto" o "gorra".</p>
+      <div style="grid-column: 1/-1; text-align: center; padding: 48px 20px; background: var(--bg-card); border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+        <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 8px;">No encontramos prendas con "${searchQuery}"</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Prueba con términos como camiseta, hoodie, conjunto o gorra.</p>
       </div>
     `;
     return;
@@ -73,21 +71,9 @@ export function renderCatalogGrid() {
 }
 
 /**
- * Renderiza la sección LATEST DROP (prendas destacadas)
+ * Tarjeta de Producto limpia (Sin emojis, diseño tipográfico y de autor)
  */
-export function renderLatestDropGrid() {
-  const container = document.getElementById('latest-drop-grid');
-  if (!container) return;
-
-  const latestItems = products.filter(p => p.isLatestDrop).slice(0, 4);
-  container.innerHTML = latestItems.map(product => createProductCardHtml(product, true)).join('');
-  attachProductCardEvents(container);
-}
-
-/**
- * Plantilla HTML de Tarjeta de Producto basada fielmente en el UI Kit de Figma (Image 2 & 5)
- */
-function createProductCardHtml(product, isFeatured = false) {
+function createProductCardHtml(product) {
   const isWish = cart.isWishlisted(product.id);
   const discountHtml = product.originalPrice && product.originalPrice > product.price
     ? `<span class="product-price-original">${formatPriceCOP(product.originalPrice)}</span>`
@@ -98,13 +84,13 @@ function createProductCardHtml(product, isFeatured = false) {
     : '';
 
   return `
-    <article class="app-product-card ${isFeatured ? 'is-featured' : ''}" data-id="${product.id}">
+    <article class="app-product-card" data-id="${product.id}">
       
       <!-- Contenedor Visual con Botón de Wishlist -->
       <div class="app-card-media-wrap">
         ${badgeHtml}
         
-        <button class="app-wishlist-heart-btn ${isWish ? 'is-active' : ''}" data-id="${product.id}" aria-label="Guardar en favoritos">
+        <button class="app-wishlist-heart-btn" data-id="${product.id}" aria-label="Guardar en favoritos">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="${isWish ? '#e11d48' : 'none'}" stroke="${isWish ? '#e11d48' : '#ffffff'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
           </svg>
@@ -133,7 +119,7 @@ function createProductCardHtml(product, isFeatured = false) {
             ${discountHtml}
           </div>
 
-          <button class="app-card-quick-add-btn" data-id="${product.id}" title="Añadir talla L al carrito">
+          <button class="app-card-quick-add-btn" data-id="${product.id}" title="Añadir al carrito">
             <span>+</span>
           </button>
         </div>
@@ -164,7 +150,6 @@ function attachProductCardEvents(container) {
       const prodId = btn.getAttribute('data-id');
       cart.toggleWishlist(prodId);
       renderCatalogGrid();
-      renderLatestDropGrid();
     });
   });
 

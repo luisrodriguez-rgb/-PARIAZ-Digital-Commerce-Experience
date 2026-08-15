@@ -1,6 +1,6 @@
 /**
- * PARIAZ DIGITAL STORE — Catálogo Oficial con Especificaciones de Figma UI Kit
- * Con fotos reales, calificaciones, combinaciones sugeridas y variantes.
+ * PARIAZ DIGITAL STORE — Catálogo Oficial (Clean Streetwear Luxury Edition)
+ * Sin emojis, con tipografías limpias y datos reales.
  */
 
 export const products = [
@@ -16,23 +16,23 @@ export const products = [
     collection: "Drop 004 — Signature",
     sizes: ["S", "M", "L", "XL", "XXL"],
     colors: ["#111115", "#f8fafc"],
-    badge: "FOTO REAL",
+    badge: "PIEZA INSIGNIA",
     isLatestDrop: true,
     isTrending: true,
     image: "./assets/products/camisa-manos.jpeg",
-    description: "La auténtica silueta insignia de Pariaz. Confeccionada en algodón peinado de 240g con fit streetwear holgado. Estampado serigráfico en tramado semitono de manos elevando la 'P' cósmica.",
+    description: "Silueta insignia de Pariaz confeccionada en algodón peinado de 240g con fit streetwear holgado. Estampado serigráfico en tramado semitono de manos elevando la 'P' cósmica.",
     details: [
       "100% Algodón Premium Peinado 240 GSM",
       "Corte Boxy Streetwear con caída pesada",
       "Estampado tramado de alta durabilidad",
-      "Hecho en Medellín, Colombia"
+      "Confeccionado en Medellín, Colombia"
     ],
     matchingItems: [
       { id: "gorra-p", name: "Gorra Pariaz Corona 3D", price: 95000, image: "./assets/brand/logo.jpeg" },
       { id: "conjunto-hades", name: "Pantalón Jogger Sand", price: 240000, image: "./assets/artists/hades.jpeg" }
     ],
     accentColor: "#f8fafc",
-    tag: "SIGNATURE PIECE"
+    tag: "SIGNATURE"
   },
   {
     id: "pariaz-krisr",
@@ -50,7 +50,7 @@ export const products = [
     isLatestDrop: true,
     isTrending: true,
     image: "./assets/artists/krisr.jpeg",
-    description: "Pieza exclusiva vista en Kris R. Base en negro profundo con la 'P' gótica en serigrafía degradada roja carmesí y la firma 'Security and trust' en cursiva.",
+    description: "Pieza exclusiva vista en Kris R. Base en negro profundo con la 'P' gótica en serigrafía degradada roja carmesí y firma 'Security and trust' en cursiva.",
     details: [
       "Serigrafía táctil a dos tonos con degradado",
       "Cuello acanalado grueso de 3cm",
@@ -62,7 +62,7 @@ export const products = [
       { id: "pariaz-manos", name: "Camiseta Manos & Luz", price: 140000, image: "./assets/products/camisa-manos.jpeg" }
     ],
     accentColor: "#e11d48",
-    tag: "KRIS R EDITION"
+    tag: "KRIS R"
   },
   {
     id: "pariaz-jonz",
@@ -88,11 +88,11 @@ export const products = [
       "Costuras reforzadas"
     ],
     matchingItems: [
-      { id: "gorra-leon", name: "Gorra Pariaz León", price: 95000, image: "./assets/brand/logo.jpeg" },
+      { id: "gorra-p", name: "Gorra Pariaz Corona 3D", price: 95000, image: "./assets/brand/logo.jpeg" },
       { id: "pariaz-krisr", name: "Camiseta Crimson Security", price: 170000, image: "./assets/artists/krisr.jpeg" }
     ],
     accentColor: "#38bdf8",
-    tag: "STAGE EDITION"
+    tag: "JON Z"
   },
   {
     id: "conjunto-hades",
@@ -106,7 +106,7 @@ export const products = [
     collection: "Worn by Hades 66",
     sizes: ["S", "M", "L", "XL"],
     colors: ["#d97706", "#292524"],
-    badge: "FULL OUTFIT",
+    badge: "FULL SUIT",
     isLatestDrop: true,
     isTrending: true,
     image: "./assets/artists/hades.jpeg",
@@ -122,7 +122,7 @@ export const products = [
       { id: "pariaz-manos", name: "Camiseta Manos & Luz", price: 140000, image: "./assets/products/camisa-manos.jpeg" }
     ],
     accentColor: "#d97706",
-    tag: "HADES 66 SET"
+    tag: "HADES 66"
   },
   {
     id: "p-blanca",
@@ -140,8 +140,8 @@ export const products = [
     isLatestDrop: false,
     isTrending: false,
     image: "./assets/products/camisa-manos.jpeg",
-    description: "La camiseta blanca de algodón pesado 240 GSM con el monograma 'P' bordado/estampado frontal. Un básico esencial del streetwear colombiano.",
-    details: ["100% Algodón Premium 240g", "Cuello grueso 3cm", "Corte Boxy holgado"],
+    description: "Camiseta blanca de algodón pesado 240 GSM con el monograma 'P' serigrafiado al frente. Un clásico esencial del streetwear colombiano.",
+    details: ["100% Algodón Premium 240g", "Cuello grueso de 3cm", "Corte Boxy holgado"],
     matchingItems: [
       { id: "conjunto-hades", name: "Pantalón Jogger Sand", price: 240000, image: "./assets/artists/hades.jpeg" }
     ],
@@ -160,11 +160,11 @@ export const products = [
     collection: "Edición Especial",
     sizes: ["S", "M", "L", "XL"],
     colors: ["#7e22ce", "#000000"],
-    badge: "SPECIAL EDITION",
+    badge: "EDICIÓN ESPECIAL",
     isLatestDrop: false,
     isTrending: false,
     image: "./assets/artists/coscu.jpeg",
-    description: "Pieza de taller con aplicaciones de cristales y pedrería térmica sobre fondo púrpura noche.",
+    description: "Pieza de autor con aplicaciones de cristales y pedrería térmica sobre base púrpura profunda.",
     details: ["Pedrería checa de alta fijación", "Algodón teñido en prenda", "Edición limitada"],
     matchingItems: [
       { id: "gorra-p", name: "Gorra Pariaz Corona 3D", price: 95000, image: "./assets/brand/logo.jpeg" }
@@ -188,8 +188,8 @@ export const products = [
     isLatestDrop: false,
     isTrending: true,
     image: "./assets/artists/luar.jpeg",
-    description: "Conjunto impermeable de dos piezas (Chaqueta Track + Pantalón Cargo) en gabardina técnica con cierres termosellados.",
-    details: ["Chaqueta + Pantalón", "Herrajes grabados con láser", "Resistente a salpicaduras"],
+    description: "Conjunto de dos piezas (Chaqueta Track + Pantalón Cargo) en gabardina técnica con cierres termosellados.",
+    details: ["Chaqueta + Pantalón", "Herrajes grabados en láser", "Resistente al agua"],
     matchingItems: [
       { id: "gorra-p", name: "Gorra Pariaz Corona 3D", price: 95000, image: "./assets/brand/logo.jpeg" }
     ],
@@ -266,7 +266,7 @@ export const products = [
       { id: "gorra-p", name: "Gorra Pariaz Corona 3D", price: 95000, image: "./assets/brand/logo.jpeg" }
     ],
     accentColor: "#db2777",
-    tag: "WOMEN"
+    tag: "FEMME"
   },
   {
     id: "angeles-verde",
@@ -290,7 +290,7 @@ export const products = [
       { id: "gorra-p", name: "Gorra Pariaz Corona 3D", price: 95000, image: "./assets/brand/logo.jpeg" }
     ],
     accentColor: "#15803d",
-    tag: "VAULT PIECE"
+    tag: "VAULT"
   }
 ];
 

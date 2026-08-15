@@ -1,19 +1,18 @@
 /**
- * PARIAZ DIGITAL STORE — Shopping Cart & Wishlist State Manager (Figma UI Edition)
- * Persistencia reactiva con localStorage, wishlist, cupones y checkout multi-paso.
+ * PARIAZ DIGITAL STORE — Shopping Cart & Wishlist State Manager
+ * Persistencia en localStorage, wishlist y cálculo de subtotales en COP.
  */
 
 import { formatPriceCOP, generateWhatsAppOrderUrl } from './whatsapp.js';
 
-const CART_STORAGE_KEY = 'pariaz_cart_state_v2';
-const WISHLIST_STORAGE_KEY = 'pariaz_wishlist_state_v2';
+const CART_STORAGE_KEY = 'pariaz_cart_state_v3';
+const WISHLIST_STORAGE_KEY = 'pariaz_wishlist_state_v3';
 const FREE_SHIPPING_THRESHOLD = 300000; // $300.000 COP para envío gratis
 
 class CartManager {
   constructor() {
     this.items = this.loadCart();
     this.wishlist = this.loadWishlist();
-    this.appliedCoupon = null;
     this.listeners = [];
   }
 
@@ -60,7 +59,7 @@ class CartManager {
       this.showToast("Eliminado de tu lista de guardados");
     } else {
       this.wishlist.push(productId);
-      this.showToast("❤️ Guardado en tus favoritos");
+      this.showToast("Guardado en tus favoritos");
     }
     this.saveWishlist();
   }
@@ -102,7 +101,7 @@ class CartManager {
 
     this.saveCart();
     this.openDrawer();
-    this.showToast(`🔥 Añadido a tu bolsa: ${product.name} (${size})`);
+    this.showToast(`Añadido a tu bolsa: ${product.name} (${size})`);
   }
 
   removeItem(itemKey) {
@@ -158,7 +157,7 @@ class CartManager {
       toast.className = 'pariaz-toast';
       document.body.appendChild(toast);
     }
-    toast.innerHTML = message;
+    toast.textContent = message;
     toast.classList.add('show');
     clearTimeout(this.toastTimeout);
     this.toastTimeout = setTimeout(() => {
@@ -198,13 +197,13 @@ class CartManager {
       if (subtotal >= FREE_SHIPPING_THRESHOLD) {
         freeShippingBar.style.width = '100%';
         freeShippingBar.style.backgroundColor = '#10b981';
-        freeShippingText.innerHTML = `🔥 <strong>¡Envío Gratis desbloqueado!</strong> a todo Colombia.`;
+        freeShippingText.innerHTML = `<strong>Envío Gratis activo</strong> a todo Colombia.`;
       } else {
         const remaining = FREE_SHIPPING_THRESHOLD - subtotal;
         const percent = Math.min(100, (subtotal / FREE_SHIPPING_THRESHOLD) * 100);
         freeShippingBar.style.width = `${percent}%`;
         freeShippingBar.style.backgroundColor = '#ffffff';
-        freeShippingText.innerHTML = `Agrega <strong>${formatPriceCOP(remaining)}</strong> más para <strong>Envío Gratis</strong>.`;
+        freeShippingText.innerHTML = `Agrega <strong>${formatPriceCOP(remaining)}</strong> para <strong>Envío Gratis</strong>.`;
       }
     }
 
