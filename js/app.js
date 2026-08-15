@@ -583,7 +583,7 @@
   }
 
   function generateWhatsAppUrl(delivery) {
-    const phone = '573009299777';
+    const phone = '573007575615';
     if (cartItems.length === 0) return `https://wa.me/${phone}?text=Hola%20Pariaz,%20quiero%20informaci%C3%B3n%20sobre%20las%20prendas`;
 
     let msg = `*NUEVO PEDIDO — TIENDA OFICIAL PARIAZ*\n\n`;
@@ -864,7 +864,7 @@
     if (waBtn && activeProduct) {
       const text = `Hola Pariaz, quiero comprar la prenda:\n\n• *${activeProduct.name}*\n• Talla: ${selectedSize}\n• Precio: ${formatCOP(activeProduct.price)}\n\n¿Tienen disponibilidad para envío inmediato?`;
       waBtn.onclick = () => {
-        window.open(`https://wa.me/573009299777?text=${encodeURIComponent(text)}`, '_blank');
+        window.open(`https://wa.me/573007575615?text=${encodeURIComponent(text)}`, '_blank');
       };
     }
   }
