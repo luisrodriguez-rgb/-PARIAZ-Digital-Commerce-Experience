@@ -69,9 +69,7 @@
        ========================================================================= -->
   <section class="stories-bar-section" aria-label="Historias destacadas de artistas">
     <div class="container">
-      <div class="stories-scroll-container" id="app-stories-bar">
-        <!-- Generado dinámicamente o pre-renderizado -->
-      </div>
+      <div class="stories-scroll-container" id="app-stories-bar"></div>
     </div>
   </section>
 
@@ -116,7 +114,7 @@
           </div>
 
           <div class="hero-mockup-frame">
-            <img src="assets/products/camisa-manos.jpeg" alt="Camiseta Manos y Luz Pariaz" class="hero-mockup-img">
+            <img src="assets/products/camisa.jpeg" alt="Camiseta Manos y Luz Pariaz" class="hero-mockup-img">
           </div>
 
         </div>
@@ -131,7 +129,7 @@
       <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
         <div>
           <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; color: var(--accent-red); text-transform: uppercase;">
-            CATÁLOGO OFICIAL
+            CATÁLOGO OFICIAL (23 PRENDAS)
           </span>
           <h2 style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 900; line-height: 1.1; margin-top: 4px;">
             PRENDAS & SILUETAS
@@ -145,12 +143,11 @@
 
       <!-- Category Pills -->
       <div class="category-pills-row" role="tablist">
-        <button class="filter-tab-pill active" data-category="all" role="tab">ALL DROPS (11)</button>
-        <button class="filter-tab-pill" data-category="camisetas" role="tab">CAMISETAS (6)</button>
-        <button class="filter-tab-pill" data-category="conjuntos" role="tab">CONJUNTOS (2)</button>
-        <button class="filter-tab-pill" data-category="buzos" role="tab">BUZOS (1)</button>
-        <button class="filter-tab-pill" data-category="gorras" role="tab">GORRAS (1)</button>
-        <button class="filter-tab-pill" data-category="limited" role="tab">EDICIONES LIMITADAS (1)</button>
+        <button class="filter-tab-pill active" data-category="all" role="tab">ALL DROPS (23)</button>
+        <button class="filter-tab-pill" data-category="camisetas" role="tab">CAMISETAS (13)</button>
+        <button class="filter-tab-pill" data-category="conjuntos" role="tab">CONJUNTOS (5)</button>
+        <button class="filter-tab-pill" data-category="buzos" role="tab">BUZOS (2)</button>
+        <button class="filter-tab-pill" data-category="gorras" role="tab">GORRAS (3)</button>
       </div>
 
       <!-- App Products Grid -->
@@ -172,9 +169,11 @@
         </h2>
       </div>
 
-      <!-- Conmutador de Looks -->
+      <!-- Conmutador de Looks con 5 Artistas -->
       <div class="shop-look-tabs-row">
         <button class="look-tab-btn active" data-look="hades">HADES 66 (DESERT SUIT)</button>
+        <button class="look-tab-btn" data-look="blessd">BLESSD (GORRA CORONA)</button>
+        <button class="look-tab-btn" data-look="almighty">ALMIGHTY (MORADO TRACK)</button>
         <button class="look-tab-btn" data-look="krisr">KRIS R (CRIMSON TEE)</button>
         <button class="look-tab-btn" data-look="jonz">JON Z (ÁNGELES HEAVEN)</button>
       </div>
@@ -182,7 +181,7 @@
       <div class="shop-look-container">
         <!-- Media Frame con Hotspots -->
         <div class="look-media-frame">
-          <img src="assets/looks/hades-look.jpeg" alt="Hades 66 Look Pariaz" class="shop-look-bg-img" id="shop-look-bg-img">
+          <img src="assets/products/Hades.jpeg" alt="Hades 66 Look Pariaz" class="shop-look-bg-img" id="shop-look-bg-img">
           
           <div class="look-hotspots-container" id="shop-look-hotspots-container">
             <!-- Hotspots inyectados desde js/app.js -->
@@ -470,7 +469,7 @@
     </div>
 
     <div class="story-media-layer">
-      <img src="assets/artists/krisr.jpeg" alt="Story Frame" class="story-bg-img" id="story-bg-img">
+      <img src="assets/products/krisr.jpeg" alt="Story Frame" class="story-bg-img" id="story-bg-img">
     </div>
 
     <div class="story-bottom-content">
@@ -629,7 +628,7 @@
   <!-- Toast -->
   <div class="pariaz-toast" id="pariaz-toast"></div>
 
-  <!-- Core Script (Sin module cors restrictions) -->
+  <!-- Core Script -->
   <script src="js/app.js"></script>
 </body>
 </html>

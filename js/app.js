@@ -1,33 +1,73 @@
 /**
  * PARIAZ DIGITAL STORE — Core Application Engine
  * Compatible con file:// y http:// (Cero dependencias externas, 100% robusto).
+ * 23 Prendas Reales, 8 Artistas Urbanos y 5 Looks de Tarima.
  */
 
 (function () {
   'use strict';
 
   // =========================================================================
-  // 01. BASE DE DATOS DE PRODUCTOS Y ARTISTAS
+  // 01. BASE DE DATOS DE PRODUCTOS Y ARTISTAS (FOTOS REALES ORDENADAS)
   // =========================================================================
   const PRODUCTS = [
+    // --- CAMISETAS ---
     {
-      id: "pariaz-manos",
-      name: "Camiseta Pariaz Manos & Luz",
+      id: "camisa-1",
+      name: "Camiseta Pariaz Manos & Luz (Drop 004)",
       price: 140000,
       originalPrice: 180000,
       rating: "5.0",
       reviewsCount: "1.4k",
       category: "camisetas",
       categoryLabel: "Camisetas",
-      collection: "Drop 004 — Signature",
+      collection: "Drop 004 Signature",
       sizes: ["S", "M", "L", "XL", "XXL"],
       badge: "PIEZA INSIGNIA",
-      image: "assets/products/camisa-manos.jpeg",
-      description: "Silueta insignia de Pariaz confeccionada en algodón peinado de 240g con fit streetwear holgado. Estampado serigráfico en tramado semitono de manos elevando la 'P' cósmica.",
+      image: "assets/products/camisa.jpeg",
+      description: "Silueta insignia de Pariaz en algodón peinado de 240g con fit streetwear holgado. Estampado serigráfico en tramado semitono de manos elevando la 'P' cósmica.",
       details: ["100% Algodón Premium 240 GSM", "Corte Boxy Streetwear", "Estampado tramado de alta durabilidad", "Hecho en Medellín"],
       matching: [
-        { id: "gorra-p", name: "Gorra Pariaz Corona 3D", price: 95000, image: "assets/brand/logo.jpeg" },
-        { id: "conjunto-hades", name: "Pantalón Jogger Sand", price: 240000, image: "assets/artists/hades.jpeg" }
+        { id: "gorra-blessd", name: "Gorra Pariaz Corona 3D", price: 95000, image: "assets/products/blessd_gorra.png" },
+        { id: "conjunto-hades", name: "Pantalón Jogger Sand", price: 240000, image: "assets/products/Hades.jpeg" }
+      ]
+    },
+    {
+      id: "camisa-4-almighty",
+      name: "Camiseta Pariaz x Almighty Edition",
+      price: 170000,
+      originalPrice: 220000,
+      rating: "5.0",
+      reviewsCount: "920",
+      category: "camisetas",
+      categoryLabel: "Camisetas",
+      collection: "Worn by Almighty",
+      sizes: ["S", "M", "L", "XL", "XXL"],
+      badge: "WORN BY ALMIGHTY",
+      image: "assets/products/camisa_4_almaygthhy.png",
+      description: "Edición especial lucida por Almighty. Confección en algodón pesado con diseño de autor en el pecho y espalda.",
+      details: ["Algodón 240g perchado", "Serigrafía discharge táctil", "Cuello grueso 3cm", "Edición limitada"],
+      matching: [
+        { id: "conjunto-morado", name: "Conjunto Morado Almighty", price: 480000, image: "assets/products/conjunto_morado.png" }
+      ]
+    },
+    {
+      id: "camisa-5-jonz",
+      name: "Camiseta Pariaz Ángeles Heaven Gate",
+      price: 180000,
+      originalPrice: 230000,
+      rating: "5.0",
+      reviewsCount: "654",
+      category: "camisetas",
+      categoryLabel: "Camisetas",
+      collection: "Worn by Jon Z",
+      sizes: ["S", "M", "L", "XL"],
+      badge: "WORN BY JON Z",
+      image: "assets/products/camisa_5_jonz.png",
+      description: "Pieza de autor lucida por Jon Z en vivo. Composición barroca con ángeles heraldos, leones guardianes y la emblemática 'P' celestial.",
+      details: ["Serigrafía discharge al agua", "Algodón pre-lavado vintage", "Edición numerada", "Costuras reforzadas"],
+      matching: [
+        { id: "gorra-blessd", name: "Gorra Pariaz Corona 3D", price: 95000, image: "assets/products/blessd_gorra.png" }
       ]
     },
     {
@@ -42,33 +82,186 @@
       collection: "Worn by Kris R",
       sizes: ["S", "M", "L", "XL", "XXL"],
       badge: "WORN BY KRIS R",
-      image: "assets/artists/krisr.jpeg",
+      image: "assets/products/krisr.jpeg",
       description: "Pieza exclusiva vista en Kris R. Base en negro profundo con la 'P' gótica en serigrafía degradada roja carmesí y firma 'Security and trust'.",
       details: ["Serigrafía táctil degradada", "Cuello acanalado de 3cm", "Gramaje pesado 240 GSM", "Etiqueta tejida en dobladillo"],
       matching: [
-        { id: "gorra-p", name: "Gorra Pariaz Corona 3D", price: 95000, image: "assets/brand/logo.jpeg" },
-        { id: "pariaz-manos", name: "Camiseta Manos & Luz", price: 140000, image: "assets/products/camisa-manos.jpeg" }
+        { id: "gorra-krisr", name: "Gorra Pariaz Snapback", price: 95000, image: "assets/products/gorra_krisr.jpeg" }
       ]
     },
     {
-      id: "pariaz-jonz",
-      name: "Camiseta Ángeles Heaven Gate",
-      price: 180000,
-      originalPrice: 230000,
-      rating: "5.0",
-      reviewsCount: "654",
+      id: "camisa-6",
+      name: "Camiseta Pariaz Double Print (Front & Back)",
+      price: 160000,
+      originalPrice: 200000,
+      rating: "4.9",
+      reviewsCount: "540",
       category: "camisetas",
       categoryLabel: "Camisetas",
-      collection: "Worn by Jon Z",
-      sizes: ["S", "M", "L", "XL"],
-      badge: "WORN BY JON Z",
-      image: "assets/artists/jonz.jpeg",
-      description: "Pieza de autor lucida por Jon Z en vivo. Composición barroca con ángeles heraldos, leones guardianes y la emblemática 'P' celestial.",
-      details: ["Serigrafía discharge al agua", "Algodón pre-lavado vintage", "Edición numerada", "Costuras reforzadas"],
+      collection: "Drop 004",
+      sizes: ["S", "M", "L", "XL", "XXL"],
+      badge: "DOBLE ESTAMPADO",
+      image: "assets/products/camisa_6.png",
+      description: "Diseño completo con arte frontal y gráfica de gran formato en la espalda. Algodón pesado de confección colombiana.",
+      details: ["Estampado doble (Frente y Espalda)", "Algodón 240 GSM", "Corte holgado Boxy Fit"],
       matching: [
-        { id: "gorra-p", name: "Gorra Pariaz Corona 3D", price: 95000, image: "assets/brand/logo.jpeg" }
+        { id: "conjunto-negro", name: "Pantalón Track Black", price: 220000, image: "assets/products/conjunto_negro.jpeg" }
       ]
     },
+    {
+      id: "camisa-7",
+      name: "Camiseta Pariaz Gothic Lettering Black",
+      price: 150000,
+      originalPrice: 190000,
+      rating: "4.8",
+      reviewsCount: "410",
+      category: "camisetas",
+      categoryLabel: "Camisetas",
+      collection: "Drop 003",
+      sizes: ["S", "M", "L", "XL"],
+      badge: "GOTHIC CORE",
+      image: "assets/products/camisa_7.png",
+      description: "Tipografía gótica en relieve sobre base negra mate. Esencial para combinaciones streetwear finas.",
+      details: ["Algodón peinado 240g", "Cuello reforzado", "Tacto suave y resistente"],
+      matching: [
+        { id: "gorra-blessd", name: "Gorra Pariaz Corona 3D", price: 95000, image: "assets/products/blessd_gorra.png" }
+      ]
+    },
+    {
+      id: "camisa-8",
+      name: "Camiseta Pariaz Raw Boxy Edition",
+      price: 160000,
+      originalPrice: 200000,
+      rating: "5.0",
+      reviewsCount: "380",
+      category: "camisetas",
+      categoryLabel: "Camisetas",
+      collection: "Editorial Look",
+      sizes: ["S", "M", "L", "XL", "XXL"],
+      badge: "EDITORIAL FIT",
+      image: "assets/products/camisa_8.png",
+      description: "Silueta pesada con corte y caída limpia. Testeada en sesiones editoriales de moda urbana.",
+      details: ["Gramaje pesado 240 GSM", "Pre-lavado industrial", "Hecho en Sabaneta"],
+      matching: [
+        { id: "buzo-cafe", name: "Buzo Hoodie Brown", price: 240000, image: "assets/products/buzo_cafe.png" }
+      ]
+    },
+    {
+      id: "camisa-9",
+      name: "Camiseta Pariaz Street Royalty",
+      price: 160000,
+      originalPrice: 200000,
+      rating: "4.9",
+      reviewsCount: "290",
+      category: "camisetas",
+      categoryLabel: "Camisetas",
+      collection: "Drop 004",
+      sizes: ["S", "M", "L", "XL"],
+      badge: "ROYALTY",
+      image: "assets/products/camisa_9.png",
+      description: "Gráfica exclusiva con elementos heráldicos y el león insignia de Pariaz.",
+      details: ["100% Algodón Peinado", "Serigrafía a 4 tintas", "Corte Boxy"],
+      matching: [
+        { id: "gorra-blessd", name: "Gorra Pariaz Corona 3D", price: 95000, image: "assets/products/blessd_gorra.png" }
+      ]
+    },
+    {
+      id: "camisa-10",
+      name: "Camiseta Pariaz Core Monogram",
+      price: 150000,
+      originalPrice: 185000,
+      rating: "4.8",
+      reviewsCount: "320",
+      category: "camisetas",
+      categoryLabel: "Camisetas",
+      collection: "Core Collection",
+      sizes: ["S", "M", "L", "XL", "XXL"],
+      badge: "CORE ESSENTIAL",
+      image: "assets/products/camisa_10.png",
+      description: "El monograma esencial 'P' en formato central. La base de todo guardarropa streetwear.",
+      details: ["Algodón pesado 240 GSM", "Cuello de 3cm", "Corte Boxy"],
+      matching: [
+        { id: "conjunto-azul", name: "Conjunto Azul Royal", price: 500000, image: "assets/products/conjunto_azul.jpeg" }
+      ]
+    },
+    {
+      id: "camisa-2",
+      name: "Camiseta Pariaz Monograma White Vintage",
+      price: 140000,
+      originalPrice: 175000,
+      rating: "4.9",
+      reviewsCount: "670",
+      category: "camisetas",
+      categoryLabel: "Camisetas",
+      collection: "White Vault",
+      sizes: ["S", "M", "L", "XL"],
+      badge: "WHITE VAULT",
+      image: "assets/products/camisa_2.jpeg",
+      description: "Base blanca en algodón pesado de 240g con serigrafía en contraste.",
+      details: ["100% Algodón Premium 240g", "Cuello grueso 3cm", "Corte holgado"],
+      matching: [
+        { id: "conjunto-hades", name: "Pantalón Jogger Sand", price: 240000, image: "assets/products/Hades.jpeg" }
+      ]
+    },
+    {
+      id: "camisa-3",
+      name: "Camiseta Pariaz Street Classic Black",
+      price: 140000,
+      originalPrice: 175000,
+      rating: "4.8",
+      reviewsCount: "510",
+      category: "camisetas",
+      categoryLabel: "Camisetas",
+      collection: "Classics",
+      sizes: ["S", "M", "L", "XL", "XXL"],
+      badge: "CLASSIC",
+      image: "assets/products/camisa_3.jpeg",
+      description: "Un clásico eterno de la marca con estampado limpio frontal.",
+      details: ["Algodón 240g", "Corte Boxy Fit", "Alta durabilidad"],
+      matching: [
+        { id: "gorra-blessd", name: "Gorra Pariaz Corona 3D", price: 95000, image: "assets/products/blessd_gorra.png" }
+      ]
+    },
+    {
+      id: "camisa-4",
+      name: "Camiseta Pariaz Graphic Dark Night",
+      price: 150000,
+      originalPrice: 190000,
+      rating: "4.9",
+      reviewsCount: "440",
+      category: "camisetas",
+      categoryLabel: "Camisetas",
+      collection: "Dark Nights",
+      sizes: ["S", "M", "L", "XL"],
+      badge: "DARK NIGHT",
+      image: "assets/products/camisa_4.jpeg",
+      description: "Gráfica de autor inspirada en la vida nocturna y la cultura urbana de Medellín.",
+      details: ["Serigrafía de alto detalle", "Algodón pesado 240g", "Costuras reforzadas"],
+      matching: [
+        { id: "conjunto-negro", name: "Conjunto Black Shadow", price: 420000, image: "assets/products/conjunto_negro.jpeg" }
+      ]
+    },
+    {
+      id: "camisa-tury",
+      name: "Camiseta Pariaz x Tury Signature",
+      price: 160000,
+      originalPrice: 200000,
+      rating: "4.9",
+      reviewsCount: "390",
+      category: "camisetas",
+      categoryLabel: "Camisetas",
+      collection: "Worn by Tury",
+      sizes: ["S", "M", "L", "XL"],
+      badge: "WORN BY TURY",
+      image: "assets/products/camisa_5_tury.png",
+      description: "Pieza exclusiva vista en Tury. Serigrafía discharge de autor con estética de alta costura callejera.",
+      details: ["Algodón 240 GSM", "Estampado discharge al agua", "Corte Boxy holgado"],
+      matching: [
+        { id: "gorra-krisr", name: "Gorra Pariaz Snapback", price: 95000, image: "assets/products/gorra_krisr.jpeg" }
+      ]
+    },
+
+    // --- CONJUNTOS ---
     {
       id: "conjunto-hades",
       name: "Conjunto Corona Desert Sand Suit",
@@ -80,50 +273,50 @@
       categoryLabel: "Conjuntos",
       collection: "Worn by Hades 66",
       sizes: ["S", "M", "L", "XL"],
-      badge: "FULL SUIT",
-      image: "assets/artists/hades.jpeg",
+      badge: "WORN BY HADES 66",
+      image: "assets/products/Hades.jpeg",
       description: "Set completo de 2 piezas (Camiseta Oversize + Pantalón Jogger) lucido por Hades 66. Diseño de corona de espinas en tono arena desierto.",
       details: ["Set de 2 piezas completas", "Algodón perchado y gabardina", "Bolsillos funcionales y cordones", "Fit Streetwear auténtico"],
       matching: [
-        { id: "gorra-p", name: "Gorra Pariaz Corona 3D", price: 95000, image: "assets/brand/logo.jpeg" }
+        { id: "gorra-blessd", name: "Gorra Pariaz Corona 3D", price: 95000, image: "assets/products/blessd_gorra.png" }
       ]
     },
     {
-      id: "p-blanca",
-      name: "Camiseta de la P Blanca Classic",
-      price: 140000,
-      originalPrice: 170000,
-      rating: "4.8",
-      reviewsCount: "1.1k",
-      category: "camisetas",
-      categoryLabel: "Camisetas",
-      collection: "Drop 001 — La P",
-      sizes: ["S", "M", "L", "XL", "XXL"],
-      badge: "BEST SELLER",
-      image: "assets/products/camisa-manos.jpeg",
-      description: "Camiseta blanca de algodón pesado 240 GSM con el monograma 'P' serigrafiado al frente. Un clásico esencial del streetwear.",
-      details: ["100% Algodón 240g", "Cuello grueso de 3cm", "Corte Boxy holgado"],
-      matching: [
-        { id: "conjunto-hades", name: "Pantalón Jogger Sand", price: 240000, image: "assets/artists/hades.jpeg" }
-      ]
-    },
-    {
-      id: "p-piedras",
-      name: "Camiseta P Morada con Pedrería",
-      price: 170000,
-      originalPrice: 220000,
-      rating: "4.9",
-      reviewsCount: "430",
-      category: "camisetas",
-      categoryLabel: "Camisetas",
-      collection: "Edición Especial",
+      id: "conjunto-morado",
+      name: "Conjunto Pariaz Morado x Almighty Track",
+      price: 480000,
+      originalPrice: 580000,
+      rating: "5.0",
+      reviewsCount: "260",
+      category: "conjuntos",
+      categoryLabel: "Conjuntos",
+      collection: "Worn by Almighty",
       sizes: ["S", "M", "L", "XL"],
-      badge: "SPECIAL EDITION",
-      image: "assets/artists/coscu.jpeg",
-      description: "Pieza de autor con aplicaciones de cristales y pedrería térmica sobre base púrpura profunda.",
-      details: ["Pedrería checa de alta fijación", "Algodón teñido en prenda", "Edición limitada"],
+      badge: "ALMIGHTY SUIT",
+      image: "assets/products/conjunto_morado.png",
+      description: "Conjunto de 2 piezas en púrpura profundo con detalles reflectivos y herrajes premium. Visto en Almighty.",
+      details: ["Chaqueta + Pantalón", "Tela técnica repelente", "Bordados y aplicaciones de autor"],
       matching: [
-        { id: "gorra-p", name: "Gorra Pariaz Corona 3D", price: 95000, image: "assets/brand/logo.jpeg" }
+        { id: "camisa-4-almighty", name: "Camiseta Almighty", price: 170000, image: "assets/products/camisa_4_almaygthhy.png" }
+      ]
+    },
+    {
+      id: "conjunto-negro",
+      name: "Conjunto Pariaz Black Shadow Tracksuit",
+      price: 420000,
+      originalPrice: 520000,
+      rating: "4.9",
+      reviewsCount: "310",
+      category: "conjuntos",
+      categoryLabel: "Conjuntos",
+      collection: "Shadow Series",
+      sizes: ["S", "M", "L", "XL"],
+      badge: "SHADOW SUIT",
+      image: "assets/products/conjunto_negro.jpeg",
+      description: "Conjunto negro mate de dos piezas con corte holgado y cierres termosellados.",
+      details: ["Chaqueta + Pantalón Jogger", "Gabardina técnica", "Ajustes elásticos con tanca"],
+      matching: [
+        { id: "gorra-krisr", name: "Gorra Pariaz Snapback", price: 95000, image: "assets/products/gorra_krisr.jpeg" }
       ]
     },
     {
@@ -137,104 +330,149 @@
       categoryLabel: "Conjuntos",
       collection: "Full Suits",
       sizes: ["S", "M", "L", "XL"],
-      badge: "VIP SUIT",
-      image: "assets/artists/luar.jpeg",
-      description: "Conjunto de dos piezas (Chaqueta Track + Pantalón Cargo) en gabardina técnica con cierres termosellados.",
-      details: ["Chaqueta + Pantalón", "Herrajes grabados en láser", "Resistente al agua"],
+      badge: "WORN BY LUAR",
+      image: "assets/products/conjunto_azul.jpeg",
+      description: "Conjunto impermeable de dos piezas lucido por Luar La L en sesiones de estudio.",
+      details: ["Chaqueta + Pantalón Cargo", "Herrajes grabados en láser", "Resistente al agua"],
       matching: [
-        { id: "gorra-p", name: "Gorra Pariaz Corona 3D", price: 95000, image: "assets/brand/logo.jpeg" }
+        { id: "gorra-blessd", name: "Gorra Pariaz Corona 3D", price: 95000, image: "assets/products/blessd_gorra.png" }
+      ]
+    },
+    {
+      id: "conjunto-rojo",
+      name: "Conjunto Pariaz Crimson Blood Suit",
+      price: 450000,
+      originalPrice: 550000,
+      rating: "4.9",
+      reviewsCount: "180",
+      category: "conjuntos",
+      categoryLabel: "Conjuntos",
+      collection: "Crimson Line",
+      sizes: ["S", "M", "L", "XL"],
+      badge: "CRIMSON SUIT",
+      image: "assets/products/conjunto_rojo.jpeg",
+      description: "Conjunto de impacto en rojo carmesí con franjas negras y detalles de confección artesanal.",
+      details: ["Set 2 piezas", "Algodón perchado 380g", "Bolsillos reforzados"],
+      matching: [
+        { id: "pariaz-krisr", name: "Camiseta Crimson Kris R", price: 170000, image: "assets/products/krisr.jpeg" }
+      ]
+    },
+
+    // --- BUZOS & HOODIES ---
+    {
+      id: "buzo-cafe",
+      name: "Buzo Hoodie Pariaz Brown Heavyweight 380G",
+      price: 240000,
+      originalPrice: 300000,
+      rating: "5.0",
+      reviewsCount: "420",
+      category: "buzos",
+      categoryLabel: "Buzos & Hoodies",
+      collection: "Earth Tones",
+      sizes: ["S", "M", "L", "XL", "XXL"],
+      badge: "HEAVYWEIGHT 380G",
+      image: "assets/products/buzo_cafe.png",
+      description: "Hoodie en tono café tierra confeccionado en algodón perchado de 380g. Capucha estructurada de doble capa sin cordones.",
+      details: ["Algodón 380 GSM perchado", "Capucha doble capa estructurada", "Bolsillo canguro oculto", "Hecho en Sabaneta"],
+      matching: [
+        { id: "camisa-8", name: "Camiseta Raw Boxy", price: 160000, image: "assets/products/camisa_8.png" }
       ]
     },
     {
       id: "buzo-pariaz",
-      name: "Buzo Hoodie Pariaz Heavyweight",
+      name: "Buzo Hoodie Pariaz Black Night Heavyweight",
       price: 220000,
       originalPrice: 280000,
       rating: "4.9",
       reviewsCount: "780",
       category: "buzos",
-      categoryLabel: "Buzos",
-      collection: "Winter Streets",
+      categoryLabel: "Buzos & Hoodies",
+      collection: "Worn by Coscu",
       sizes: ["S", "M", "L", "XL", "XXL"],
-      badge: "ESSENTIAL",
-      image: "assets/artists/coscu.jpeg",
-      description: "Hoodie de algodón perchado térmico 380 GSM con capucha estructurada doble capa y bolsillo canguro reforzado.",
-      details: ["Algodón 380g perchado", "Capucha doble sin cordones", "Bordado tonal Pariaz"],
+      badge: "WORN BY COSCU",
+      image: "assets/products/coscu.jpeg",
+      description: "Hoodie de algodón perchado térmico 380 GSM con bordado tonal de la 'P'.",
+      details: ["Algodón 380g perchado", "Capucha doble", "Bordado de alta densidad"],
       matching: [
-        { id: "pariaz-manos", name: "Camiseta Manos & Luz", price: 140000, image: "assets/products/camisa-manos.jpeg" }
+        { id: "camisa-1", name: "Camiseta Manos & Luz", price: 140000, image: "assets/products/camisa.jpeg" }
+      ]
+    },
+
+    // --- GORRAS & HEADWEAR ---
+    {
+      id: "gorra-blessd",
+      name: "Gorra Pariaz Corona 3D Trucker (Seen on Blessd)",
+      price: 95000,
+      originalPrice: 130000,
+      rating: "5.0",
+      reviewsCount: "1.2k",
+      category: "gorras",
+      categoryLabel: "Gorras & Headwear",
+      collection: "Seen on Blessd",
+      sizes: ["Talla Única"],
+      badge: "SEEN ON BLESSD",
+      image: "assets/products/blessd_gorra.png",
+      description: "La icónica gorra trucker con la corona 3D de Pariaz bordada en alto relieve. Vista en tarima con Blessd.",
+      details: ["Bordado 3D puff de alta densidad", "Malla trasera transpirable", "Broche snapback regulable", "Edición original"],
+      matching: [
+        { id: "camisa-1", name: "Camiseta Manos & Luz", price: 140000, image: "assets/products/camisa.jpeg" }
+      ]
+    },
+    {
+      id: "gorra-krisr",
+      name: "Gorra Pariaz Snapback (Seen on Kris R)",
+      price: 95000,
+      originalPrice: 120000,
+      rating: "4.9",
+      reviewsCount: "870",
+      category: "gorras",
+      categoryLabel: "Gorras & Headwear",
+      collection: "Seen on Kris R",
+      sizes: ["Talla Única"],
+      badge: "SEEN ON KRIS R",
+      image: "assets/products/gorra_krisr.jpeg",
+      description: "Gorra plana estructurada de 6 paneles lucida por Kris R. Bordado lateral y frontal.",
+      details: ["Bordado 3D frontal", "Visera plana rígida", "Tafilete antitranspirante"],
+      matching: [
+        { id: "pariaz-krisr", name: "Camiseta Crimson Kris R", price: 170000, image: "assets/products/krisr.jpeg" }
       ]
     },
     {
       id: "gorra-p",
-      name: "Gorra Pariaz Corona / P 3D",
+      name: "Gorra Pariaz León Official 3D",
       price: 95000,
       originalPrice: 120000,
       rating: "4.8",
       reviewsCount: "950",
       category: "gorras",
-      categoryLabel: "Gorras",
+      categoryLabel: "Gorras & Headwear",
       collection: "Headwear 01",
       sizes: ["Talla Única"],
-      badge: "HEADWEAR",
+      badge: "OFFICIAL LOGO",
       image: "assets/brand/logo.jpeg",
-      description: "Gorra trucker estructurada de 5 paneles con visera semi-curva, bordado puff 3D y broche snapback ajustable.",
-      details: ["Bordado 3D de alta densidad", "Malla trasera transpirable", "Broche snapback ajustable"],
+      description: "Gorra con el isotipo oficial de león de Pariaz bordado en relieve.",
+      details: ["Bordado 3D", "Malla trasera", "Broche ajustable"],
       matching: [
-        { id: "pariaz-manos", name: "Camiseta Manos & Luz", price: 140000, image: "assets/products/camisa-manos.jpeg" }
-      ]
-    },
-    {
-      id: "mujer-coleccion",
-      name: "Top & Crop Tee Pariaz Femme",
-      price: 140000,
-      originalPrice: 175000,
-      rating: "4.9",
-      reviewsCount: "310",
-      category: "camisetas",
-      categoryLabel: "Camisetas",
-      collection: "Pariaz Femme",
-      sizes: ["XS", "S", "M", "L"],
-      badge: "PARIAZ FEMME",
-      image: "assets/products/camisa-manos.jpeg",
-      description: "Prenda de silueta crop entallada con elastómero acanalado de tacto suave y logo Pariaz micro-grabado.",
-      details: ["Algodón elastano acanalado", "Tacto segunda piel", "Bordado sutil"],
-      matching: [
-        { id: "gorra-p", name: "Gorra Pariaz Corona 3D", price: 95000, image: "assets/brand/logo.jpeg" }
-      ]
-    },
-    {
-      id: "angeles-verde",
-      name: "Edición Limitada Ángeles Verde Bosque",
-      price: 180000,
-      originalPrice: 240000,
-      rating: "5.0",
-      reviewsCount: "190",
-      category: "limited",
-      categoryLabel: "Limitadas",
-      collection: "Drop Ángeles Vault",
-      sizes: ["S", "M", "L", "XL"],
-      badge: "NO VUELVE",
-      image: "assets/artists/jonz.jpeg",
-      description: "Tiraje único e irrepetible en verde esmeralda con tintas reflectivas. Incluye certificado seriado de autenticidad.",
-      details: ["Certificado seriado de drop", "Tintas ecológicas reflectivas", "Corte holgado"],
-      matching: [
-        { id: "gorra-p", name: "Gorra Pariaz Corona 3D", price: 95000, image: "assets/brand/logo.jpeg" }
+        { id: "camisa-1", name: "Camiseta Manos & Luz", price: 140000, image: "assets/products/camisa.jpeg" }
       ]
     }
   ];
 
   const ARTISTS = [
-    { name: "Kris R", avatar: "assets/artists/krisr.jpeg", image: "assets/artists/krisr.jpeg", headline: "KRIS R EN VIVO CON PARIAZ", subhead: "Camiseta Crimson Security & Trust.", prodId: "pariaz-krisr" },
-    { name: "Hades 66", avatar: "assets/artists/hades.jpeg", image: "assets/artists/hades.jpeg", headline: "HADES 66 — DESERT SUIT", subhead: "Conjunto Corona Desert Sand Suit de 2 piezas.", prodId: "conjunto-hades" },
-    { name: "Jon Z", avatar: "assets/artists/jonz.jpeg", image: "assets/artists/jonz.jpeg", headline: "JON Z ON TOUR CON PARIAZ", subhead: "Camiseta Ángeles Heaven Gate en tarima.", prodId: "pariaz-jonz" },
-    { name: "Cosculluela", avatar: "assets/artists/coscu.jpeg", image: "assets/artists/coscu.jpeg", headline: "COSCU x PARIAZ CULTURE", subhead: "Prendas exclusivas de autor.", prodId: "buzo-pariaz" },
-    { name: "Luar La L", avatar: "assets/artists/luar.jpeg", image: "assets/artists/luar.jpeg", headline: "LUAR LA L EN ESTUDIO", subhead: "Conjunto Pariaz Azul Royal Track.", prodId: "conjunto-azul" }
+    { name: "Blessd", avatar: "assets/products/blessd_gorra.png", image: "assets/products/blessd_gorra.png", headline: "BLESSD EN VIVO CON LA GORRA PARIAZ", subhead: "Gorra Pariaz Corona 3D Trucker en tarima.", prodId: "gorra-blessd" },
+    { name: "Almighty", avatar: "assets/products/camisa_4_almaygthhy.png", image: "assets/products/camisa_4_almaygthhy.png", headline: "ALMIGHTY x PARIAZ DROP", subhead: "Camiseta Pariaz x Almighty Edition.", prodId: "camisa-4-almighty" },
+    { name: "Kris R", avatar: "assets/products/krisr.jpeg", image: "assets/products/krisr.jpeg", headline: "KRIS R EN VIVO CON PARIAZ", subhead: "Camiseta Crimson Security & Trust y Gorra Snapback.", prodId: "pariaz-krisr" },
+    { name: "Hades 66", avatar: "assets/products/Hades.jpeg", image: "assets/products/Hades.jpeg", headline: "HADES 66 — FULL DESERT SUIT", subhead: "Conjunto Corona Desert Sand Suit de 2 piezas.", prodId: "conjunto-hades" },
+    { name: "Jon Z", avatar: "assets/products/camisa_5_jonz.png", image: "assets/products/camisa_5_jonz.png", headline: "JON Z ON TOUR CON PARIAZ", subhead: "Camiseta Ángeles Heaven Gate en tarima.", prodId: "camisa-5-jonz" },
+    { name: "Tury", avatar: "assets/products/camisa_5_tury.png", image: "assets/products/camisa_5_tury.png", headline: "TURY x PARIAZ STREETWEAR", subhead: "Camiseta Pariaz x Tury Signature Edition.", prodId: "camisa-tury" },
+    { name: "Luar La L", avatar: "assets/products/luar.jpeg", image: "assets/products/luar.jpeg", headline: "LUAR LA L EN ESTUDIO", subhead: "Conjunto Pariaz Azul Royal Track.", prodId: "conjunto-azul" },
+    { name: "Cosculluela", avatar: "assets/products/coscu.jpeg", image: "assets/products/coscu.jpeg", headline: "COSCU x PARIAZ CULTURE", subhead: "Buzo Hoodie Pariaz Black Night Heavyweight.", prodId: "buzo-pariaz" }
   ];
 
   const LOOKS_DATA = {
     'hades': {
       title: 'HADES 66 — FULL DESERT SUIT',
-      image: 'assets/looks/hades-look.jpeg',
+      image: 'assets/products/Hades.jpeg',
       items: [
         { num: '01', name: 'Camiseta Corona de Espinas Sand', price: '$160.000 COP', id: 'conjunto-hades', size: 'L' },
         { num: '02', name: 'Pantalón Jogger Pariaz Desert Sand', price: '$240.000 COP', id: 'conjunto-hades', size: 'L' }
@@ -245,12 +483,38 @@
         { top: '68%', left: '42%', label: 'Jogger Desert Sand ($240k)', id: 'conjunto-hades' }
       ]
     },
+    'blessd': {
+      title: 'BLESSD — TARIMA CON GORRA CORONA 3D',
+      image: 'assets/products/blessd_gorra.png',
+      items: [
+        { num: '01', name: 'Gorra Pariaz Corona 3D Trucker', price: '$95.000 COP', id: 'gorra-blessd', size: 'Talla Única' },
+        { num: '02', name: 'Camiseta Pariaz Manos & Luz', price: '$140.000 COP', id: 'camisa-1', size: 'L' }
+      ],
+      totalCOP: '$235.000 COP',
+      hotspots: [
+        { top: '25%', left: '50%', label: 'Gorra Corona 3D ($95k)', id: 'gorra-blessd' },
+        { top: '60%', left: '50%', label: 'Camiseta Manos & Luz ($140k)', id: 'camisa-1' }
+      ]
+    },
+    'almighty': {
+      title: 'ALMIGHTY — PURPLE SPECIAL EDITION',
+      image: 'assets/products/conjunto_morado_alma.png',
+      items: [
+        { num: '01', name: 'Camiseta Pariaz x Almighty Edition', price: '$170.000 COP', id: 'camisa-4-almighty', size: 'L' },
+        { num: '02', name: 'Conjunto Pariaz Morado Track', price: '$480.000 COP', id: 'conjunto-morado', size: 'L' }
+      ],
+      totalCOP: '$650.000 COP',
+      hotspots: [
+        { top: '40%', left: '48%', label: 'Camiseta Almighty ($170k)', id: 'camisa-4-almighty' },
+        { top: '70%', left: '45%', label: 'Conjunto Morado ($480k)', id: 'conjunto-morado' }
+      ]
+    },
     'krisr': {
       title: 'KRIS R — CRIMSON SECURITY OUTFIT',
-      image: 'assets/looks/krisr-look.jpeg',
+      image: 'assets/products/krisr.jpeg',
       items: [
         { num: '01', name: 'Camiseta Crimson Security & Trust', price: '$170.000 COP', id: 'pariaz-krisr', size: 'XL' },
-        { num: '02', name: 'Gorra Pariaz Corona 3D', price: '$95.000 COP', id: 'gorra-p', size: 'Talla Única' }
+        { num: '02', name: 'Gorra Pariaz Snapback', price: '$95.000 COP', id: 'gorra-krisr', size: 'Talla Única' }
       ],
       totalCOP: '$265.000 COP',
       hotspots: [
@@ -259,14 +523,14 @@
     },
     'jonz': {
       title: 'JON Z — ÁNGELES HEAVEN OUTFIT',
-      image: 'assets/artists/jonz.jpeg',
+      image: 'assets/products/camisa_5_jonz.png',
       items: [
-        { num: '01', name: 'Camiseta Ángeles Heaven Gate', price: '$180.000 COP', id: 'pariaz-jonz', size: 'L' },
-        { num: '02', name: 'Gorra Pariaz Corona 3D', price: '$95.000 COP', id: 'gorra-p', size: 'Talla Única' }
+        { num: '01', name: 'Camiseta Ángeles Heaven Gate', price: '$180.000 COP', id: 'camisa-5-jonz', size: 'L' },
+        { num: '02', name: 'Gorra Pariaz Corona 3D', price: '$95.000 COP', id: 'gorra-blessd', size: 'Talla Única' }
       ],
       totalCOP: '$275.000 COP',
       hotspots: [
-        { top: '46%', left: '48%', label: 'Camiseta Ángeles ($180k)', id: 'pariaz-jonz' }
+        { top: '46%', left: '48%', label: 'Camiseta Ángeles ($180k)', id: 'camisa-5-jonz' }
       ]
     }
   };
@@ -309,17 +573,17 @@
 
   function loadState() {
     try {
-      const c = localStorage.getItem('prz_cart_v4');
+      const c = localStorage.getItem('prz_cart_v5');
       if (c) cartItems = JSON.parse(c);
-      const w = localStorage.getItem('prz_wish_v4');
+      const w = localStorage.getItem('prz_wish_v5');
       if (w) wishlist = JSON.parse(w);
     } catch (e) {}
   }
 
   function saveState() {
     try {
-      localStorage.setItem('prz_cart_v4', JSON.stringify(cartItems));
-      localStorage.setItem('prz_wish_v4', JSON.stringify(wishlist));
+      localStorage.setItem('prz_cart_v5', JSON.stringify(cartItems));
+      localStorage.setItem('prz_wish_v5', JSON.stringify(wishlist));
     } catch (e) {}
     renderCart();
   }
@@ -431,7 +695,7 @@
       container.innerHTML = `
         <div style="grid-column: 1/-1; text-align: center; padding: 48px 20px; background: var(--bg-card); border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
           <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 8px;">No encontramos prendas con "${searchQuery}"</h3>
-          <p style="color: var(--text-muted); font-size: 0.9rem;">Prueba con camiseta, conjunto, buzo o gorra.</p>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Prueba buscando camiseta, conjunto, buzo o gorra.</p>
         </div>
       `;
       return;
@@ -848,7 +1112,6 @@
     }
   }
 
-  // Countdown timer
   function initCountdown() {
     const el = document.getElementById('drop-countdown-val');
     if (!el) return;
@@ -1094,7 +1357,7 @@
       closeCheckout();
       cartItems = [];
       saveState();
-      showToast('¡Pedido #PRZ-8842 confirmado! Conectando con pasarela...');
+      showToast('¡Pedido confirmado! Redirigiendo a pasarela...');
     });
 
     // Cupón de Descuento
@@ -1143,7 +1406,7 @@
     document.getElementById('bnav-cart')?.addEventListener('click', openCart);
     document.getElementById('bnav-wishlist')?.addEventListener('click', openWishlist);
 
-    console.log("PARIAZ Store Engine Active (Zero CORS / Instant Exec).");
+    console.log("PARIAZ Store Engine Active: 23 Products, 8 Artists.");
   });
 
 })();

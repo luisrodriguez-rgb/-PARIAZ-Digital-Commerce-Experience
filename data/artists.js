@@ -1,105 +1,103 @@
 /**
- * PARIAZ DIGITAL STORE — Artistas y Stories Bar
- * Historias interactivas estilo Instagram / TikTok con fotos reales de tarima.
+ * PARIAZ DIGITAL STORE — Artistas y Stories Reel Oficial
+ * Con todas las fotos reales de artistas urbanos: Blessd, Almighty, Kris R, Hades 66, Jon Z, Tury, Luar, Coscu.
  */
 
 export const artists = [
   {
+    id: "blessd",
+    name: "Blessd",
+    tagline: "El Bendito",
+    role: "Global Urban Icon",
+    avatar: "assets/products/blessd_gorra.png",
+    image: "assets/products/blessd_gorra.png",
+    badge: "SEEN ON BLESSD",
+    headline: "BLESSD EN VIVO CON LA GORRA PARIAZ",
+    subhead: "Gorra Pariaz Corona 3D Trucker en concierto.",
+    prodId: "gorra-blessd"
+  },
+  {
+    id: "almighty",
+    name: "Almighty",
+    tagline: "The Game Changer",
+    role: "Latin Urban Pioneer",
+    avatar: "assets/products/camisa_4_almaygthhy.png",
+    image: "assets/products/camisa_4_almaygthhy.png",
+    badge: "SEEN ON ALMIGHTY",
+    headline: "ALMIGHTY x PARIAZ DROP",
+    subhead: "Camiseta Pariaz x Almighty Edition y Conjunto Morado.",
+    prodId: "camisa-4-almighty"
+  },
+  {
     id: "kris-r",
     name: "Kris R",
     tagline: "Street Heavyweight",
-    role: "Trap / Urban Icon",
-    avatar: "./assets/artists/krisr.jpeg",
-    quote: "El piquete no se compra, se nace con él. Pariaz en la calle.",
-    featuredPiece: "Camiseta Pariaz Crimson — Security & Trust",
-    image: "./assets/artists/krisr.jpeg",
+    role: "Urban Star",
+    avatar: "assets/products/krisr.jpeg",
+    image: "assets/products/krisr.jpeg",
     badge: "SEEN ON KRIS R",
-    accent: "#e11d48",
-    hasStory: true,
-    storySlide: {
-      headline: "KRIS R EN VIVO LUCIENDO PARIAZ",
-      subhead: "Drop 004 Crimson Security & Trust disponible en la tienda.",
-      productLink: "pariaz-krisr"
-    }
+    headline: "KRIS R EN VIVO CON PARIAZ",
+    subhead: "Camiseta Crimson Security & Trust y Gorra Snapback.",
+    prodId: "pariaz-krisr"
   },
   {
     id: "hades",
     name: "Hades 66",
     tagline: "El Diablo de Humacao",
     role: "Latin Urban Star",
-    avatar: "./assets/artists/hades.jpeg",
-    quote: "De abajo hacia la cima. La disciplina y la fe lo cambian todo.",
-    featuredPiece: "Conjunto Corona Desert Sand Suit",
-    image: "./assets/artists/hades.jpeg",
-    badge: "STAGE WORN",
-    accent: "#d97706",
-    hasStory: true,
-    storySlide: {
-      headline: "HADES 66 — FULL DESERT SUIT",
-      subhead: "Outfit completo de 2 piezas diseñado en Medellín.",
-      productLink: "conjunto-hades"
-    }
+    avatar: "assets/products/Hades.jpeg",
+    image: "assets/products/Hades.jpeg",
+    badge: "SEEN ON HADES 66",
+    headline: "HADES 66 — FULL DESERT SUIT",
+    subhead: "Conjunto Corona Desert Sand Suit de 2 piezas.",
+    prodId: "conjunto-hades"
   },
   {
     id: "jon-z",
     name: "Jon Z",
     tagline: "Loco Humilde Real",
-    role: "Trap Pioneer",
-    avatar: "./assets/artists/jonz.jpeg",
-    quote: "Autenticidad por encima de todo. Pariaz representa la cultura real.",
-    featuredPiece: "Camiseta Pariaz Ángeles Heaven Gate",
-    image: "./assets/artists/jonz.jpeg",
-    badge: "WORN ON TOUR",
-    accent: "#38bdf8",
-    hasStory: true,
-    storySlide: {
-      headline: "JON Z ON TOUR CON PARIAZ",
-      subhead: "Edición Ángeles Heaven Gate con serigrafía discharge.",
-      productLink: "pariaz-jonz"
-    }
+    role: "Trap Icon",
+    avatar: "assets/products/camisa_5_jonz.png",
+    image: "assets/products/camisa_5_jonz.png",
+    badge: "SEEN ON JON Z",
+    headline: "JON Z ON TOUR CON PARIAZ",
+    subhead: "Camiseta Ángeles Heaven Gate en tarima.",
+    prodId: "camisa-5-jonz"
+  },
+  {
+    id: "tury",
+    name: "Tury",
+    tagline: "Street Vision",
+    role: "Urban Artist",
+    avatar: "assets/products/camisa_5_tury.png",
+    image: "assets/products/camisa_5_tury.png",
+    badge: "SEEN ON TURY",
+    headline: "TURY x PARIAZ STREETWEAR",
+    subhead: "Camiseta Pariaz x Tury Signature Edition.",
+    prodId: "camisa-tury"
+  },
+  {
+    id: "luar",
+    name: "Luar La L",
+    tagline: "L3TRA",
+    role: "Trap Star",
+    avatar: "assets/products/luar.jpeg",
+    image: "assets/products/luar.jpeg",
+    badge: "SEEN ON LUAR",
+    headline: "LUAR LA L EN ESTUDIO",
+    subhead: "Conjunto Pariaz Azul Royal Track.",
+    prodId: "conjunto-azul"
   },
   {
     id: "coscu",
     name: "Cosculluela",
     tagline: "El Príncipe",
     role: "Urban Legend",
-    avatar: "./assets/artists/coscu.jpeg",
-    quote: "Estilo callejero fino. Respeto para la gente de visión.",
-    featuredPiece: "Camiseta Pariaz & Hoodie Heavyweight",
-    image: "./assets/artists/coscu.jpeg",
+    avatar: "assets/products/coscu.jpeg",
+    image: "assets/products/coscu.jpeg",
     badge: "SEEN ON COSCU",
-    accent: "#f59e0b",
-    hasStory: true,
-    storySlide: {
-      headline: "COSCU x PARIAZ CULTURE",
-      subhead: "Conexión de alto nivel con referentes de la música urbana.",
-      productLink: "buzo-pariaz"
-    }
-  },
-  {
-    id: "luar",
-    name: "Luar La L",
-    tagline: "L3TRA",
-    role: "Trap Sensation",
-    avatar: "./assets/artists/luar.jpeg",
-    quote: "La esencia de la calle no se imita. Pariaz de corazón.",
-    featuredPiece: "Conjunto Pariaz Azul Royal",
-    image: "./assets/artists/luar.jpeg",
-    badge: "STUDIO SESSION",
-    accent: "#10b981",
-    hasStory: true,
-    storySlide: {
-      headline: "LUAR LA L EN EL ESTUDIO",
-      subhead: "Grabaciones con la indumentaria oficial de Pariaz.",
-      productLink: "conjunto-azul"
-    }
+    headline: "COSCU x PARIAZ CULTURE",
+    subhead: "Buzo Hoodie Pariaz Black Night Heavyweight.",
+    prodId: "buzo-pariaz"
   }
 ];
-
-export const socialStats = {
-  followers: "47K+",
-  posts: "86",
-  handle: "@tiendapariaz",
-  instagramUrl: "https://instagram.com/tiendapariaz",
-  city: "Medellín / Sabaneta, Colombia"
-};
